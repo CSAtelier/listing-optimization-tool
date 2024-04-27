@@ -1,0 +1,3 @@
+ad_settings = {
+    "data path": "codebase/persistance/data",
+}
