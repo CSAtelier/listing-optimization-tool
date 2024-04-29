@@ -28,10 +28,10 @@ def change_location_us(driver):
     element = WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.ID, "GLUXZipUpdateInput")))
     postcode_form = driver.find_element(By.ID, "GLUXZipUpdateInput").send_keys("73001") 
     postcode_button = driver.find_element(By.XPATH, '//*[@id="GLUXZipUpdate"]/span/input').click()
-    time.sleep(1)
+    time.sleep(5)
     continue_button = driver.find_element(By.XPATH, '//*[@id="a-popover-2"]/div/div[2]/span')
     continue_button.click()
-    time.sleep(1)
+    time.sleep(5)
 
 
 def get_price_us(response):

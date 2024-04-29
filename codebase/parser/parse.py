@@ -15,8 +15,11 @@ def parse_asin_us(url):
         driver.get(url)
         html = driver.page_source
         soup = BeautifulSoup(html,features="lxml")
-        captcha_handle(soup,driver)
-        change_location_us(driver)
+        try:
+            captcha_handle(soup,driver)
+        except:
+            pass
+        # change_location_us(driver)
         html_updated = driver.page_source
         soup_updated = BeautifulSoup(html_updated,features="lxml")
         price = get_price_us(soup_updated)
@@ -37,7 +40,10 @@ def parse_asin_ca(url):
         driver.get(url)
         html = driver.page_source
         soup = BeautifulSoup(html,features="lxml")
-        captcha_handle(soup,driver)
+        try:
+            captcha_handle(soup,driver)
+        except:
+            pass
         change_location_ca(driver)
         html_updated = driver.page_source
         soup_updated = BeautifulSoup(html_updated,features="lxml")
