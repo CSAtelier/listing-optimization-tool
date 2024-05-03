@@ -1,76 +1,36 @@
-from amazoncaptcha import AmazonCaptcha
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-import bs4
-import time
-import re
 from openpyxl import Workbook
 import random
 
 def asin_to_url(asin_list):
-    url_list = []
+    url_list_us = []
+    url_list_ca = []
     for asin in asin_list:
-        url_list.append(f"https://www.amazon.com/dp/{asin}")
-        url_list.append(f"https://www.amazon.ca/dp/{asin}")
-    return url_list
+        url_list_us.append(f"https://www.amazon.com/dp/{asin}")
+        url_list_ca.append(f"https://www.amazon.ca/dp/{asin}")
+    return url_list_us, url_list_ca
 
-def captcha_handle(response,driver):
-    img = response.find_all("img")[0]["src"]
-    captcha = AmazonCaptcha.fromlink(img)
-    solution = captcha.solve()
-    driver.find_element(By.NAME, "field-keywords").send_keys(solution) 
-    driver.find_element(By.CLASS_NAME, "a-button-text").click()
-
-def change_location_us(driver):
-    
-    driver.find_element(By.ID, "nav-global-location-popover-link").click()
-    element = WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.ID, "GLUXZipUpdateInput")))
-    postcode_form = driver.find_element(By.ID, "GLUXZipUpdateInput").send_keys("73001") 
-    postcode_button = driver.find_element(By.XPATH, '//*[@id="GLUXZipUpdate"]/span/input').click()
-    time.sleep(5)
-    continue_button = driver.find_element(By.XPATH, '//*[@id="a-popover-2"]/div/div[2]/span')
-    continue_button.click()
-    time.sleep(5)
-
-
-def get_price_us(response):
-
-    price = response.find('span', attrs = {'class':'a-offscreen'})
-    price = re.search(r'\$\d+\.\d+', price.text).group()
-    return price
-
-def change_location_ca(driver):
-    
-    driver.find_element(By.ID, "nav-global-location-popover-link").click()
-    element = WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.ID, "GLUXZipUpdateInput_0")))
-    postcode_form0 = driver.find_element(By.ID, "GLUXZipUpdateInput_0").send_keys("M5V") 
-    postcode_form1 = driver.find_element(By.ID, "GLUXZipUpdateInput_1").send_keys("3L9") 
-    postcode_button = driver.find_element(By.XPATH, '//*[@id="GLUXZipUpdate"]/span/input').click()
-    time.sleep(1)
-    # continue_button = driver.find_element(By.XPATH, '//*[@id="a-popover-3"]/div/div[2]/span').click()
-
-def get_price_ca(response):
-
-    price = response.find('span', attrs = {'class':'a-offscreen'})
-    price = re.search(r'\$\d+\.\d+', price.text).group()
-    return price
-
-def create_excel(asin, price, country, index):
+def create_excel(price_dict_us, price_dict_ca, save_path):
 
     wb = Workbook()
     ws = wb.active
     ws['A1'] = 'ASIN'
-    ws['B1'] = 'CA Prices'
-    ws['C1'] = 'US Prices'
-    ws['D1'] = 'Revenue Difference'
+    ws['B1'] = 'US Prices'
+    ws['C1'] = 'CA Prices'
+    ws['D1'] = 'US/CA'
     ws['E1'] = 'URL Amazon US'
     ws['F1'] = 'URL Amazon CA'
-    ws[f'A{index+2}'] = asin
-    if country == 'ca':
-        ws[f'B{index+2}'] = price
-    elif country == 'us':
-        ws[f'C{index+2}'] = price
+    key_list = list(price_dict_us.keys())
+    for i in range(len(key_list)):
+        ws[f'A{i+2}'] = key_list[i]
+        ws[f'B{i+2}'] = price_dict_us[key_list[i]]
+        ws[f'C{i+2}'] = price_dict_ca[key_list[i]]
+        ws[f'E{i+2}'] = f"https://www.amazon.com/dp/{key_list[i]}"
+        ws[f'F{i+2}'] = f"https://www.amazon.ca/dp/{key_list[i]}"
+        if price_dict_ca[key_list[i]] == 0 or price_dict_us[key_list[i]] == 0:
+            ws[f'D{i+2}'] = 0
+        else:
+            ws[f'D{i+2}'] = price_dict_us[key_list[i]]/price_dict_ca[key_list[i]]
+    wb.save(save_path + '/us-ca_excel_'+str(random.randint(1,10000))+'.xlsx')
     return wb
     
 def extract_asin(url):
