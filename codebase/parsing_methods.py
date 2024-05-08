@@ -2,8 +2,15 @@ from amazoncaptcha import AmazonCaptcha
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import Select
+from bs4 import BeautifulSoup
+from selenium_recaptcha_solver import RecaptchaSolver
 import time
 import re
+import requests
+import cv2 
+import pytesseract
+
 
 def captcha_handle(response,driver):
     img = response.find_all("img")[0]["src"]
@@ -21,19 +28,24 @@ def change_location_us(driver):
     postcode_button = driver.find_element(By.XPATH, '//*[@id="GLUXZipUpdate"]/span/input').click()
     time.sleep(2)
     continue_button = driver.find_element(By.XPATH, '//*[@id="a-popover-1"]/div/div[2]/span/span').click()
-    # continue_button.click()
     time.sleep(2)
 
 
 def get_price_us(response):
     try:
         price = response.find('span', attrs = {'class':'a-offscreen'})
+        unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
         price = re.search(r'\$\d+\.\d+', price.text).group()
+        sale = unit_sale.text
+
     except:
         price = response.find('span', attrs = {'class':'a-price aok-align-center reinventPricePriceToPayMargin priceToPay'})
         price = re.search(r'\$\d+\.\d+', price.text).group()
+        unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
+        sale = unit_sale.text
+
         
-    return float(price[1:])
+    return float(price[1:]), sale
 
 
 def change_location_ca(driver):
@@ -51,7 +63,79 @@ def get_price_ca(response):
     try:
         price = response.find('span', attrs = {'class':'a-offscreen'})
         price = re.search(r'\$\d+\.\d+', price.text).group()
+        unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
     except:
         price = response.find('span', attrs = {'class':'a-price aok-align-center reinventPricePriceToPayMargin priceToPay'})
         price = re.search(r'\$\d+\.\d+', price.text).group()
-    return float(price[1:])
+        unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
+    sale = unit_sale.text
+    return float(price[1:]),sale
+
+
+def change_revenue_country(driver, asin):
+    
+    driver.find_element(By.CLASS_NAME, "dropdown-country").click()
+    select = driver.find_element(By.XPATH, '//*[@id="ProductSearchInput"]/kat-dropdown/kat-option[2]').click()
+    driver.find_element(By.XPATH, '//*[@id="ProductSearchInput"]/kat-input').send_keys(asin)
+    driver.find_element(By.XPATH, '//*[@id="ProductSearchInput"]/kat-button').click()
+
+    # element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "GLUXZipUpdateInput")))
+    # postcode_form = driver.find_element(By.ID, "GLUXZipUpdateInput").send_keys("73001") 
+    # postcode_button = driver.find_element(By.XPATH, '//*[@id="GLUXZipUpdate"]/span/input').click()
+    # time.sleep(2)
+    # continue_button = driver.find_element(By.XPATH, '//*[@id="a-popover-1"]/div/div[2]/span/span').click()
+    # # continue_button.click()
+    # time.sleep(2)
+
+
+def calc_revenue(driver):
+    driver.get('https://sellercentral.amazon.com/hz/fba/profitabilitycalculator/index?lang=en_US')
+    html = driver.page_source
+    response = BeautifulSoup(html,features="lxml")
+    driver.find_element(By.CLASS_NAME, "spacing-top-small").click()
+
+
+def get_price_revenue(driver):
+
+    time.sleep(2)
+    # price = response.find('div', attrs = {'class':'product-detail-content'})
+    driver.execute_script("window.scrollTo(0, 1000)")
+    driver.save_screenshot('screenie.png')
+    img = cv2.imread('screenie.png')
+    img = img[1000:1070,500:666]
+    cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    custom_config = r'--oem 3 --psm 6'
+    price = pytesseract.image_to_string(img, config=custom_config)
+    index_ca = price.find('CA')
+    price_cleaned = price[index_ca:]
+    return float(price_cleaned[3:])
+    # print(response)
+    # price = driver.find_element(By.XPATH, '//*[@id="ProgramCard"]/div[2]/div[2]/div/div[1]/div[3]')
+
+
+def enable_extensions(driver):
+    driver.get('https://members.helium10.com/user/signin')
+    driver.switch_to.window(driver.window_handles[0])
+    driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
+    driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
+    time.sleep(1)
+    driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
+    time.sleep(1)
+    try:
+        driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/a').click()
+        driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
+        driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
+        driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
+    except:
+        pass
+    time.sleep(2)
+    try:
+        recaptcha_iframe = driver.find_element(By.XPATH, '//iframe[@title="reCAPTCHA"]')
+        solver = RecaptchaSolver(driver=driver)
+        solver.click_recaptcha_v2(iframe=recaptcha_iframe)
+        driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
+    except:
+        pass
+    time.sleep(0.5)
+
+    return driver
