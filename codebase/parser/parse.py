@@ -73,15 +73,16 @@ def parse_loop_us(file_path):
     options.add_extension('/Users/ardagulersoy/Desktop/Daily/listing-optimization-tool/extensions/helium10_extension.crx')
     driver = webdriver.Chrome(options=options)
     driver = enable_extensions(driver)
-    time.sleep(2)
+    time.sleep(3)
     driver = open_browser_us(driver, url='https://www.amazon.com/')
-    for url in url_list_us[1:]:
+    for url in url_list_us[1:3]:
         price = 0
         index = index + 1
         asin = extract_asin(url)
         driver.get(url)
-        time.sleep(5)
+        time.sleep(2)
         if 'amazon.com' in url:
+            
             try:
                 price, unit_sale = parse_asin_us(driver=driver)  
             except:
@@ -119,9 +120,9 @@ def parse_loop_ca(file_path):
     options.add_extension('/Users/ardagulersoy/Desktop/Daily/listing-optimization-tool/extensions/helium10_extension.crx')
     driver = webdriver.Chrome(options=options)
     driver = enable_extensions(driver)
-    time.sleep(5)
+    time.sleep(3)
     driver = open_browser_ca(driver, url='https://www.amazon.ca/')
-    for url in url_list_ca[1:]:
+    for url in url_list_ca[1:3]:
         price = 0
         index = index + 1
         asin = extract_asin(url)
