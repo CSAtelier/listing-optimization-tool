@@ -8,6 +8,7 @@ import subprocess
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 import os
+from selenium.webdriver.chrome.options import Options
 
 def setup_headful_display():
     """ Set up virtual display for running headful Chrome. """
@@ -82,13 +83,13 @@ def parse_ratio(driver, asin):
 
 
 def parse_loop_us(file_path):
-    loader = DatasetLoader(file_path=file_path)
-    asin_list = loader.load_dataset()
-    url_list_us, url_list_ca = asin_to_url(asin_list)
+    # loader = DatasetLoader(file_path=file_path)
+    # asin_list = loader.load_dataset()
+    # url_list_us, url_list_ca = asin_to_url(asin_list)
     price_dict = dict()
-    index = 0
     display = setup_headful_display()
-    options = webdriver.ChromeOptions()
+
+    options = Options()
     options.add_argument('--disable-gpu')  # Disable GPU hardware acceleration
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
@@ -96,28 +97,45 @@ def parse_loop_us(file_path):
 
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
-    options.add_extension('extensions/helium10_extension.crx')
-    driver = webdriver.Chrome(options=options)
-    driver = enable_extensions(driver)
-    time.sleep(6)
-    driver = open_browser_us(driver, url='https://www.amazon.com/')
-    for url in url_list_us[1:3]:
-        price = 0
-        index = index + 1
-        asin = extract_asin(url)
-        driver.get(url)
-        time.sleep(5)
-        if 'amazon.com' in url:
+
+    try:
+        driver.get("https://www.python.org")
+        print("Title of the page is:", driver.title)
+    finally:
+        driver.quit()
+
+    # index = 0
+    # display = setup_headful_display()
+    # options = webdriver.ChromeOptions()
+    # options.add_argument('--disable-gpu')  # Disable GPU hardware acceleration
+    # options.add_argument('--no-sandbox')
+    # options.add_argument('--disable-dev-shm-usage')
+    # options.add_argument(f'--display={display}')  # Use the virtual display
+
+    # service = Service(ChromeDriverManager().install())
+    # driver = webdriver.Chrome(service=service, options=options)
+    # options.add_extension('extensions/helium10_extension.crx')
+    # driver = webdriver.Chrome(options=options)
+    # driver = enable_extensions(driver)
+    # time.sleep(6)
+    # driver = open_browser_us(driver, url='https://www.amazon.com/')
+    # for url in url_list_us[1:3]:
+    #     price = 0
+    #     index = index + 1
+    #     asin = extract_asin(url)
+    #     driver.get(url)
+    #     time.sleep(5)
+    #     if 'amazon.com' in url:
             
-            try:
-                price, unit_sale = parse_asin_us(driver=driver)  
-            except:
-                unit_sale = 0
-                pass
+    #         try:
+    #             price, unit_sale = parse_asin_us(driver=driver)  
+    #         except:
+    #             unit_sale = 0
+    #             pass
 
-        price_dict[asin] = [price, unit_sale]
+    #     price_dict[asin] = [price, unit_sale]
 
-    print(price)
+    # print(price)
     return price_dict
         
 
