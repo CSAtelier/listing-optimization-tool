@@ -4,7 +4,23 @@ from bs4 import BeautifulSoup
 from ..parsing_methods import *
 from codebase.util.utils import *
 from codebase.dataset_loader import DatasetLoader
-import sys
+import subprocess
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+import os
+
+def setup_headful_display():
+    """ Set up virtual display for running headful Chrome. """
+    # Find a free display number
+    display_number = 1
+    lock_file = f"/tmp/.X{display_number}-lock"
+    while os.path.exists(lock_file):
+        display_number += 1
+        lock_file = f"/tmp/.X{display_number}-lock"
+    
+    subprocess.Popen(['Xvfb', f':{display_number}'])
+    return f':{display_number}'
+
 
 def open_browser_ratio(driver):
 
@@ -71,12 +87,15 @@ def parse_loop_us(file_path):
     url_list_us, url_list_ca = asin_to_url(asin_list)
     price_dict = dict()
     index = 0
+    display = setup_headful_display()
     options = webdriver.ChromeOptions()
-    my_user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36"
-    options.add_argument(f"--user-agent={my_user_agent}")
-    # options.add_argument("--headless=new")
-    # options.add_argument('--disable-gpu')
-    # options.add_argument('--no-sandbox')
+    options.add_argument('--disable-gpu')  # Disable GPU hardware acceleration
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument(f'--display={display}')  # Use the virtual display
+
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
     options.add_extension('extensions/helium10_extension.crx')
     driver = webdriver.Chrome(options=options)
     driver = enable_extensions(driver)
