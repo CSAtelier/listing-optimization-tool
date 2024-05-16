@@ -10,6 +10,7 @@ import re
 import requests
 import cv2 
 import pytesseract
+import sys
 
 
 def captcha_handle(response,driver):
@@ -44,7 +45,7 @@ def get_price_us(response):
         unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
         sale = unit_sale.text
 
-        
+
     return float(price[1:]), sale
 
 
@@ -116,26 +117,25 @@ def get_price_revenue(driver):
 def enable_extensions(driver):
     driver.get('https://members.helium10.com/user/signin')
     driver.switch_to.window(driver.window_handles[0])
+    # First login try
     driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
     driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
-    time.sleep(1)
+    time.sleep(3)
     driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
-    time.sleep(1)
+    time.sleep(3)
     try:
         driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/a').click()
-        driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
-        driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
-        driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
     except:
         pass
-    time.sleep(2)
-    try:
-        recaptcha_iframe = driver.find_element(By.XPATH, '//iframe[@title="reCAPTCHA"]')
-        solver = RecaptchaSolver(driver=driver)
-        solver.click_recaptcha_v2(iframe=recaptcha_iframe)
-        driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
-    except:
-        pass
-    time.sleep(0.5)
+    driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
+    driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
+   
+    # recaptcha_iframe = driver.find_element(By.XPATH, '//iframe[@title="reCAPTCHA"]')
+    # solver = RecaptchaSolver(driver=driver)
+    # solver.click_recaptcha_v2(iframe=recaptcha_iframe)
 
+    time.sleep(2)
+    driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
+
+    time.sleep(1)
     return driver
