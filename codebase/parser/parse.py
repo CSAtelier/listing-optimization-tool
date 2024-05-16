@@ -74,10 +74,10 @@ def parse_loop_us(file_path):
     options = webdriver.ChromeOptions()
     my_user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36"
     options.add_argument(f"--user-agent={my_user_agent}")
-    options.add_argument("--headless=new")
+    # options.add_argument("--headless=new")
     # options.add_argument('--disable-gpu')
     # options.add_argument('--no-sandbox')
-    options.add_extension('/Users/ardagulersoy/Desktop/Daily/listing-optimization-tool/extensions/helium10_extension.crx')
+    options.add_extension('extensions/helium10_extension.crx')
     driver = webdriver.Chrome(options=options)
     driver = enable_extensions(driver)
     time.sleep(6)
