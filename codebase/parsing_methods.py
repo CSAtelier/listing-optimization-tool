@@ -14,6 +14,7 @@ import sys
 
 
 def captcha_handle(response,driver):
+    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, "field-keywords")))
     img = response.find_all("img")[0]["src"]
     captcha = AmazonCaptcha.fromlink(img)
     solution = captcha.solve()
@@ -23,13 +24,14 @@ def captcha_handle(response,driver):
 
 def change_location_us(driver):
     
+    element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "nav-global-location-popover-link")))
     driver.find_element(By.ID, "nav-global-location-popover-link").click()
-    element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "GLUXZipUpdateInput")))
+    element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "GLUXZipUpdateInput")))
     postcode_form = driver.find_element(By.ID, "GLUXZipUpdateInput").send_keys("73001") 
     postcode_button = driver.find_element(By.XPATH, '//*[@id="GLUXZipUpdate"]/span/input').click()
-    time.sleep(2)
+    element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="a-popover-1"]/div/div[2]/span/span')))
     continue_button = driver.find_element(By.XPATH, '//*[@id="a-popover-1"]/div/div[2]/span/span').click()
-    time.sleep(2)
+    time.sleep(5)
 
 
 def get_price_us(response):
@@ -122,20 +124,18 @@ def enable_extensions(driver):
     driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
     time.sleep(3)
     driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
-    time.sleep(3)
+    element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[2]/div/div[2]/a')))
     try:
         driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/a').click()
     except:
         pass
+    element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "loginform-email")))
     driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
     driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
-   
     # recaptcha_iframe = driver.find_element(By.XPATH, '//iframe[@title="reCAPTCHA"]')
     # solver = RecaptchaSolver(driver=driver)
     # solver.click_recaptcha_v2(iframe=recaptcha_iframe)
-
-    time.sleep(2)
+    time.sleep(5)
     driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
-
-    time.sleep(1)
+    time.sleep(5)
     return driver
