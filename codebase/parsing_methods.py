@@ -120,10 +120,13 @@ def enable_extensions(driver):
     driver.get('https://members.helium10.com/user/signin')
     driver.switch_to.window(driver.window_handles[0])
     # First login try
+    print(driver.current_url)
     driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
     driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
     time.sleep(3)
     driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
+    print(driver.current_url)
+    """
     element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[2]/div/div[2]/a')))
     try:
         driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/a').click()
@@ -138,4 +141,5 @@ def enable_extensions(driver):
     time.sleep(5)
     driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
     time.sleep(5)
+    """
     return driver
