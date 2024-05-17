@@ -116,8 +116,7 @@ def parse_loop_us(file_path):
                 pass
 
         price_dict[asin] = [price, unit_sale]
-
-    print(price)
+        print(price)
     return price_dict
         
 

@@ -36,10 +36,11 @@ def change_location_us(driver):
 
 def get_price_us(response):
     try:
+        sale = 0
         price = response.find('span', attrs = {'class':'a-offscreen'})
-        unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
+        # unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
         price = re.search(r'\$\d+\.\d+', price.text).group()
-        sale = unit_sale.text
+        # sale = unit_sale.text
 
     except:
         price = response.find('span', attrs = {'class':'a-price aok-align-center reinventPricePriceToPayMargin priceToPay'})
