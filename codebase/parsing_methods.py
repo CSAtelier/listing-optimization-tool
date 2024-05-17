@@ -127,7 +127,6 @@ def enable_extensions(driver):
     time.sleep(3)
     driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
     print(driver.current_url)
-    """
     element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[2]/div/div[2]/a')))
     try:
         driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/a').click()
@@ -142,5 +141,5 @@ def enable_extensions(driver):
     time.sleep(5)
     driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
     time.sleep(5)
-    """
+
     return driver
