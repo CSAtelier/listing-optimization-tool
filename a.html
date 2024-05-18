@@ -1,214 +1,229 @@
-<html>
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
-  <link href="/images/new-logo/helium-apple-logo-new.png" rel="apple-touch-icon"/>
-  <link href="/images/new-logo/helium-apple-logo-new.png" rel="apple-touch-icon-precomposed"/>
-  <meta content="_csrf" name="csrf-param"/>
-  <meta content="CjQjcQ1dA4z_OzMMPZltoNG-36S_C9kAIKyhBBRaSD5GUmQ6QSdt1c5eQ35n3QiRt9uG3elP9FNyz_dOQzwmag==" name="csrf-token"/>
+<html><head><meta http-equiv="origin-trial" content="3NNj0GXVktLOmVKwWUDendk4Vq2qgMVDBDX+Sni48ATJl9JBj+zF+9W2HGB3pvt6qowOihTbQgTeBm9SKbdTwYAAABfeyJvcmlnaW4iOiJodHRwczovL3JlY2FwdGNoYS5uZXQ6NDQzIiwiZmVhdHVyZSI6IlRwY2QiLCJleHBpcnkiOjE3MzUzNDM5OTksImlzVGhpcmRQYXJ0eSI6dHJ1ZX0="><meta http-equiv="origin-trial" content="A89JPrWYXvEpNQ/xE+PjjlGJiBu/L2GfQcplC/QkDJOS1fBoX5Q4/HLfT1dXpD1td7C2peXE3bSCJiYdwoFcNgQAAACSeyJvcmlnaW4iOiJodHRwczovL3JlY2FwdGNoYS5uZXQ6NDQzIiwiZmVhdHVyZSI6IkRpc2FibGVUaGlyZFBhcnR5U3RvcmFnZVBhcnRpdGlvbmluZyIsImV4cGlyeSI6MTcyNTQwNzk5OSwiaXNTdWJkb21haW4iOnRydWUsImlzVGhpcmRQYXJ0eSI6dHJ1ZX0=">
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" href="/images/new-logo/helium-apple-logo-new.png">
+  <link rel="apple-touch-icon-precomposed" href="/images/new-logo/helium-apple-logo-new.png">
+  <meta name="csrf-param" content="_csrf">
+<meta name="csrf-token" content="5MHKVApOzgaLGZJZwixeeVCPW056_fkenF_dXE09Dcymr50YTQ2vb_tq8zWUQm8aAvh2OCKaq03tKq0kGGk6gA==">
+
   <!-- Page title -->
-  <title>
-   Bad Request (#400)
-  </title>
+  <title>Log In to Helium 10</title>
+
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <link href="/favicon.ico?v=1" rel="shortcut icon" type="image/ico"/>
-  <link href="https://cdn.helium10.com/jquery-ui/1.12.1/themes/smoothness/jquery-ui.min.css" rel="stylesheet"/>
-  <link href="https://cdn.helium10.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://cdn.helium10.com/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"/>
-  <link href="https://cdn.helium10.com/sweetalert/1.1.3/sweetalert.css" rel="stylesheet"/>
-  <link href="https://cdn.helium10.com/icheck/1.0.2/skins/square/green.css" rel="stylesheet"/>
-  <link href="https://cdn.helium10.com/animate-css/3.7.2/animate.min.css" rel="stylesheet"/>
-  <link href="https://cdn.helium10.com/toastr/2.1.4/toastr.min.css" rel="stylesheet"/>
-  <link href="/assets/ed80ab1f/css/style.css" rel="stylesheet"/>
-  <style>
-   .error-container{max-width:488px;padding:6% 15px 0}.error-container__box{border-radius:4px;box-shadow:0 0 35px 0 rgba(154,161,171,0.15);background-color:#fff;border-radius:4px;overflow:hidden}.error-container__header{height:94px;background-color:#003873;display:flex;justify-content:center;align-items:center}.error-container__logo{max-width:200px}.error-container__logo img{display:block;width:100%}.error-container__content{text-align:center;padding:22px 15px 35px}.error-container__sorry{font-size:18px;font-weight:bold;color:#003873;margin-bottom:6px}h1.error-container__number{font-size:84px;font-weight:400;letter-spacing:4px;color:#003873;line-height:1em;margin-top:0;margin-bottom:18px}.error-container__error{font-size:18px;font-weight:bold;text-align:center;color:#f64f45;margin-bottom:36px;text-transform:uppercase}.error-container__message{font-size:14px;font-weight:400;color:#646464;margin-bottom:63px}.error-container__btn{font-size:14px;font-weight:bold;letter-spacing:.5px;color:#fff;padding:8px 15px}.btn-primary{background-color:#003873;border-color:#003873;transition:all .3s ease}body.blank{background:#fff}
-  </style>
-  <style>
-   @font-face{font-family:'helium10-icons';src:url('/images/iconsfonts/helium10-icons.eot?ow1il9');src:url('/images/iconsfonts/helium10-icons.eot?ow1il9#iefix') format('embedded-opentype'),url('/images/iconsfonts/helium10-icons.ttf?ow1il9') format('truetype'),url('/images/iconsfonts/helium10-icons.woff?ow1il9') format('woff'),url('/images/iconsfonts/helium10-icons.svg?ow1il9#helium10-icons') format('svg');font-weight:normal;font-style:normal}[class^="h10-icon-"],[class*=" h10-icon-"]{font-family:'Helium10-Icons' !important;speak:none;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.h10-icon-follow-up:before{content:"\e901"}.h10-icon-tools-solid:before{content:"\e900"}
-  </style>
-  <script async="" src="https://public.profitwell.com/js/profitwell.js?auth=1ae92f5c3c41ef20a90d3f86d62af411">
-  </script>
-  <script async="" src="https://survey.survicate.com/workspaces/4ea7422b2324f5759128c40fb53b526c/web_surveys.js" type="text/javascript">
-  </script>
-  <script async="" src="https://fast.trychameleon.com/messo/SLCkwzpxukuITo6J9QY8dvJR3BO7sT5X4c2kSDi6mUfSRf-1NMGEU-DCTNOLJTk64yPn8d/messo.min.js" type="text/javascript">
-  </script>
-  <script async="" src="https://public.profitwell.com/js/profitwell.js?auth=1ae92f5c3c41ef20a90d3f86d62af411" type="text/javascript">
-  </script>
-  <script async="" src="https://cdn.amplitude.com/libs/amplitude-5.2.2-min.gz.js" type="text/javascript">
-  </script>
-  <script async="" src="https://cdn.segment.com/next-integrations/middleware/analytics.js-middleware-braze-deduplicate/latest/analytics.js-middleware-braze-deduplicate.js.gz" status="loaded" type="text/javascript">
-  </script>
-  <script async="" src="https://cdn.segment.com/next-integrations/integrations/vendor/commons.c42222c4cb2f8913500f.js.gz" status="loaded" type="text/javascript">
-  </script>
-  <script async="" src="https://cdn.segment.com/next-integrations/integrations/vendor/commons.a61d7bea37d2de5d4b69.js.gz" status="loaded" type="text/javascript">
-  </script>
-  <script async="" src="https://cdn.segment.com/next-integrations/integrations/survicate/1.0.3/survicate.dynamic.js.gz" status="loaded" type="text/javascript">
-  </script>
-  <script async="" src="https://cdn.segment.com/next-integrations/integrations/chameleon/2.0.3/chameleon.dynamic.js.gz" status="loaded" type="text/javascript">
-  </script>
-  <script async="" src="https://cdn.segment.com/next-integrations/integrations/profitwell/1.0.1/profitwell.dynamic.js.gz" status="loaded" type="text/javascript">
-  </script>
-  <script async="" src="https://cdn.segment.com/next-integrations/integrations/amplitude/3.3.3/amplitude.dynamic.js.gz" status="loaded" type="text/javascript">
-  </script>
-  <script async="" src="https://cdn.segment.com/analytics.js/v1/8WK3kTMgcvEicb2ubbzXXv1MG26iotZw/analytics.min.js" type="text/javascript">
-  </script>
-  <script async="" src="https://connect.facebook.net/signals/config/924226957674390?v=2.9.156&amp;r=stable&amp;domain=members.helium10.com&amp;hme=c3a545c63044e8e9102d4f32d84a1137594d024f28e801d670bc76dc5c075575&amp;ex_m=67%2C112%2C99%2C103%2C58%2C3%2C93%2C66%2C15%2C91%2C84%2C49%2C51%2C158%2C161%2C172%2C168%2C169%2C171%2C28%2C94%2C50%2C73%2C170%2C153%2C156%2C165%2C166%2C173%2C121%2C14%2C48%2C178%2C177%2C123%2C17%2C33%2C38%2C1%2C41%2C62%2C63%2C64%2C68%2C88%2C16%2C13%2C90%2C87%2C86%2C100%2C102%2C37%2C101%2C29%2C25%2C154%2C157%2C130%2C27%2C10%2C11%2C12%2C5%2C6%2C24%2C21%2C22%2C54%2C59%2C61%2C71%2C95%2C26%2C72%2C8%2C7%2C76%2C46%2C20%2C97%2C96%2C9%2C19%2C18%2C81%2C53%2C79%2C32%2C70%2C0%2C89%2C31%2C78%2C83%2C45%2C44%2C82%2C36%2C4%2C85%2C77%2C42%2C39%2C34%2C80%2C2%2C35%2C60%2C40%2C98%2C43%2C75%2C65%2C104%2C57%2C56%2C30%2C92%2C55%2C52%2C47%2C74%2C69%2C23%2C105">
-  </script>
-  <script async="" src="https://connect.facebook.net/en_US/fbevents.js">
-  </script>
-  <script async="" src="https://bat.bing.com/bat.js" type="text/javascript">
-  </script>
-  <script async="" src="https://snap.licdn.com/li.lms-analytics/insight.min.js" type="text/javascript">
-  </script>
-  <script async="" src="https://www.googletagmanager.com/gtag/destination?id=AW-871883812&amp;l=dataLayer&amp;cx=c" type="text/javascript">
-  </script>
-  <script async="" src="https://www.google-analytics.com/analytics.js" type="text/javascript">
-  </script>
-  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-XEHBKN0W7N&amp;l=dataLayer&amp;cx=c" type="text/javascript">
-  </script>
-  <script async="" src="//www.googletagmanager.com/gtm.js?id=GTM-5QPG5B">
-  </script>
-  <script src="https://cdn.helium10.com/datadog-browser-logs/2.11.1/datadog-logs.js">
-  </script>
-  <script>
-   window.DD_LOGS && DD_LOGS.init({
-        clientToken: 'pub976bb176a3e2bb18172112d83c6c6ddc',
-        service: 'helium-app-frontend',
-        site: 'datadoghq.com',
-        forwardErrorsToLogs: true,
-        sampleRate: 100
-    })
-    console.log('DD_LOGS.init');
-    window._vwo_code = window._vwo_code || (function(){
-    var account_id=610751,
-    settings_tolerance=2000,
-    library_tolerance=2500,
-    use_existing_jquery=false,
-    is_spa=1,
-    hide_element='body',
-    /* DO NOT EDIT BELOW THIS LINE */
-    f=false,d=document,code={use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.fetchPriority='high';b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){window.settings_timer=setTimeout(function () {_vwo_code.finish() },settings_tolerance);var a=d.createElement('style'),b=hide_element?hide_element+'{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}':'',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);this.load('https://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&f='+(+is_spa)+'&r='+Math.random());return settings_timer; }};window._vwo_settings_timer = code.init(); return code; }());
-  </script>
-  <script fetchpriority="high" src="https://dev.visualwebsiteoptimizer.com/j.php?a=610751&amp;u=https%3A%2F%2Fmembers.helium10.com%2Fuser%2Fsignin&amp;f=1&amp;r=0.8542520981352948" type="text/javascript">
-  </script>
-  <script async="" data-ueto="ueto_fd337fd199" src="https://bat.bing.com/p/action/25068719.js" type="text/javascript">
-  </script>
-  <script async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/871883812/?random=1716057570433&amp;cv=11&amp;fst=1716057570433&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;gtm=45be45f0v871250825z872084553za201&amp;gcd=13l3l3l3l1&amp;dma=0&amp;u_w=1440&amp;u_h=900&amp;url=https%3A%2F%2Fmembers.helium10.com%2Fuser%2Fsignin&amp;ref=https%3A%2F%2Fmembers.helium10.com%2Fuser%2Fsignin&amp;hn=www.googleadservices.com&amp;frm=0&amp;tiba=Bad%20Request%20(%23400)&amp;npa=0&amp;pscdl=noapi&amp;auid=1653403054.1716057565&amp;uaa=arm&amp;uab=64&amp;uafvl=Google%2520Chrome%3B125.0.6422.61%7CChromium%3B125.0.6422.61%7CNot.A%252FBrand%3B24.0.0.0&amp;uamb=0&amp;uam=&amp;uap=macOS&amp;uapv=14.4.1&amp;uaw=0&amp;fdr=QA&amp;rfmt=3&amp;fmt=4" type="text/javascript">
-  </script>
-  <link href="https://surveys-static.survicate.com/fonts/fonts.css" rel="stylesheet" type="text/css"/>
- </head>
- <body class="blank" data-helium10-main-tool-id="njmehopjdpcckochcggncklnlmikcbnb" data-helium10-main-tool-version="8.2.1">
-  <!-- Simple splash screen-->
-  <div class="splash" style="display: none;">
-   <div class="splash__logo">
-    <div class="splash__logo__block1">
-    </div>
-    <div class="splash__logo__block2">
-    </div>
-    <div class="splash__logo__block3">
-    </div>
-    <div class="splash__logo__block4">
-    </div>
-    <div class="splash__logo__block5">
-    </div>
-    <div class="splash__logo__block6">
-    </div>
-   </div>
+  <link rel="shortcut icon" type="image/ico" href="/favicon.ico?v=1">
+
+  <meta name="description" content="Log In to unlock the power of Helium 10.">
+<link href="https://cdn.helium10.com/jquery-ui/1.12.1/themes/smoothness/jquery-ui.min.css" rel="stylesheet">
+<link href="https://cdn.helium10.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.helium10.com/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.helium10.com/sweetalert/1.1.3/sweetalert.css" rel="stylesheet">
+<link href="https://cdn.helium10.com/icheck/1.0.2/skins/square/green.css" rel="stylesheet">
+<link href="https://cdn.helium10.com/animate-css/3.7.2/animate.min.css" rel="stylesheet">
+<link href="https://cdn.helium10.com/toastr/2.1.4/toastr.min.css" rel="stylesheet">
+<link href="/assets/ed80ab1f/css/style.css" rel="stylesheet">
+<style>@font-face{font-family:'helium10-icons';src:url('/images/iconsfonts/helium10-icons.eot?ow1il9');src:url('/images/iconsfonts/helium10-icons.eot?ow1il9#iefix') format('embedded-opentype'),url('/images/iconsfonts/helium10-icons.ttf?ow1il9') format('truetype'),url('/images/iconsfonts/helium10-icons.woff?ow1il9') format('woff'),url('/images/iconsfonts/helium10-icons.svg?ow1il9#helium10-icons') format('svg');font-weight:normal;font-style:normal}[class^="h10-icon-"],[class*=" h10-icon-"]{font-family:'Helium10-Icons' !important;speak:none;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.h10-icon-follow-up:before{content:"\e901"}.h10-icon-tools-solid:before{content:"\e900"}
+</style>
+<style>@font-face{font-family:'Nunito Sans';font-style:italic;font-weight:300;font-display:swap;src:local('Nunito Sans Light Italic'),local('NunitoSans-LightItalic'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe01MImSLYBIv1o4X1M8cce4G3JoY1wIUql-.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Nunito Sans';font-style:italic;font-weight:300;font-display:swap;src:local('Nunito Sans Light Italic'),local('NunitoSans-LightItalic'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe01MImSLYBIv1o4X1M8cce4G3JoY10IUql-.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Nunito Sans';font-style:italic;font-weight:300;font-display:swap;src:local('Nunito Sans Light Italic'),local('NunitoSans-LightItalic'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe01MImSLYBIv1o4X1M8cce4G3JoY1MIUg.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Nunito Sans';font-style:italic;font-weight:400;font-display:swap;src:local('Nunito Sans Italic'),local('NunitoSans-Italic'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe0oMImSLYBIv1o4X1M8cce4E9ZKdmwp.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Nunito Sans';font-style:italic;font-weight:400;font-display:swap;src:local('Nunito Sans Italic'),local('NunitoSans-Italic'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe0oMImSLYBIv1o4X1M8cce4E9dKdmwp.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Nunito Sans';font-style:italic;font-weight:400;font-display:swap;src:local('Nunito Sans Italic'),local('NunitoSans-Italic'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe0oMImSLYBIv1o4X1M8cce4E9lKdg.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Nunito Sans';font-style:italic;font-weight:600;font-display:swap;src:local('Nunito Sans SemiBold Italic'),local('NunitoSans-SemiBoldItalic'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe01MImSLYBIv1o4X1M8cce4GwZuY1wIUql-.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Nunito Sans';font-style:italic;font-weight:600;font-display:swap;src:local('Nunito Sans SemiBold Italic'),local('NunitoSans-SemiBoldItalic'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe01MImSLYBIv1o4X1M8cce4GwZuY10IUql-.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Nunito Sans';font-style:italic;font-weight:600;font-display:swap;src:local('Nunito Sans SemiBold Italic'),local('NunitoSans-SemiBoldItalic'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe01MImSLYBIv1o4X1M8cce4GwZuY1MIUg.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Nunito Sans';font-style:italic;font-weight:700;font-display:swap;src:local('Nunito Sans Bold Italic'),local('NunitoSans-BoldItalic'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe01MImSLYBIv1o4X1M8cce4G2JvY1wIUql-.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Nunito Sans';font-style:italic;font-weight:700;font-display:swap;src:local('Nunito Sans Bold Italic'),local('NunitoSans-BoldItalic'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe01MImSLYBIv1o4X1M8cce4G2JvY10IUql-.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Nunito Sans';font-style:italic;font-weight:700;font-display:swap;src:local('Nunito Sans Bold Italic'),local('NunitoSans-BoldItalic'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe01MImSLYBIv1o4X1M8cce4G2JvY1MIUg.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Nunito Sans';font-style:normal;font-weight:300;font-display:swap;src:local('Nunito Sans Light'),local('NunitoSans-Light'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe03MImSLYBIv1o4X1M8cc8WAc5iU1EQVg.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Nunito Sans';font-style:normal;font-weight:300;font-display:swap;src:local('Nunito Sans Light'),local('NunitoSans-Light'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe03MImSLYBIv1o4X1M8cc8WAc5jU1EQVg.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Nunito Sans';font-style:normal;font-weight:300;font-display:swap;src:local('Nunito Sans Light'),local('NunitoSans-Light'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe03MImSLYBIv1o4X1M8cc8WAc5tU1E.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Nunito Sans';font-style:normal;font-weight:400;font-display:swap;src:local('Nunito Sans Regular'),local('NunitoSans-Regular'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe0qMImSLYBIv1o4X1M8cceyI9tScg.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Nunito Sans';font-style:normal;font-weight:400;font-display:swap;src:local('Nunito Sans Regular'),local('NunitoSans-Regular'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe0qMImSLYBIv1o4X1M8ccezI9tScg.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Nunito Sans';font-style:normal;font-weight:400;font-display:swap;src:local('Nunito Sans Regular'),local('NunitoSans-Regular'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe0qMImSLYBIv1o4X1M8cce9I9s.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Nunito Sans';font-style:normal;font-weight:600;font-display:swap;src:local('Nunito Sans SemiBold'),local('NunitoSans-SemiBold'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe03MImSLYBIv1o4X1M8cc9iB85iU1EQVg.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Nunito Sans';font-style:normal;font-weight:600;font-display:swap;src:local('Nunito Sans SemiBold'),local('NunitoSans-SemiBold'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe03MImSLYBIv1o4X1M8cc9iB85jU1EQVg.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Nunito Sans';font-style:normal;font-weight:600;font-display:swap;src:local('Nunito Sans SemiBold'),local('NunitoSans-SemiBold'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe03MImSLYBIv1o4X1M8cc9iB85tU1E.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Nunito Sans';font-style:normal;font-weight:700;font-display:swap;src:local('Nunito Sans Bold'),local('NunitoSans-Bold'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe03MImSLYBIv1o4X1M8cc8GBs5iU1EQVg.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Nunito Sans';font-style:normal;font-weight:700;font-display:swap;src:local('Nunito Sans Bold'),local('NunitoSans-Bold'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe03MImSLYBIv1o4X1M8cc8GBs5jU1EQVg.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Nunito Sans';font-style:normal;font-weight:700;font-display:swap;src:local('Nunito Sans Bold'),local('NunitoSans-Bold'),url(https://fonts.gstatic.com/s/nunitosans/v5/pe03MImSLYBIv1o4X1M8cc8GBs5tU1E.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Nunito Sans';font-style:normal;font-weight:800;font-display:swap;src:local('Nunito Sans ExtraBold'),local('NunitoSans-ExtraBold'),url(https://fonts.gstatic.com/s/nunitosans/v6/pe03MImSLYBIv1o4X1M8cc8aBc5iU1EQVg.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Nunito Sans';font-style:normal;font-weight:800;font-display:swap;src:local('Nunito Sans ExtraBold'),local('NunitoSans-ExtraBold'),url(https://fonts.gstatic.com/s/nunitosans/v6/pe03MImSLYBIv1o4X1M8cc8aBc5jU1EQVg.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Nunito Sans';font-style:normal;font-weight:800;font-display:swap;src:local('Nunito Sans ExtraBold'),local('NunitoSans-ExtraBold'),url(https://fonts.gstatic.com/s/nunitosans/v6/pe03MImSLYBIv1o4X1M8cc8aBc5tU1E.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+</style>
+<style>@font-face{font-family:'Neuton';font-style:normal;font-weight:300;font-display:swap;src:local('Neuton Light'),local('Neuton-Light'),url(https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKZKovcwr4Pro.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Neuton';font-style:normal;font-weight:300;font-display:swap;src:local('Neuton Light'),local('Neuton-Light'),url(https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKZKovfQr4.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Neuton';font-style:normal;font-weight:400;font-display:swap;src:local('Neuton Regular'),local('Neuton-Regular'),url(https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCwYg6Qis.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Neuton';font-style:normal;font-weight:400;font-display:swap;src:local('Neuton Regular'),local('Neuton-Regular'),url(https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Neuton';font-style:normal;font-weight:700;font-display:swap;src:local('Neuton Bold'),local('Neuton-Bold'),url(https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vcwr4Pro.woff2) format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Neuton';font-style:normal;font-weight:700;font-display:swap;src:local('Neuton Bold'),local('Neuton-Bold'),url(https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+</style>
+<style>.content{padding:0 0 60px}.invalid-feedback{font-size:12px}.frame-wrapper{margin-left:100px}.form-wrapper--authenticator .frame-wrapper{margin-left:0;margin-right:50px;width:450px}#right-frame{height:819px;width:475px;border:0}.form-wrapper{min-height:calc(100vh - 60px);padding-top:20px;display:flex;justify-content:center;align-items:center}.form-wrapper--authenticator{align-items:flex-start;padding-top:7%}.login-form-wrapper{display:flex;flex-direction:column;justify-content:flex-start;align-items:center}.login-form-wrapper__logo{width:200px}.login-form-wrapper__logo a{display:block}.login-form-wrapper__logo img{max-width:100%}.login-form-wrapper__title{font-family:'Neuton',serif;font-size:44px;font-weight:400;letter-spacing:2px;text-align:center;color:#003873;margin:24px auto 28px}.login-form{width:410px}.login-form label{font-size:16px;font-weight:600;letter-spacing:.5px;line-height:1.375;color:#646464;margin-bottom:8px}.login-form .form-control{border-radius:3px;border-color:#8c8c8c;height:auto;line-height:1.375;letter-spacing:.46px;padding:14px 11px;font-size:16px;font-weight:400}.login-form .form-control[type="number"]{-moz-appearance:textfield}.login-form .form-control[type="number"]::-webkit-inner-spin-button,.login-form .form-control[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.login-form .form-control.is-invalid{border-color:#dc3545}.login-form .form-control.is-valid{border-color:#28a745}.login-form .form-control::-webkit-input-placeholder{color:#8c8c8c;transition:color 150ms ease}.login-form .form-control::-moz-placeholder{color:#8c8c8c;transition:color 150ms ease}.login-form .form-control:-moz-placeholder{color:#8c8c8c;transition:color 150ms ease}.login-form .form-control:-ms-input-placeholder{color:#8c8c8c;transition:color 150ms ease}.login-form .form-control:focus::-webkit-input-placeholder{color:transparent}.login-form .form-control:focus::-moz-placeholder{color:transparent}.login-form .form-control:focus:-moz-placeholder{color:transparent}.login-form .form-control:focus:-ms-input-placeholder{color:transparent}.login-form__forgot{text-align:right;margin-top:7px}.login-form__forgot a{font-size:16px;font-weight:600;color:#337ab7;line-height:1.375}.login-form__forgot a:hover{color:#0081ff;text-decoration:none}.login-form__forgot a:focus{outline:0}.login-form .field-loginform-recaptcha>div>div{width:100% !important;margin-top:20px}.login-form .field-loginform-recaptcha{text-align:center;margin-bottom:13px}.login-form .custom-checkbox{padding-left:30px}.login-form .custom-control-label{font-size:16px;font-weight:600;color:#343a40}.login-form .custom-control-input{width:22px;height:22px;cursor:pointer}.login-form .custom-control-label{cursor:pointer;user-select:none}.login-form .custom-control-label::before,.login-form .custom-control-label::after{width:22px;height:22px;top:2px;left:-30px;cursor:pointer}.login-form__help-block{display:block;font-size:16px;font-weight:300;color:#343a40;margin:7px 0 12px -30px}.login-form .btn{font-size:16px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;line-height:1.375;padding:14px 20px;border-radius:8px}.login-form .btn:hover,.login-form .btn:active,.login-form .btn:focus{box-shadow:none;outline:0}.login-form .btn-secondary{color:#ede8e4;border-color:#0081ff;background-color:#0081ff}.login-form--recovery .btn-secondary{margin-top:35px}.login-form .btn-secondary:hover:enabled,.login-form .btn-secondary:active,.login-form .btn-secondary:focus{color:#ede8e4;border-color:#0081ff;background-color:#0069d9}.login-form .btn-outline-secondary{color:#003873;border-color:#0081ff;background-color:#fff}.login-form .btn-outline-secondary:hover,.login-form .btn-outline-secondary:active,.login-form .btn-outline-secondary:focus{color:#ede8e4;border-color:#0081ff;background-color:#0081ff}.btn-block+.btn-block{margin-top:15px}.login-form-bottom{margin-top:15px;text-align:center}.login-form-bottom__text{text-align:center;font-size:16px;font-weight:600;letter-spacing:.45px;color:#343a40;margin:0}.login-form-bottom__link{color:#337ab7}.login-form-bottom__link:hover{color:#0081ff;text-decoration:none}.login-form-bottom__text:first-of-type{margin-bottom:10px}.login-form-message{padding:28px 18px;font-size:18px;font-weight:600;letter-spacing:.5px;color:#343a40;border-radius:8px;background-color:#ede8e4}.dot-symbol{background:#6784a2;width:4px;display:inline-block;height:4px;border-radius:50%;margin-left:8px;margin-right:8px}@media screen and (max-width:991px){.content{padding-bottom:60px}.form-wrapper--authenticator{flex-direction:column}.form-wrapper--authenticator .frame-wrapper{width:auto;margin-right:0}}@media screen and (max-width:480px){.content{padding:0 0 100px}.login-form-wrapper__title{font-size:34px}}
+</style>
+<style>.login-form{width:410px}.login-form label{font-size:16px;font-weight:600;letter-spacing:.5px;line-height:1.375;color:#646464;margin-bottom:8px}.login-form .form-control{border-radius:3px;border-color:#8c8c8c;height:auto;line-height:1.375;letter-spacing:.46px;padding:14px 11px;font-size:16px;font-weight:400}.login-form .form-control.is-invalid{border-color:#dc3545}.login-form .form-control.is-valid{border-color:#28a745}.login-form .form-control::-webkit-input-placeholder{color:#8c8c8c;transition:color 150ms ease}.login-form .form-control::-moz-placeholder{color:#8c8c8c;transition:color 150ms ease}.login-form .form-control:-moz-placeholder{color:#8c8c8c;transition:color 150ms ease}.login-form .form-control:-ms-input-placeholder{color:#8c8c8c;transition:color 150ms ease}.login-form .form-control:focus::-webkit-input-placeholder{color:transparent}.login-form .form-control:focus::-moz-placeholder{color:transparent}.login-form .form-control:focus:-moz-placeholder{color:transparent}.login-form .form-control:focus:-ms-input-placeholder{color:transparent}.login-form__forgot{text-align:right;margin-top:7px}.login-form__forgot a{font-size:16px;font-weight:600;color:#337ab7;line-height:1.375}.login-form__forgot a:hover{color:#0081ff;text-decoration:none}.login-form__forgot a:focus{outline:0}.login-form .field-loginform-recaptcha>div>div{width:100% !important;margin-top:20px}.login-form .field-loginform-recaptcha{text-align:center;margin-bottom:13px}.login-form .custom-checkbox{padding-left:30px}.login-form .custom-control-label{font-size:16px;font-weight:600;color:#343a40}.login-form .custom-control-input{width:22px;height:22px;cursor:pointer}.login-form .custom-control-label{cursor:pointer;user-select:none}.login-form .custom-control-label::before,.login-form .custom-control-label::after{width:22px;height:22px;top:2px;left:-30px;cursor:pointer}.login-form__help-block{display:block;font-size:16px;font-weight:300;color:#343a40;margin:7px 0 12px -30px}.login-form .btn{font-size:16px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;line-height:1.375;padding:14px 20px;border-radius:8px}.login-form .btn:hover,.login-form .btn:active,.login-form .btn:focus{box-shadow:none;outline:0}.login-form .btn-secondary{color:#ede8e4;border-color:#0081ff;background-color:#0081ff}.login-form--recovery .btn-secondary{margin-top:35px}.login-form .btn-secondary:hover,.login-form .btn-secondary:active,.login-form .btn-secondary:focus{color:#ede8e4;border-color:#0081ff;background-color:#0069d9}.login-form .btn-secondary.btn-danger{background-color:#e74c3c;border-color:#e74c3c;color:#fff}.login-form .btn-secondary.btn-danger:hover:enabled,.login-form .btn-secondary.btn-danger:active,.login-form .btn-secondary.btn-danger:focus{background-color:#c82333;border-color:#bd2130}.login-form .btn-secondary.btn-success{background-color:#74d348;border-color:#74d348;color:#fff}.login-form .btn-outline-secondary{color:#003873;border-color:#0081ff;background-color:#fff}.login-form .btn-outline-secondary:hover,.login-form .btn-outline-secondary:active,.login-form .btn-outline-secondary:focus{color:#ede8e4;border-color:#0081ff;background-color:#0081ff}.btn-block+.btn-block{margin-top:15px}.login-form-bottom{margin-top:15px;text-align:center}.login-form-bottom__text{text-align:center;font-size:16px;font-weight:600;letter-spacing:.45px;color:#343a40;margin:0}.login-form-bottom__link{color:#337ab7}.login-form-bottom__link:hover{color:#0081ff;text-decoration:none}.login-form-bottom__text:first-of-type{margin-bottom:10px}.login-form-message{padding:28px 18px;font-size:18px;font-weight:600;letter-spacing:.5px;color:#343a40;border-radius:8px;background-color:#ede8e4}@media screen and (max-width:480px){.login-form{width:auto;min-width:90%;max-width:100%}}
+</style>
+<script async="" src="https://public.profitwell.com/js/profitwell.js?auth=1ae92f5c3c41ef20a90d3f86d62af411"></script><script type="text/javascript" async="" src="https://survey.survicate.com/workspaces/4ea7422b2324f5759128c40fb53b526c/web_surveys.js"></script><script type="text/javascript" async="" src="https://fast.trychameleon.com/messo/SLCkwzpxukuITo6J9QY8dvJR3BO7sT5X4c2kSDi6mUfSRf-1NMGEU-DCTNOLJTk64yPn8d/messo.min.js"></script><script type="text/javascript" async="" src="https://public.profitwell.com/js/profitwell.js?auth=1ae92f5c3c41ef20a90d3f86d62af411"></script><script type="text/javascript" async="" src="https://cdn.amplitude.com/libs/amplitude-5.2.2-min.gz.js"></script><script type="text/javascript" src="https://cdn.segment.com/next-integrations/middleware/analytics.js-middleware-braze-deduplicate/latest/analytics.js-middleware-braze-deduplicate.js.gz" async="" status="loaded"></script><script type="text/javascript" src="https://cdn.segment.com/next-integrations/integrations/vendor/commons.a61d7bea37d2de5d4b69.js.gz" async="" status="loaded"></script><script type="text/javascript" src="https://cdn.segment.com/next-integrations/integrations/survicate/1.0.3/survicate.dynamic.js.gz" async="" status="loaded"></script><script type="text/javascript" src="https://cdn.segment.com/next-integrations/integrations/chameleon/2.0.3/chameleon.dynamic.js.gz" async="" status="loaded"></script><script type="text/javascript" src="https://cdn.segment.com/next-integrations/integrations/profitwell/1.0.1/profitwell.dynamic.js.gz" async="" status="loaded"></script><script type="text/javascript" src="https://cdn.segment.com/next-integrations/integrations/amplitude/3.3.3/amplitude.dynamic.js.gz" async="" status="loaded"></script><script type="text/javascript" async="" src="https://cdn.segment.com/analytics.js/v1/8WK3kTMgcvEicb2ubbzXXv1MG26iotZw/analytics.min.js"></script><script src="https://connect.facebook.net/signals/config/924226957674390?v=2.9.156&amp;r=stable&amp;domain=members.helium10.com&amp;hme=c3a545c63044e8e9102d4f32d84a1137594d024f28e801d670bc76dc5c075575&amp;ex_m=67%2C112%2C99%2C103%2C58%2C3%2C93%2C66%2C15%2C91%2C84%2C49%2C51%2C158%2C161%2C172%2C168%2C169%2C171%2C28%2C94%2C50%2C73%2C170%2C153%2C156%2C165%2C166%2C173%2C121%2C14%2C48%2C178%2C177%2C123%2C17%2C33%2C38%2C1%2C41%2C62%2C63%2C64%2C68%2C88%2C16%2C13%2C90%2C87%2C86%2C100%2C102%2C37%2C101%2C29%2C25%2C154%2C157%2C130%2C27%2C10%2C11%2C12%2C5%2C6%2C24%2C21%2C22%2C54%2C59%2C61%2C71%2C95%2C26%2C72%2C8%2C7%2C76%2C46%2C20%2C97%2C96%2C9%2C19%2C18%2C81%2C53%2C79%2C32%2C70%2C0%2C89%2C31%2C78%2C83%2C45%2C44%2C82%2C36%2C4%2C85%2C77%2C42%2C39%2C34%2C80%2C2%2C35%2C60%2C40%2C98%2C43%2C75%2C65%2C104%2C57%2C56%2C30%2C92%2C55%2C52%2C47%2C74%2C69%2C23%2C105" async=""></script><script async="" src="https://connect.facebook.net/en_US/fbevents.js"></script><script type="text/javascript" async="" src="https://bat.bing.com/bat.js"></script><script type="text/javascript" async="" src="https://snap.licdn.com/li.lms-analytics/insight.min.js"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/destination?id=AW-871883812&amp;l=dataLayer&amp;cx=c"></script><script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-XEHBKN0W7N&amp;l=dataLayer&amp;cx=c"></script><script async="" src="//www.googletagmanager.com/gtm.js?id=GTM-5QPG5B"></script><script async="" src="https://www.clarity.ms/s/0.7.32/clarity.js"></script><script type="text/javascript" async="" src="https://www.gstatic.com/recaptcha/releases/vjbW55W42X033PfTdVf6Ft4q/recaptcha__en.js" crossorigin="anonymous" integrity="sha384-jqt/W+w17r4O2YInpGAzsGqUkWuFwLH1iwGKOM8Z//8l09d6UkRjn4GYUmr6Agro"></script><script async="" src="https://www.clarity.ms/tag/9duji312kk"></script><script src="https://cdn.helium10.com/datadog-browser-logs/2.11.1/datadog-logs.js"></script>
+<script>    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "9duji312kk");
+  window.DD_LOGS && DD_LOGS.init({
+      clientToken: 'pub976bb176a3e2bb18172112d83c6c6ddc',
+      service: 'helium-app-frontend',
+      site: 'datadoghq.com',
+      forwardErrorsToLogs: true,
+      sampleRate: 100
+  })
+  console.log('DD_LOGS.init');
+  window._vwo_code = window._vwo_code || (function(){
+  var account_id=610751,
+  settings_tolerance=2000,
+  library_tolerance=2500,
+  use_existing_jquery=false,
+  is_spa=1,
+  hide_element='body',
+  /* DO NOT EDIT BELOW THIS LINE */
+  f=false,d=document,code={use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.fetchPriority='high';b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){window.settings_timer=setTimeout(function () {_vwo_code.finish() },settings_tolerance);var a=d.createElement('style'),b=hide_element?hide_element+'{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}':'',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);this.load('https://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&f='+(+is_spa)+'&r='+Math.random());return settings_timer; }};window._vwo_settings_timer = code.init(); return code; }());</script><script fetchpriority="high" src="https://dev.visualwebsiteoptimizer.com/j.php?a=610751&amp;u=https%3A%2F%2Fmembers.helium10.com%2Fuser%2Fsignin&amp;f=1&amp;r=0.7146599395120015" type="text/javascript"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/871883812/?random=1716065512002&amp;cv=11&amp;fst=1716065512002&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;gtm=45be45f0v871250825z872084553za201&amp;gcd=13l3l3l3l1&amp;dma=0&amp;u_w=800&amp;u_h=600&amp;url=https%3A%2F%2Fmembers.helium10.com%2Fuser%2Fsignin&amp;ref=https%3A%2F%2Fmembers.helium10.com%2Fuser%2Fsignin&amp;hn=www.googleadservices.com&amp;frm=0&amp;tiba=Log%20In%20to%20Helium%2010&amp;npa=0&amp;pscdl=noapi&amp;auid=1429453999.1716065500&amp;uaa=x86&amp;uab=64&amp;uafvl=Google%2520Chrome%3B125.0.6422.60%7CChromium%3B125.0.6422.60%7CNot.A%252FBrand%3B24.0.0.0&amp;uamb=0&amp;uam=&amp;uap=Linux&amp;uapv=6.5.0&amp;uaw=0&amp;fdr=QA&amp;rfmt=3&amp;fmt=4"></script><script src="https://bat.bing.com/p/action/25068719.js" type="text/javascript" async="" data-ueto="ueto_7500046c91"></script><link href="https://surveys-static.survicate.com/fonts/fonts.css" rel="stylesheet" type="text/css"></head>
+<body class="fixed-footer hide-sidebar" data-helium10-main-tool-id="njmehopjdpcckochcggncklnlmikcbnb" data-helium10-main-tool-version="8.2.1">
+
+
+<!-- Simple splash screen-->
+<div class="splash" style="display: none;">
+  <div class="splash__logo">
+      <div class="splash__logo__block1"></div>
+      <div class="splash__logo__block2"></div>
+      <div class="splash__logo__block3"></div>
+      <div class="splash__logo__block4"></div>
+      <div class="splash__logo__block5"></div>
+      <div class="splash__logo__block6"></div>
   </div>
-  <!--[if lt IE 7]>
+</div>
+<!--[if lt IE 7]>
 <p class="alert alert-danger">You are using an <strong>outdated</strong> browser. Please <a
-        href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
-  <div class="error-container">
-   <div class="error-container__box">
-    <div class="error-container__header">
-     <a class="error-container__logo" href="/">
-      <img alt="Helium 10" src="/images/new-logo/beige-dark-bg.svg"/>
-     </a>
-    </div>
-    <div class="error-container__content">
-     <h3 class="error-container__sorry">
-      We're sorry...
-     </h3>
-     <h1 class="error-container__number">
-      400
-     </h1>
-     <div class="error-container__error">
-      Unable to verify your data submission.
-     </div>
-     <a class="btn btn-primary error-container__btn" href="/">
-      Go back
-     </a>
-    </div>
-   </div>
+
+
+<div class="content">
+
+  
+<div class="container">
+  <div class="form-wrapper">
+      <div class="login-form-wrapper">
+          <div class="login-form-wrapper__logo">
+              <a href="https://www.helium10.com">
+                  <img src="/images/new-logo/2-colors-light-bg.svg" alt="Helium 10">
+              </a>
+          </div>
+
+          <h3 class="login-form-wrapper__title">Log In to Helium 10</h3>
+
+          
+<form id="login-form" class="login-form" action="/user/signin" method="post">
+<input type="hidden" name="_csrf" value="5MHKVApOzgaLGZJZwixeeVCPW056_fkenF_dXE09Dcymr50YTQ2vb_tq8zWUQm8aAvh2OCKaq03tKq0kGGk6gA==">
+
+<div class="form-group field-loginform-email required">
+<label for="loginform-email">Email</label>
+<input type="text" id="loginform-email" class="form-control" name="LoginForm[email]" value="akucukoduk16@ku.edu.tr" placeholder="Please enter your email" required="true" aria-required="true">
+
+<div class="invalid-feedback"></div>
+</div><div class="form-group field-loginform-password required">
+<label for="loginform-password">Password</label><input type="password" id="loginform-password" class="form-control" name="LoginForm[password]" value="Abdullah1." placeholder="Please enter your password" required="true" aria-required="true"><div class="invalid-feedback"></div><div class="login-form__forgot"><a href="/user/recovery" tabindex="-1">Forgot password?</a></div>
+</div>
+<div class="form-group field-loginform-recaptcha">
+
+<input type="hidden" id="loginform-recaptcha" class="form-control is-invalid" name="LoginForm[reCaptcha]" aria-invalid="true"><div id="loginform-recaptcha-recaptcha-login-form" class="g-recaptcha" data-sitekey="6LdMnNkUAAAAAHl2e9YbBHPI-uzSuv03rEm57EAQ" data-callback="onReCaptchaSubmit" data-size="normal" data-input-id="loginform-recaptcha" data-form-id="login-form"><div style="width: 304px; height: 78px;"><div><iframe title="reCAPTCHA" width="304" height="78" role="presentation" name="a-4igxt2y1nvqu" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="https://www.recaptcha.net/recaptcha/api2/anchor?ar=1&amp;k=6LdMnNkUAAAAAHl2e9YbBHPI-uzSuv03rEm57EAQ&amp;co=aHR0cHM6Ly9tZW1iZXJzLmhlbGl1bTEwLmNvbTo0NDM.&amp;hl=en&amp;v=vjbW55W42X033PfTdVf6Ft4q&amp;size=normal&amp;cb=6vtvcxvef6yz"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div><iframe style="display: none;"></iframe></div>
+
+<div class="invalid-feedback">The verification data is incorrect.</div>
+</div>
+<div class="form-group field-loginform-rememberme">
+<div class="custom-control custom-checkbox">
+<input type="hidden" name="LoginForm[rememberMe]" value="0"><input type="checkbox" id="loginform-rememberme" class="custom-control-input" name="LoginForm[rememberMe]" value="1" checked="">
+<label class="custom-control-label" for="loginform-rememberme">Remember Me</label>
+<div class="invalid-feedback"></div>
+<small class="login-form__help-block">(if this is a private computer)</small>
+</div>
+</div>
+<button type="submit" class="btn btn-secondary btn-block">Log In</button>
+
+<div class="login-form-bottom">
+  <p class="login-form-bottom__text">New to Helium 10?        <a class="login-form-bottom__link" href="/user/signup">Sign Up Now</a>
+  </p>
+  <p class="login-form-bottom__text">Problems or questions?        <a class="login-form-bottom__link" href="https://helium10.zendesk.com/hc/en-us/requests/new" target="_blank">
+          Contact Us        </a>
+  </p>
+</div>
+
+</form>        </div>
   </div>
-  <!-- Google Tag Manager -->
-  <noscript>
-   <iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-5QPG5B" style="display:none;visibility:hidden" width="0">
-   </iframe>
-  </noscript>
-  <script>
-   document.addEventListener("DOMContentLoaded", () => {
-        (function (w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js',
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                '//www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
+</div>
 
-        })(window, document, 'script', 'dataLayer', 'GTM-5QPG5B');
-    });
-  </script>
-  <!-- End Google Tag Manager -->
-  <script src="https://cdn.helium10.com/jquery/3.6.0/jquery.min.js">
-  </script>
-  <script src="https://cdn.helium10.com/jquery-migrate/3.3.2/jquery-migrate.min.js">
-  </script>
-  <script src="/assets/7fb1d8b1/yii.js">
-  </script>
-  <script src="https://cdn.helium10.com/jquery-ui/1.13.2/jquery-ui.min.js">
-  </script>
-  <script src="https://cdn.helium10.com/bootstrap/3.4.1/js/bootstrap.min.js">
-  </script>
-  <script src="https://cdn.helium10.com/sweetalert/1.1.3/sweetalert.min.js">
-  </script>
-  <script src="https://cdn.helium10.com/icheck/1.0.2/icheck.min.js">
-  </script>
-  <script src="https://cdn.helium10.com/toastr/2.1.4/toastr.min.js">
-  </script>
-  <script src="/assets/ed80ab1f/js/script.js">
-  </script>
-  <script>
-   !function(){var t,e,a,n,o;0<(o=$("#http-403-redirect-counter")).length&&(t=o.data("template"),e=o.data("duration"),a=o.data("url"),n=function(){o.text(t.replace("{X}",e)),0<=--e?setTimeout(n,1e3):window.location=a},setTimeout(n,500))}();
+  <footer class="footer">
+      
+<div class="footer-menu">
+  <a href="https://www.helium10.com/privacy-policy/" target="_blank">Privacy Policy</a> |
+  <a href="https://www.helium10.com/terms-and-conditions/" target="_blank">Terms &amp; Conditions</a> |
+          <a href="https://www.g2.com/products/helium-10/reviews#reviews" target="_blank">Submit Testimonial</a> |
+      <a href="/sitemap">Site Map</a></div>
 
+<div class="footer-copyright">
+  Helium 10 - Copyright 2024 - PixelLabs LLC</div>
+  </footer>
+</div>
+
+<!-- Google Tag Manager -->
+<noscript>
+  <iframe src="//www.googletagmanager.com/ns.html?id=GTM-5QPG5B"
+          height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+      (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({
+              'gtm.start': new Date().getTime(),
+              event: 'gtm.js',
+          });
+          var f = d.getElementsByTagName(s)[0],
+              j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+          j.async = true;
+          j.src =
+              '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+          f.parentNode.insertBefore(j, f);
+
+      })(window, document, 'script', 'dataLayer', 'GTM-5QPG5B');
+  });
+</script>
+<!-- End Google Tag Manager -->
+<script src="https://www.recaptcha.net/recaptcha/api.js?hl=en&amp;render=explicit&amp;onload=recaptchaOnloadCallback" async="" defer=""></script>
+<script src="https://cdn.helium10.com/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.helium10.com/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
+<script src="/assets/7fb1d8b1/yii.js"></script>
+<script src="https://cdn.helium10.com/jquery-ui/1.13.2/jquery-ui.min.js"></script>
+<script src="https://cdn.helium10.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.helium10.com/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script src="https://cdn.helium10.com/icheck/1.0.2/icheck.min.js"></script>
+<script src="https://cdn.helium10.com/toastr/2.1.4/toastr.min.js"></script>
+<script src="/assets/ed80ab1f/js/script.js"></script>
+<script src="/assets/7fb1d8b1/yii.activeForm.js"></script>
+<script>function recaptchaOnloadCallback() {
+  "use strict";
+  jQuery(".g-recaptcha").each(function () {
+      const reCaptcha = jQuery(this);
+      if (reCaptcha.data("recaptcha-client-id") === undefined) {
+          const recaptchaClientId = grecaptcha.render(reCaptcha.attr("id"), {
+              "callback": function (response) {
+                  if (reCaptcha.data("form-id") !== "") {
+                      jQuery("#" + reCaptcha.data("input-id"), "#" + reCaptcha.data("form-id")).val(response)
+                          .trigger("change");
+                  } else {
+                      jQuery("#" + reCaptcha.data("input-id")).val(response).trigger("change");
+                  }
+
+                  if (reCaptcha.attr("data-callback")) {
+                      eval("(" + reCaptcha.attr("data-callback") + ")(response)");
+                  }
+              },
+              "expired-callback": function () {
+                  if (reCaptcha.data("form-id") !== "") {
+                      jQuery("#" + reCaptcha.data("input-id"), "#" + reCaptcha.data("form-id")).val("");
+                  } else {
+                      jQuery("#" + reCaptcha.data("input-id")).val("");
+                  }
+
+                  if (reCaptcha.attr("data-expired-callback")) {
+                      eval("(" + reCaptcha.attr("data-expired-callback") + ")()");
+                  }
+              },
+          });
+          reCaptcha.data("recaptcha-client-id", recaptchaClientId);
+      }
+  });
+}
 $.fn.extend({animateCss:function(n,i){var t=function(n){var i,t={animation:"animationend",OAnimation:"oAnimationEnd",MozAnimation:"mozAnimationEnd",WebkitAnimation:"webkitAnimationEnd"};for(i in t)if(void 0!==n.style[i])return t[i]}(document.createElement("div"));return this.addClass("animated "+n).one(t,function(){$(this).removeClass("animated "+n),"function"==typeof i&&i()}),this}});
-  </script>
-  <script charset="" id="" type="text/javascript">
-   !function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","924226957674390");fbq("track","PageView");
-  </script>
-  <noscript>
-   <img height="1" src="https://www.facebook.com/tr?id=924226957674390&amp;ev=PageView&amp;noscript=1" style="display:none" width="1"/>
-  </noscript>
-  <script charset="" id="" type="text/javascript">
-   !function(){var a=window.analytics=window.analytics||[];if(!a.initialize)if(a.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{a.invoked=!0;a.methods="trackSubmit trackClick trackLink trackForm pageview identify reset group track ready alias debug page once off on addSourceMiddleware addIntegrationMiddleware setAnonymousId addDestinationMiddleware".split(" ");a.factory=function(b){return function(){var c=Array.prototype.slice.call(arguments);c.unshift(b);
-a.push(c);return a}};for(var e=0;e<a.methods.length;e++){var f=a.methods[e];a[f]=a.factory(f)}a.load=function(b,c){var d=document.createElement("script");d.type="text/javascript";d.async=!0;d.src="https://cdn.segment.com/analytics.js/v1/"+b+"/analytics.min.js";b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(d,b);a._loadOptions=c};a._writeKey="8WK3kTMgcvEicb2ubbzXXv1MG26iotZw";a.SNIPPET_VERSION="4.15.3";a.load("8WK3kTMgcvEicb2ubbzXXv1MG26iotZw");a.page()}}();
-  </script>
-  <script charset="" id="" src="https://cdn.helium10.com/h10/utm2cookies/utm2cookies.js?v=1695826968" text="" type="text/javascript">
-  </script>
-  <div id="batBeacon537518710780" style="width: 0px; height: 0px; display: none; visibility: hidden;">
-   <img alt="" height="0" id="batBeacon167269614960" src="https://bat.bing.com/action/0?ti=25068719&amp;tm=gtm002&amp;Ver=2&amp;mid=d08fc624-a290-4b02-bc85-65d516a25cfd&amp;sid=f3787ac0154511efbc963be8908a65d0&amp;vid=f37899b0154511efb6e1bfe095abd82f&amp;vids=0&amp;msclkid=N&amp;pi=918639831&amp;lg=en-US&amp;sw=1440&amp;sh=900&amp;sc=30&amp;nwd=1&amp;tl=Bad%20Request%20(%23400)&amp;p=https%3A%2F%2Fmembers.helium10.com%2Fuser%2Fsignin&amp;r=https%3A%2F%2Fmembers.helium10.com%2Fuser%2Fsignin&amp;lt=445&amp;evt=pageLoad&amp;sv=1&amp;rn=765300" style="width: 0px; height: 0px; display: none; visibility: hidden;" width="0"/>
-  </div>
-  <div style="display: none; visibility: hidden;">
-   <script data-pw-auth="1ae92f5c3c41ef20a90d3f86d62af411" id="profitwell-js">
-    (function(b,d,a,f,g,c,e){b[a]=b[a]||function(){(b[a].q=b[a].q||[]).push(arguments)};c=d.createElement(f);e=d.getElementsByTagName(f)[0];c.async=1;c.src=g+"?auth\x3d"+d.getElementById(a+"-js").getAttribute("data-pw-auth");e.parentNode.insertBefore(c,e)})(window,document,"profitwell","script","https://public.profitwell.com/js/profitwell.js");profitwell("start",{});
-   </script>
-  </div>
- </body>
-</html>
+
+function onReCaptchaSubmit(e){var n=$(".field-loginform-recaptcha");n.removeClass("has-error"),n.find("label.error-text").hide()}window.onload=function(){window.jQuery&&dataLayer&&$(document).on("click",".signin-additional-block__btn",function(){dataLayer.push({event:"sell_s3_2022_learn_more_clicked"})});let n=window.location.hash;n&&document.querySelectorAll(".btn-switcher").forEach(function(e){e.href+=n})};
+</script>
+<script>jQuery(function ($) {
+jQuery('#login-form').yiiActiveForm([], {"errorSummary":".alert.alert-danger","errorCssClass":"is-invalid","successCssClass":"is-valid","validationStateOn":"input"});
+});</script>
+
+
+<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","924226957674390");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=924226957674390&amp;ev=PageView&amp;noscript=1"></noscript>
+<script type="text/javascript" id="">!function(){var a=window.analytics=window.analytics||[];if(!a.initialize)if(a.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{a.invoked=!0;a.methods="trackSubmit trackClick trackLink trackForm pageview identify reset group track ready alias debug page once off on addSourceMiddleware addIntegrationMiddleware setAnonymousId addDestinationMiddleware".split(" ");a.factory=function(b){return function(){var c=Array.prototype.slice.call(arguments);c.unshift(b);
+a.push(c);return a}};for(var e=0;e<a.methods.length;e++){var f=a.methods[e];a[f]=a.factory(f)}a.load=function(b,c){var d=document.createElement("script");d.type="text/javascript";d.async=!0;d.src="https://cdn.segment.com/analytics.js/v1/"+b+"/analytics.min.js";b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(d,b);a._loadOptions=c};a._writeKey="8WK3kTMgcvEicb2ubbzXXv1MG26iotZw";a.SNIPPET_VERSION="4.15.3";a.load("8WK3kTMgcvEicb2ubbzXXv1MG26iotZw");a.page()}}();</script><script type="text/javascript" id="" src="https://cdn.helium10.com/h10/utm2cookies/utm2cookies.js?v=1695826968"></script><div id="batBeacon504061518461" style="width: 0px; height: 0px; display: none; visibility: hidden;"><img id="batBeacon256530442112" width="0" height="0" alt="" src="https://bat.bing.com/action/0?ti=25068719&amp;tm=gtm002&amp;Ver=2&amp;mid=18235a8e-b74f-4a62-9476-7746ac723def&amp;sid=6dfea110155811efa2c2fd7bb1324158&amp;vid=6dfebb40155811ef9ceebd065413f9a3&amp;vids=0&amp;msclkid=N&amp;pi=918639831&amp;lg=en-US&amp;sw=800&amp;sh=600&amp;sc=24&amp;nwd=1&amp;tl=Log%20In%20to%20Helium%2010&amp;p=https%3A%2F%2Fmembers.helium10.com%2Fuser%2Fsignin&amp;r=https%3A%2F%2Fmembers.helium10.com%2Fuser%2Fsignin&amp;lt=589&amp;evt=pageLoad&amp;sv=1&amp;rn=447263" style="width: 0px; height: 0px; display: none; visibility: hidden;"></div><div style="display: none; visibility: hidden;"><script id="profitwell-js" data-pw-auth="1ae92f5c3c41ef20a90d3f86d62af411">(function(b,d,a,f,g,c,e){b[a]=b[a]||function(){(b[a].q=b[a].q||[]).push(arguments)};c=d.createElement(f);e=d.getElementsByTagName(f)[0];c.async=1;c.src=g+"?auth\x3d"+d.getElementById(a+"-js").getAttribute("data-pw-auth");e.parentNode.insertBefore(c,e)})(window,document,"profitwell","script","https://public.profitwell.com/js/profitwell.js");profitwell("start",{});</script>
+</div></body></html>

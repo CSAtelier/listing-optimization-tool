@@ -124,15 +124,16 @@ def enable_extensions(driver):
     driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
     driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
     time.sleep(3)
-    driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
+    button = driver.find_element(By.CSS_SELECTOR, 'button.btn.btn-secondary.btn-block')
+    driver.execute_script("arguments[0].click();", button)
+
+    # Error page
     time.sleep(3)
-    page_source = driver.page_source
-    soup = BeautifulSoup(page_source, 'html.parser')
-    buttons = soup.find_all('a')
-    if buttons:
-        print(buttons[-1])
+    print(driver.page_source)
     button = driver.find_element(By.CSS_SELECTOR, 'a.btn.btn-primary.error-container__btn')
     button.click()
+
+    # Second try
     time.sleep(3)
     driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
     driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
