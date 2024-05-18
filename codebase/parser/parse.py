@@ -101,7 +101,7 @@ def parse_loop_us(file_path):
     time.sleep(20)
     driver = open_browser_us(driver, url='https://www.amazon.com/')
     print(driver.current_url)
-    for url in url_list_us[1:3]:
+    for url in url_list_us[1:]:
         price = 0
         index = index + 1
         asin = extract_asin(url)
@@ -150,7 +150,7 @@ def parse_loop_ca(file_path):
     driver = enable_extensions(driver)
     time.sleep(6)
     driver = open_browser_ca(driver, url='https://www.amazon.ca/')
-    for url in url_list_ca[1:3]:
+    for url in url_list_ca[1:]:
         price = 0
         index = index + 1
         asin = extract_asin(url)
