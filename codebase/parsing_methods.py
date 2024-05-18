@@ -38,9 +38,9 @@ def get_price_us(response):
     try:
         sale = 0
         price = response.find('span', attrs = {'class':'a-offscreen'})
-        # unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
+        unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
         price = re.search(r'\$\d+\.\d+', price.text).group()
-        # sale = unit_sale.text
+        sale = unit_sale.text
 
     except:
         price = response.find('span', attrs = {'class':'a-price aok-align-center reinventPricePriceToPayMargin priceToPay'})
@@ -121,18 +121,19 @@ def enable_extensions(driver):
     driver.get('https://members.helium10.com/user/signin')
     driver.switch_to.window(driver.window_handles[0])
     # First login try
-    print(driver.current_url)
     driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
     driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
     time.sleep(3)
     driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
-    print(driver.current_url)
-    element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[2]/div/div[2]/a')))
-    try:
-        driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/a').click()
-    except:
-        pass
-    element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "loginform-email")))
+    time.sleep(3)
+    page_source = driver.page_source
+    soup = BeautifulSoup(page_source, 'html.parser')
+    buttons = soup.find_all('a')
+    if buttons:
+        print(buttons[-1])
+    button = driver.find_element(By.CSS_SELECTOR, 'a.btn.btn-primary.error-container__btn')
+    button.click()
+    time.sleep(3)
     driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
     driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
     # recaptcha_iframe = driver.find_element(By.XPATH, '//iframe[@title="reCAPTCHA"]')

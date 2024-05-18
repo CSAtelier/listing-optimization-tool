@@ -87,13 +87,13 @@ def parse_loop_us(file_path):
     asin_list = loader.load_dataset()
     url_list_us, url_list_ca = asin_to_url(asin_list)
     price_dict = dict()
-    display = setup_headful_display()
+    # display = setup_headful_display()
     options = Options()
     options.add_argument('--disable-gpu')  # Disable GPU hardware acceleration
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_extension('extensions/helium10_extension.crx')
-    options.add_argument(f'--display={display}')  # Use the virtual display
+    # options.add_argument(f'--display={display}')  # Use the virtual display
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
     index = 0
