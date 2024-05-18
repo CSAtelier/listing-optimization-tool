@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from bs4 import BeautifulSoup
 from selenium_recaptcha_solver import RecaptchaSolver
+from matplotlib import pyplot as plt
 import time
 import re
 import requests
@@ -104,10 +105,10 @@ def get_price_revenue(driver):
     time.sleep(2)
     # price = response.find('div', attrs = {'class':'product-detail-content'})
     driver.execute_script("window.scrollTo(0, 1000)")
-    driver.save_screenshot('screenie.png')
-    img = cv2.imread('screenie.png')
-    img = img[1000:1070,500:666]
-    cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    driver.save_screenshot('screenie2.png')
+    img = cv2.imread("/Users/ardagulersoy/Desktop/Daily/listing-optimization-tool/screenie2.png", cv2.IMREAD_COLOR)
+    img = img[1230:1260,620:780]
+    # cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     custom_config = r'--oem 3 --psm 6'
     price = pytesseract.image_to_string(img, config=custom_config)
     index_ca = price.find('CA')
@@ -129,6 +130,7 @@ def enable_extensions(driver):
     page_source = driver.page_source
     soup = BeautifulSoup(page_source, 'html.parser')
     buttons = soup.find_all('a')
+    print(buttons)
     if buttons:
         print(buttons[-1])
     button = driver.find_element(By.CSS_SELECTOR, 'a.btn.btn-primary.error-container__btn')
