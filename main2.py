@@ -1,6 +1,6 @@
 from codebase.parser.parse import *
 from codebase.util.utils import *
-from codebase.revenue_excel.clean_excel import * ß
+from codebase.revenue_excel.clean_excel import * 
 import threading
 
 dict_us = parse_loop_us(file_path='./persistance/data/a.csv')
