@@ -31,7 +31,7 @@ def change_location_us(driver):
     postcode_button = driver.find_element(By.XPATH, '//*[@id="GLUXZipUpdate"]/span/input').click()
     element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="a-popover-1"]/div/div[2]/span/span')))
     continue_button = driver.find_element(By.XPATH, '//*[@id="a-popover-1"]/div/div[2]/span/span').click()
-    time.sleep(5)
+    #time.sleep(5)
 
 
 def get_price_us(response):
@@ -59,7 +59,7 @@ def change_location_ca(driver):
     # postcode_form0 = driver.find_element(By.ID, "GLUXZipUpdateInput_0").send_keys("M5V") 
     # postcode_form1 = driver.find_element(By.ID, "GLUXZipUpdateInput_1").send_keys("3L9") 
     # postcode_button = driver.find_element(By.XPATH, '//*[@id="GLUXZipUpdate"]/span/input').click()
-    # time.sleep(2)
+    # #time.sleep(2)
     # continue_button = driver.find_element(By.XPATH, '//*[@id="a-popover-3"]/div/div[2]/span').click()
 
 
@@ -86,10 +86,10 @@ def change_revenue_country(driver, asin):
     # element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "GLUXZipUpdateInput")))
     # postcode_form = driver.find_element(By.ID, "GLUXZipUpdateInput").send_keys("73001") 
     # postcode_button = driver.find_element(By.XPATH, '//*[@id="GLUXZipUpdate"]/span/input').click()
-    # time.sleep(2)
+    # #time.sleep(2)
     # continue_button = driver.find_element(By.XPATH, '//*[@id="a-popover-1"]/div/div[2]/span/span').click()
     # # continue_button.click()
-    # time.sleep(2)
+    # #time.sleep(2)
 
 
 def calc_revenue(driver):
@@ -101,7 +101,7 @@ def calc_revenue(driver):
 
 def get_price_revenue(driver):
 
-    time.sleep(2)
+    #time.sleep(2)
     # price = response.find('div', attrs = {'class':'product-detail-content'})
     driver.execute_script("window.scrollTo(0, 1000)")
     driver.save_screenshot('screenie.png')
@@ -123,25 +123,25 @@ def enable_extensions(driver):
     # First login try
     driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
     driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
-    time.sleep(3)
+    #time.sleep(3)
     button = driver.find_element(By.CSS_SELECTOR, 'button.btn.btn-secondary.btn-block')
     driver.execute_script("arguments[0].click();", button)
 
     # Error page
-    time.sleep(3)
+    #time.sleep(3)
     print(driver.page_source)
     button = driver.find_element(By.CSS_SELECTOR, 'a.btn.btn-primary.error-container__btn')
     button.click()
 
     # Second try
-    time.sleep(3)
+    #time.sleep(3)
     driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
     driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
     # recaptcha_iframe = driver.find_element(By.XPATH, '//iframe[@title="reCAPTCHA"]')
     # solver = RecaptchaSolver(driver=driver)
     # solver.click_recaptcha_v2(iframe=recaptcha_iframe)
-    time.sleep(5)
+    #time.sleep(5)
     driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
-    time.sleep(5)
+    #time.sleep(5)
 
     return driver

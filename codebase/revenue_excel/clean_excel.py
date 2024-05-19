@@ -20,7 +20,7 @@ def create_excel_ratio(data_path, save_path):
     options = webdriver.ChromeOptions()
     driver = webdriver.Chrome(options=options)
     driver.get('https://www.google.com/search?q=us+to+ca&rlz=1C5CHFA_enTR987TR987&oq=us+to+ca&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQABiPAjIHCAIQABiPAjIHCAMQABiPAjIGCAQQRRg9MgYIBRBFGDwyBggGEEUYPdIBCDMyMDVqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8')
-    time.sleep(2)
+    #time.sleep(2)
     html = driver.page_source
     response = BeautifulSoup(html,features="lxml")
     ca_usd = response.find('span', attrs = {'class':'DFlfde SwHCTb'})

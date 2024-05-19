@@ -92,14 +92,15 @@ def parse_loop_us(file_path):
     options.add_argument('--disable-gpu')  # Disable GPU hardware acceleration
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    options.add_argument("--headless=new")
+    #options.add_argument("--headless=new")
     options.add_extension('extensions/helium10_extension.crx')
     # options.add_argument(f'--display={display}')  # Use the virtual display
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
+    driver.implicitly_wait(30) # waits for atleast 30 seconds for elements to appear
     index = 0
     driver = enable_extensions(driver)
-    time.sleep(20)
+    #time.sleep(20)
     driver = open_browser_us(driver, url='https://www.amazon.com/')
     print(driver.current_url)
     for url in url_list_us[1:3]:
@@ -107,7 +108,7 @@ def parse_loop_us(file_path):
         index = index + 1
         asin = extract_asin(url)
         driver.get(url)
-        time.sleep(10)
+        #time.sleep(10)
         if 'amazon.com' in url:
             
             try:
@@ -149,14 +150,14 @@ def parse_loop_ca(file_path):
     options.add_extension('/Users/ardagulersoy/Desktop/Daily/listing-optimization-tool/extensions/helium10_extension.crx')
     driver = webdriver.Chrome(options=options)
     driver = enable_extensions(driver)
-    time.sleep(6)
+    #time.sleep(6)
     driver = open_browser_ca(driver, url='https://www.amazon.ca/')
     for url in url_list_ca[1:3]:
         price = 0
         index = index + 1
         asin = extract_asin(url)
         driver.get(url)
-        time.sleep(5)
+        #time.sleep(5)
         if 'amazon.ca' in url:
             try:
                 price, unit_sale = parse_asin_us(driver=driver)  
