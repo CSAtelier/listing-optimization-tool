@@ -141,7 +141,7 @@ def enable_extensions(driver):
     # solver = RecaptchaSolver(driver=driver)
     # solver.click_recaptcha_v2(iframe=recaptcha_iframe)
     time.sleep(5)
-    driver.find_element(By.XP3ATH, '//*[@id="login-form"]/button').click()
+    driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
     time.sleep(5)
 
     return driver

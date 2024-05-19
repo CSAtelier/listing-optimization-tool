@@ -22,3 +22,22 @@ rad.json
 TestResults.xml
 venv/
 venv/*
+
+pycache
+# Ignore __pycache__ directories
+__pycache__/
+
+# Other common Python ignores
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environment directories
+venv/
+env/
