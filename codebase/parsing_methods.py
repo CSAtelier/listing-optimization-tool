@@ -30,6 +30,8 @@ def change_location_us(driver):
     postcode_form = driver.find_element(By.ID, "GLUXZipUpdateInput").send_keys("73001") 
     postcode_button = driver.find_element(By.XPATH, '//*[@id="GLUXZipUpdate"]/span/input').click()
     element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="a-popover-1"]/div/div[2]/span/span')))
+    # driver.implicitly_wait(1)
+    time.sleep(2)
     continue_button = driver.find_element(By.XPATH, '//*[@id="a-popover-1"]/div/div[2]/span/span').click()
     #time.sleep(5)
 
@@ -126,10 +128,9 @@ def enable_extensions(driver):
     #time.sleep(3)
     button = driver.find_element(By.CSS_SELECTOR, 'button.btn.btn-secondary.btn-block')
     driver.execute_script("arguments[0].click();", button)
-
+   
     # Error page
     #time.sleep(3)
-    print(driver.page_source)
     button = driver.find_element(By.CSS_SELECTOR, 'a.btn.btn-primary.error-container__btn')
     button.click()
 
@@ -137,11 +138,17 @@ def enable_extensions(driver):
     #time.sleep(3)
     driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
     driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
-    # recaptcha_iframe = driver.find_element(By.XPATH, '//iframe[@title="reCAPTCHA"]')
-    # solver = RecaptchaSolver(driver=driver)
-    # solver.click_recaptcha_v2(iframe=recaptcha_iframe)
+
+    try:
+        driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
+    except:
+        recaptcha_iframe = driver.find_element(By.XPATH, '//iframe[@title="reCAPTCHA"]')
+        solver = RecaptchaSolver(driver=driver)
+        solver.click_recaptcha_v2(iframe=recaptcha_iframe)
+        driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
+
     #time.sleep(5)
-    driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
+    
     #time.sleep(5)
 
     return driver
