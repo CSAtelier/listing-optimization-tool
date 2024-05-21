@@ -128,7 +128,8 @@ def enable_extensions(driver):
     #time.sleep(3)
     button = driver.find_element(By.CSS_SELECTOR, 'button.btn.btn-secondary.btn-block')
     driver.execute_script("arguments[0].click();", button)
-   
+    print(driver.page_source)
+    sys.exit()
     # Error page
     #time.sleep(3)
     button = driver.find_element(By.CSS_SELECTOR, 'a.btn.btn-primary.error-container__btn')
