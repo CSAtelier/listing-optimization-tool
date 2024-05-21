@@ -125,9 +125,27 @@ def enable_extensions(driver):
     # First login try
     driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
     driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
+    page_source = driver.page_source
+    soup = BeautifulSoup(page_source, 'lxml')
+    buttons = soup.find_all('button')
+    # Assuming there's only one button, get the first one
+    if buttons:
+        print(buttons)
+        button = buttons[0]
     #time.sleep(3)
     button = driver.find_element(By.CSS_SELECTOR, 'button.btn.btn-secondary.btn-block')
     driver.execute_script("arguments[0].click();", button)
+    # Error page
+    time.sleep(3)
+    page_source = driver.page_source
+    soup = BeautifulSoup(page_source, 'lxml')
+    buttons = soup.find_all('a')
+    if buttons:
+        print(buttons)
+        button = buttons[0]
+    button = driver.find_element(By.CSS_SELECTOR, 'a.btn.btn-primary.error-container__btn')
+    driver.execute_script("arguments[0].click();", button)
+    time.sleep(3)
     print(driver.page_source)
     sys.exit()
     # Error page
