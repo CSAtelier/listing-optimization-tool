@@ -1,36 +1,16 @@
-import subprocess
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-import tempfile
-import os
+import cv2
+img = cv2.imread("/Users/ardagulersoy/Desktop/Daily/listing-optimization-tool/screenie2.png", cv2.IMREAD_COLOR)
 
-def setup_headful_display():
-    """ Set up virtual display for running headful Chrome. """
-    # Find a free display number
-    display_number = 1
-    lock_file = f"/tmp/.X{display_number}-lock"
-    while os.path.exists(lock_file):
-        display_number += 1
-        lock_file = f"/tmp/.X{display_number}-lock"
-    
-    subprocess.Popen(['Xvfb', f':{display_number}'])
-    return f':{display_number}'
-
-display = setup_headful_display()
-
-options = Options()
-options.add_argument('--disable-gpu')  # Disable GPU hardware acceleration
-options.add_argument('--no-sandbox')
-options.add_argument('--disable-dev-shm-usage')
-options.add_argument(f'--display={display}')  # Use the virtual display
-
-service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service, options=options)
-
-try:
-    driver.get("https://www.python.org")
-    print("Title of the page is:", driver.title)
-finally:
-    driver.quit()
+cv2.imshow("image", img)
+ 
+# To hold the window on screen, we use cv2.waitKey method
+# Once it detected the close input, it will release the control
+# To the next line
+# First Parameter is for holding screen for specified milliseconds
+# It should be positive integer. If 0 pass an parameter, then it will
+# hold the screen until user close it.
+cv2.waitKey(0)
+ 
+# It is for removing/deleting created GUI window from screen
+# and memory
+cv2.destroyAllWindows()

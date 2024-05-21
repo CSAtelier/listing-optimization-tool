@@ -27,15 +27,15 @@ def create_excel(price_dict_us, price_dict_ca, save_path):
     for i in range(len(key_list)):
         ws[f'A{i+2}'] = key_list[i]
         ws[f'B{i+2}'] = price_dict_us[key_list[i]][0]
-        ws[f'C{i+2}'] = int(price_dict_us[key_list[i]][1])
+        ws[f'C{i+2}'] = float(price_dict_us[key_list[i]][1].replace(',', '.'))
         ws[f'D{i+2}'] = price_dict_ca[key_list[i]][0]
-        ws[f'E{i+2}'] = int(price_dict_ca[key_list[i]][1])
-        ws[f'F{i+2}'] = f"https://www.amazon.com/dp/{key_list[i]}"
-        ws[f'G{i+2}'] = f"https://www.amazon.ca/dp/{key_list[i]}"
+        ws[f'E{i+2}'] = float(price_dict_ca[key_list[i]][1].replace(',', '.'))
+        ws[f'G{i+2}'] = f"https://www.amazon.com/dp/{key_list[i]}"
+        ws[f'H{i+2}'] = f"https://www.amazon.ca/dp/{key_list[i]}"
         if price_dict_ca[key_list[i]] == 0 or price_dict_us[key_list[i]] == 0:
-            ws[f'H{i+2}'] = 0
+            ws[f'F{i+2}'] = 0
         else:
-            ws[f'H{i+2}'] = price_dict_us[key_list[i]][0]/price_dict_ca[key_list[i]][0]
+            ws[f'F{i+2}'] = price_dict_us[key_list[i]][0]/price_dict_ca[key_list[i]][0]
     wb.save(save_path + '/us-ca_excel_'+str(random.randint(1,10000))+'.xlsx')
     return wb
     
