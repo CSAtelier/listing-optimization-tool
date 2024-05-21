@@ -10,6 +10,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 import os
 from selenium.webdriver.chrome.options import Options
 
+from config import kIsHeadless
+
 def setup_headful_display():
     """ Set up virtual display for running headful Chrome. """
     # Find a free display number
