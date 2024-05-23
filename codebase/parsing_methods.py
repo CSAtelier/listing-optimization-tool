@@ -105,10 +105,12 @@ def get_price_revenue(driver):
 
     time.sleep(2)
     # price = response.find('div', attrs = {'class':'product-detail-content'})
-    driver.execute_script("window.scrollTo(0, 1000)")
+    # driver.maximize_window() 
+    driver.execute_script("window.scrollTo(0, 2000)")
+    time.sleep(1)
     driver.save_screenshot('screenie2.png')
     img = cv2.imread("/Users/ardagulersoy/Desktop/Daily/listing-optimization-tool/screenie2.png", cv2.IMREAD_COLOR)
-    img = img[1230:1260,620:780]
+    img = img[1110:1145,620:800]
     # cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     custom_config = r'--oem 3 --psm 6'
     price = pytesseract.image_to_string(img, config=custom_config)

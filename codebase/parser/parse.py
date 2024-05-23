@@ -101,11 +101,11 @@ def parse_loop_us(file_path):
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
     index = 0
-    driver = enable_extensions(driver)
+    # driver = enable_extensions(driver)
     time.sleep(20)
     driver = open_browser_us(driver, url='https://www.amazon.com/')
     print(driver.current_url)
-    for url in url_list_us[1:]:
+    for url in url_list_us[1:10]:
         price = 0
         index = index + 1
         asin = extract_asin(url)
@@ -151,10 +151,10 @@ def parse_loop_ca(file_path):
     # options.add_argument('--no-sandbox')
     options.add_extension('/Users/ardagulersoy/Desktop/Daily/listing-optimization-tool/extensions/helium10_extension.crx')
     driver = webdriver.Chrome(options=options)
-    driver = enable_extensions(driver)
+    # driver = enable_extensions(driver)
     time.sleep(6)
     driver = open_browser_ca(driver, url='https://www.amazon.ca/')
-    for url in url_list_ca[1:]:
+    for url in url_list_ca[1:10]:
         price = 0
         index = index + 1
         asin = extract_asin(url)
