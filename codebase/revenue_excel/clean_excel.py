@@ -37,11 +37,8 @@ def create_excel_ratio(data_path, save_path):
         ws[f'B{i+2}'] = df['US Prices'][i]
         price_ca = parse_ratio(driver=driver, asin=df['ASIN'][i])
         ws[f'C{i+2}'] = price_ca
-        print(price_ca)
         calc_us = float(df['US Prices'][i])+4.0
-        print(calc_us)
         calc_ca = float(price_ca)*float(ca_usd)
-        print(calc_ca)
         ws[f'D{i+2}'] = (price_ca - (calc_ca))/calc_ca
         # except:
         #     ws[f'D{i+2}'] = 0

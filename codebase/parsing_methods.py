@@ -12,7 +12,7 @@ import requests
 import cv2 
 import pytesseract
 import sys
-from config import kDeploymentEnvEnum
+from config import kDeploymentEnvEnum, kDelay, kEnableHelium
 from config_types import DeploymentEnvEnum
 
 def captcha_handle(response,driver):
@@ -32,24 +32,37 @@ def change_location_us(driver):
     postcode_form = driver.find_element(By.ID, "GLUXZipUpdateInput").send_keys("73001") 
     postcode_button = driver.find_element(By.XPATH, '//*[@id="GLUXZipUpdate"]/span/input').click()
     element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="a-popover-1"]/div/div[2]/span/span')))
+    time.sleep(kDelay)
     continue_button = driver.find_element(By.XPATH, '//*[@id="a-popover-1"]/div/div[2]/span/span').click()
-    time.sleep(5)
+    time.sleep(kDelay)
 
 
 def get_price_us(response):
-    try:
-        sale = 0
-        price = response.find('span', attrs = {'class':'a-offscreen'})
-        unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
-        price = re.search(r'\$\d+\.\d+', price.text).group()
-        sale = unit_sale.text
+    if kEnableHelium == True:
+        try:
+            sale = 0
+            price = response.find('span', attrs = {'class':'a-offscreen'})
+            unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
+            price = re.search(r'\$\d+\.\d+', price.text).group()
+            sale = unit_sale.text
 
-    except:
-        price = response.find('span', attrs = {'class':'a-price aok-align-center reinventPricePriceToPayMargin priceToPay'})
-        price = re.search(r'\$\d+\.\d+', price.text).group()
-        unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
-        sale = unit_sale.text
+        except:
+            sale = 0
+            price = response.find('span', attrs = {'class':'a-price aok-align-center reinventPricePriceToPayMargin priceToPay'})
+            price = re.search(r'\$\d+\.\d+', price.text).group()
+            unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
+            sale = unit_sale.text
 
+    else:
+        try:
+            sale = 0
+            price = response.find('span', attrs = {'class':'a-offscreen'})
+            price = re.search(r'\$\d+\.\d+', price.text).group()
+
+        except:
+            sale = 0
+            price = response.find('span', attrs = {'class':'a-price aok-align-center reinventPricePriceToPayMargin priceToPay'})
+            price = re.search(r'\$\d+\.\d+', price.text).group()
 
     return float(price[1:]), sale
 
@@ -66,15 +79,28 @@ def change_location_ca(driver):
 
 
 def get_price_ca(response):
-    try:
-        price = response.find('span', attrs = {'class':'a-offscreen'})
-        price = re.search(r'\$\d+\.\d+', price.text).group()
-        unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
-    except:
-        price = response.find('span', attrs = {'class':'a-price aok-align-center reinventPricePriceToPayMargin priceToPay'})
-        price = re.search(r'\$\d+\.\d+', price.text).group()
-        unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
-    sale = unit_sale.text
+    if kEnableHelium == True:
+        try:
+            sale = 0
+            price = response.find('span', attrs = {'class':'a-offscreen'})
+            price = re.search(r'\$\d+\.\d+', price.text).group()
+            unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
+            sale = unit_sale.text
+        except:
+            sale = 0
+            price = response.find('span', attrs = {'class':'a-price aok-align-center reinventPricePriceToPayMargin priceToPay'})
+            price = re.search(r'\$\d+\.\d+', price.text).group()
+            unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
+            sale = unit_sale.text
+    else:
+        try:
+            sale = 0
+            price = response.find('span', attrs = {'class':'a-offscreen'})
+            price = re.search(r'\$\d+\.\d+', price.text).group()
+        except:
+            sale = 0
+            price = response.find('span', attrs = {'class':'a-price aok-align-center reinventPricePriceToPayMargin priceToPay'})
+            price = re.search(r'\$\d+\.\d+', price.text).group()
     return float(price[1:]),sale
 
 
@@ -103,11 +129,12 @@ def calc_revenue(driver):
 
 def get_price_revenue(driver):
 
-    time.sleep(2)
+    time.sleep(3)
     # price = response.find('div', attrs = {'class':'product-detail-content'})
     # driver.maximize_window() 
-    driver.execute_script("window.scrollTo(0, 2000)")
-    time.sleep(1)
+
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+    time.sleep(2)
     driver.save_screenshot('screenie2.png')
     img = cv2.imread("/Users/ardagulersoy/Desktop/Daily/listing-optimization-tool/screenie2.png", cv2.IMREAD_COLOR)
     img = img[1110:1145,620:800]
@@ -130,18 +157,18 @@ def enable_extensions(driver):
         # First login try
         driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
         driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
-        time.sleep(3)
+        time.sleep(kDelay)
         driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
-        time.sleep(3)
+        time.sleep(kDelay)
         page_source = driver.page_source
         soup = BeautifulSoup(page_source, 'html.parser')
         buttons = soup.find_all('a')
-        print(buttons)
         if buttons:
-            print(buttons[-1])
+            # print(buttons[-1])
+            pass
         button = driver.find_element(By.CSS_SELECTOR, 'a.btn.btn-primary.error-container__btn')
         button.click()
-        time.sleep(3)
+        time.sleep(kDelay)
         driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
         driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
         # try:
@@ -151,7 +178,8 @@ def enable_extensions(driver):
         # except:
         #     pass
         driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
-        time.sleep(5)
+        time.sleep(kDelay+2)
+
     elif kDeploymentEnvEnum == DeploymentEnvEnum.CLOUD:
         # TODO: ARDA implement Cloud version of the extension enabling
         print("Cloud version of the extension enabling is not implemented")

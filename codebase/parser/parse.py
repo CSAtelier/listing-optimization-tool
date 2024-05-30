@@ -9,8 +9,8 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 import os
 from selenium.webdriver.chrome.options import Options
+from config import kDeploymentEnvEnum, kDelay, kIsHeadless
 
-from config import kIsHeadless
 
 def setup_headful_display():
     """ Set up virtual display for running headful Chrome. """
@@ -34,7 +34,6 @@ def open_browser_us(driver, url,):
     
     driver.get(url)
     html = driver.page_source
-    print(driver.current_url)
     soup = BeautifulSoup(html,features="lxml")
     try:
         captcha_handle(soup,driver)
@@ -96,21 +95,24 @@ def parse_loop_us(file_path):
     options.add_argument('--disable-dev-shm-usage')
     # options.add_argument('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'+ 
     #                     'KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36')
-    options.add_extension('extensions/helium10_extension.crx')
+    # options.add_extension('extensions/helium10_extension.crx')
     # options.add_argument(f'--display={display}')  # Use the virtual display
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
     index = 0
-    # driver = enable_extensions(driver)
-    time.sleep(20)
+    if kEnableHelium == True:
+        driver = enable_extensions(driver)
+    time.sleep(kDelay*3)
     driver = open_browser_us(driver, url='https://www.amazon.com/')
-    print(driver.current_url)
-    for url in url_list_us[1:10]:
+    driver.switch_to.window(driver.window_handles[0])
+    for url in url_list_us[1:3]:
         price = 0
         index = index + 1
         asin = extract_asin(url)
         driver.get(url)
-        time.sleep(10)
+        time.sleep(kDelay)
+        if kEnableHelium == True:
+            time.sleep(kDelay)
         if 'amazon.com' in url:
             
             try:
@@ -149,17 +151,21 @@ def parse_loop_ca(file_path):
     # options.add_argument("--headless=new")
     # options.add_argument('--disable-gpu')
     # options.add_argument('--no-sandbox')
-    options.add_extension('/Users/ardagulersoy/Desktop/Daily/listing-optimization-tool/extensions/helium10_extension.crx')
+    # options.add_extension('/Users/ardagulersoy/Desktop/Daily/listing-optimization-tool/extensions/helium10_extension.crx')
     driver = webdriver.Chrome(options=options)
-    # driver = enable_extensions(driver)
-    time.sleep(6)
+    if kEnableHelium == True:
+        driver = enable_extensions(driver)
+    time.sleep(kDelay*3)
     driver = open_browser_ca(driver, url='https://www.amazon.ca/')
-    for url in url_list_ca[1:10]:
+    driver.switch_to.window(driver.window_handles[0])
+    for url in url_list_ca[1:3]:
         price = 0
         index = index + 1
         asin = extract_asin(url)
         driver.get(url)
-        time.sleep(5)
+        time.sleep(kDelay)
+        if kEnableHelium == True:
+            time.sleep(kDelay)
         if 'amazon.ca' in url:
             try:
                 price, unit_sale = parse_asin_us(driver=driver)  
