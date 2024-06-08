@@ -4,15 +4,12 @@ from codebase.revenue_excel.clean_excel import *
 from matplotlib import pyplot as plt
 import threading
 
-# Parse US Amazon with 
-# dict_us = parse_loop_us(file_path='./persistance/data/a.csv')
-# Parse CA Amazon
-# dict_ca = parse_loop_ca(file_path='./persistance/data/a.csv')
-# Create excel file for the US and CA prices
-# create_excel(dict_us, dict_ca, save_path='/Users/ardagulersoy/Desktop/Daily')
 
-# Create excel file with revenue calculator. You can run this function separately since you are giving the price values through data_path, which contains the parameters of
-# already parsed ASIN numbers
-create_excel_ratio(data_path='/Users/ardagulersoy/Desktop/Daily/us-ca_excel_4013.xlsx',save_path='/Users/ardagulersoy/Desktop/Daily/')
+parse_amazon(data_path='/Users/ardagulersoy/Desktop/Daily/us-ca_excel_1783.xlsx',
+             us_price_column='B',us_sale_column='C',ca_price_column='D',ca_sale_column='E')
+
+revenue_calculator(data_path='/Users/ardagulersoy/Downloads/siralanmis_ve_temizlenmis_parca3.xlsx.xlsx',
+                   column='F'
+                   )
 
 

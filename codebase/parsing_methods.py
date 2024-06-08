@@ -55,12 +55,12 @@ def get_price_us(response):
 
     else:
         try:
-            sale = 0
+            sale = '0,0'
             price = response.find('span', attrs = {'class':'a-offscreen'})
             price = re.search(r'\$\d+\.\d+', price.text).group()
 
         except:
-            sale = 0
+            sale = '0,0'
             price = response.find('span', attrs = {'class':'a-price aok-align-center reinventPricePriceToPayMargin priceToPay'})
             price = re.search(r'\$\d+\.\d+', price.text).group()
 
@@ -130,23 +130,18 @@ def calc_revenue(driver):
 def get_price_revenue(driver):
 
     time.sleep(3)
-    # price = response.find('div', attrs = {'class':'product-detail-content'})
-    # driver.maximize_window() 
-
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
     time.sleep(2)
     driver.save_screenshot('screenie2.png')
     img = cv2.imread("/Users/ardagulersoy/Desktop/Daily/listing-optimization-tool/screenie2.png", cv2.IMREAD_COLOR)
-    img = img[1110:1145,620:800]
+    img = img[1080:1115,620:800]
     # cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     custom_config = r'--oem 3 --psm 6'
     price = pytesseract.image_to_string(img, config=custom_config)
     index_ca = price.find('CA')
     price_cleaned = price[index_ca:]
+    print(price_cleaned)
     return float(price_cleaned[3:])
-    # print(response)
-    # price = driver.find_element(By.XPATH, '//*[@id="ProgramCard"]/div[2]/div[2]/div/div[1]/div[3]')
-
 
 def enable_extensions(driver):
 
@@ -159,13 +154,14 @@ def enable_extensions(driver):
         driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
         time.sleep(kDelay)
         driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
-        time.sleep(kDelay)
+        time.sleep(kDelay*3)
         page_source = driver.page_source
         soup = BeautifulSoup(page_source, 'html.parser')
         buttons = soup.find_all('a')
         if buttons:
             # print(buttons[-1])
             pass
+ 
         button = driver.find_element(By.CSS_SELECTOR, 'a.btn.btn-primary.error-container__btn')
         button.click()
         time.sleep(kDelay)

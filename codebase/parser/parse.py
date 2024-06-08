@@ -9,7 +9,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 import os
 from selenium.webdriver.chrome.options import Options
-from config import kDeploymentEnvEnum, kDelay, kIsHeadless
+from config import kDeploymentEnvEnum, kDelay, kIsHeadless, kEnablePrice
 
 
 def setup_headful_display():
@@ -95,7 +95,8 @@ def parse_loop_us(file_path):
     options.add_argument('--disable-dev-shm-usage')
     # options.add_argument('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'+ 
     #                     'KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36')
-    # options.add_extension('extensions/helium10_extension.crx')
+    if kEnableHelium == True:
+        options.add_extension('extensions/helium10_extension.crx')
     # options.add_argument(f'--display={display}')  # Use the virtual display
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
@@ -105,7 +106,7 @@ def parse_loop_us(file_path):
     time.sleep(kDelay*3)
     driver = open_browser_us(driver, url='https://www.amazon.com/')
     driver.switch_to.window(driver.window_handles[0])
-    for url in url_list_us[1:3]:
+    for url in url_list_us[0:3]:
         price = 0
         index = index + 1
         asin = extract_asin(url)
@@ -117,8 +118,11 @@ def parse_loop_us(file_path):
             
             try:
                 price, unit_sale = parse_asin_us(driver=driver)  
+                if kEnablePrice == False:
+                    price = 0
+                
             except:
-                unit_sale = 0
+                unit_sale = '0,0'
                 pass
 
         price_dict[asin] = [price, unit_sale]
@@ -148,9 +152,9 @@ def parse_loop_ca(file_path):
     price_dict = dict()
     index = 0
     options = webdriver.ChromeOptions()
-    # options.add_argument("--headless=new")
-    # options.add_argument('--disable-gpu')
-    # options.add_argument('--no-sandbox')
+    options.add_argument('--disable-gpu')  # Disable GPU hardware acceleration
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
     # options.add_extension('/Users/ardagulersoy/Desktop/Daily/listing-optimization-tool/extensions/helium10_extension.crx')
     driver = webdriver.Chrome(options=options)
     if kEnableHelium == True:
@@ -158,7 +162,7 @@ def parse_loop_ca(file_path):
     time.sleep(kDelay*3)
     driver = open_browser_ca(driver, url='https://www.amazon.ca/')
     driver.switch_to.window(driver.window_handles[0])
-    for url in url_list_ca[1:3]:
+    for url in url_list_ca[0:3]:
         price = 0
         index = index + 1
         asin = extract_asin(url)
@@ -169,12 +173,22 @@ def parse_loop_ca(file_path):
         if 'amazon.ca' in url:
             try:
                 price, unit_sale = parse_asin_us(driver=driver)  
+                if kEnablePrice == False:
+                    price = 0
             except:
-                unit_sale = 0
+                unit_sale ='0,0'
                 pass
         print(price)
         price_dict[asin] = [price, unit_sale]
   
 
     return price_dict
-        
+
+def parse_amazon(data_path,us_price_column=None,us_sale_column=None,
+                      ca_price_column=None,ca_sale_column=None):
+    dict_us = parse_loop_us(file_path=data_path)
+    dict_ca = parse_loop_ca(file_path=data_path)
+    print(dict_us, dict_ca)
+    create_excel(dict_us, dict_ca,data_path=data_path,us_price_column=us_price_column,us_sale_column=us_sale_column,
+                      ca_price_column=ca_price_column,ca_sale_column=ca_sale_column)
+    return dict_us,dict_ca

@@ -2,18 +2,16 @@
 import os
 import csv
 import numpy as np
+import pandas as pd
 
 class DatasetLoader:
     def __init__(self, file_path = './persistance/data'):
         self.file_path = file_path
 
     def load_dataset(self):
-        asin_values = []
         with open(self.file_path, 'r', newline='') as csvfile:
-            reader = csv.DictReader(csvfile)
-            if 'ASIN' not in reader.fieldnames:
-                print(f"ASIN column not found in {self.filename}")
-            for row in reader:
-                asin_values.append(row['ASIN'])
-
-        return asin_values
+            if self.file_path.endswith('xlsx'):
+                df =  pd.DataFrame(pd.read_excel(self.file_path)) 
+            else:
+                df = pd.read_csv(self.file_path)
+        return df['ASIN']
