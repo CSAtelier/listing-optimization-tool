@@ -6,4 +6,4 @@ kIsHeadless: bool = True
 kDelay: int = 2
 kEnableHelium: bool = False
 kEnablePrice: bool = False
-# kRevenueWithParse: bool = False
+kRevenueWithParse: bool = False
