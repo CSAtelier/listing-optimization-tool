@@ -12,7 +12,7 @@ import requests
 import cv2 
 import pytesseract
 import sys
-from config import kDeploymentEnvEnum, kDelay, kEnableHelium
+from config import *
 from config_types import DeploymentEnvEnum
 
 def captcha_handle(response,driver):
@@ -134,7 +134,7 @@ def get_price_revenue(driver):
     time.sleep(2)
     driver.save_screenshot('screenie2.png')
     img = cv2.imread("/Users/ardagulersoy/Desktop/Daily/listing-optimization-tool/screenie2.png", cv2.IMREAD_COLOR)
-    img = img[1080:1115,620:800]
+    img = img[kRevenueCrop[0]:kRevenueCrop[1],kRevenueCrop[2]:kRevenueCrop[3]]
     # cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     custom_config = r'--oem 3 --psm 6'
     price = pytesseract.image_to_string(img, config=custom_config)
