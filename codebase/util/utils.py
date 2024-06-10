@@ -21,9 +21,9 @@ def create_excel(price_dict_us, price_dict_ca,
     # ws['C1'] = 'US Sale'
     # ws['D1'] = 'CA Prices'
     # ws['E1'] = 'CA Sale'
-    ws['F1'] = 'US/CA'
-    ws['G1'] = 'URL Amazon US'
-    ws['H1'] = 'URL Amazon CA'
+    # ws['F1'] = 'US/CA'
+    # ws['G1'] = 'URL Amazon US'
+    # ws['H1'] = 'URL Amazon CA'
     key_list = list(price_dict_us.keys())
     for i in range(len(key_list)):
         if us_price_column != None:
@@ -39,8 +39,8 @@ def create_excel(price_dict_us, price_dict_ca,
         # ws[f'C{i+2}'] = float(price_dict_us[key_list[i]][1].replace(',', '.'))
         # ws[f'D{i+2}'] = price_dict_ca[key_list[i]][0]
         # ws[f'E{i+2}'] = float(price_dict_ca[key_list[i]][1].replace(',', '.'))
-        ws[f'G{i+2}'] = f"https://www.amazon.com/dp/{key_list[i]}"
-        ws[f'H{i+2}'] = f"https://www.amazon.ca/dp/{key_list[i]}"
+        # ws[f'G{i+2}'] = f"https://www.amazon.com/dp/{key_list[i]}"
+        # ws[f'H{i+2}'] = f"https://www.amazon.ca/dp/{key_list[i]}"
         if price_dict_ca[key_list[i]] == 0 or price_dict_us[key_list[i]] == 0:
             ws[f'F{i+2}'] = 0
         else:

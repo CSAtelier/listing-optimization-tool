@@ -3,13 +3,16 @@ from codebase.util.utils import *
 from codebase.revenue_excel.clean_excel import * 
 from matplotlib import pyplot as plt
 import threading
+from config import *
 
 
-# parse_amazon(data_path='/Users/ardagulersoy/Desktop/Daily/us-ca_excel_1783.xlsx',
-#              us_price_column='B',us_sale_column='C',ca_price_column='D',ca_sale_column='E')
+if kParse == True:
+    parse_amazon(data_path=kDataDir,
+                us_price_column=kUsPriceColumn ,us_sale_column=kUsSaleColumn,ca_price_column=kCaPriceColumn,ca_sale_column=kCaSaleColumn)
 
-revenue_calculator(data_path='/Users/ardagulersoy/Downloads/siralanmis_ve_temizlenmis_parca3.xlsx.xlsx',
-                   column='F'
-                   )
+if kRevenueWithParse == True:
+    revenue_calculator(data_path=kDataDir,
+                    column=kRevenueColumn,
+                    )
 
 

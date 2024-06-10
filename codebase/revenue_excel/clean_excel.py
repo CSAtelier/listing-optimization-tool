@@ -1,14 +1,10 @@
 import openpyxl
 from codebase.parser.parse import *
-from config import kRevenueWithParse
 import os
 import csv
 import pandas as pd 
 
 def revenue_calculator(data_path,column):
-    # if kRevenueWithParse == True:
-    #     dict_us, dict_ca = parse_amazon(data_path=data_path, save_path = '/Users/ardagulersoy/Desktop/Daily')
-
     options = Options()
     options.add_argument("--window-size=1920,1080")
     service = Service(ChromeDriverManager().install())
@@ -27,13 +23,13 @@ def revenue_calculator(data_path,column):
             df =  pd.DataFrame(pd.read_excel(data_path)) 
         else:
             df = pd.read_csv(data_path)
-    for i in range(len(df['ASIN'])):
-    # for i in range(2):
+    # for i in range(len(df['ASIN'])):
+    for i in range(2):
         price_ca = parse_ratio(driver=driver, asin=df['ASIN'][i])
         calc_us = float(df['Price'][i])+4.0
-        calc_ca = float(calc_us)*float(ca_usd)
+        calc_us = float(calc_us)*float(ca_usd)
         try:
-            ws[column+f'{i+2}'] = (price_ca - (calc_ca))/calc_ca
+            ws[column+f'{i+2}'] = (price_ca - (calc_us))/calc_us
         except: 
             ws[column+f'{i+2}'] = 0
     wb.save(data_path)
