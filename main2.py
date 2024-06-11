@@ -1,7 +1,6 @@
 from codebase.parser.parse import *
 from codebase.util.utils import *
 from codebase.revenue_excel.clean_excel import * 
-from matplotlib import pyplot as plt
 import threading
 from config import *
 

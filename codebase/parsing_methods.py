@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from bs4 import BeautifulSoup
 from selenium_recaptcha_solver import RecaptchaSolver
-from matplotlib import pyplot as plt
+
 import time
 import re
 import requests
