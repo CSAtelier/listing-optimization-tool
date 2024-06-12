@@ -7,6 +7,7 @@ import pandas as pd
 def revenue_calculator(data_path,column):
     options = Options()
     # options.add_argument("--window-size=1920,1080")
+    options.add_argument("--window-size=1500,900")
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
     wb = openpyxl.load_workbook(data_path)
@@ -23,8 +24,8 @@ def revenue_calculator(data_path,column):
             df =  pd.DataFrame(pd.read_excel(data_path)) 
         else:
             df = pd.read_csv(data_path)
-    # for i in range(len(df['ASIN'])):
-    for i in range(2):
+    for i in range(len(df['ASIN'])):
+    # for i in range(2):
         price_ca = parse_ratio(driver=driver, asin=df['ASIN'][i])
         calc_us = float(df['Price'][i])+4.0
         calc_us = float(calc_us)*float(ca_usd)

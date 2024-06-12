@@ -143,7 +143,11 @@ def get_price_revenue(driver):
     index_ca = price.find('CA')
     price_cleaned = price[index_ca:]
     print(price_cleaned[4:-2])
-    return float(price_cleaned[4:-2])
+    try:
+        price = float(price_cleaned[4:-2])
+    except:
+        price = 0
+    return price
 
 def enable_extensions(driver):
 
