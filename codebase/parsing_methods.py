@@ -130,7 +130,7 @@ def calc_revenue(driver):
 def get_price_revenue(driver):
 
     time.sleep(3)
-    driver.execute_script("window.scrollTo(0,20000)")
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight)") 
     time.sleep(2)
     driver.save_screenshot('screenie3.png')
     img = cv2.imread("screenie3.png", cv2.IMREAD_COLOR)
