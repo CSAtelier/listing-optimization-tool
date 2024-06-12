@@ -6,7 +6,7 @@ import pandas as pd
 
 def revenue_calculator(data_path,column):
     options = Options()
-    options.add_argument("--window-size=1920,1080")
+    # options.add_argument("--window-size=1920,1080")
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
     wb = openpyxl.load_workbook(data_path)
