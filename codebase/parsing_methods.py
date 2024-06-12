@@ -139,10 +139,11 @@ def get_price_revenue(driver):
     # cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     custom_config = r'--oem 3 --psm 6'
     price = pytesseract.image_to_string(img, config=custom_config)
+    print(price)
     index_ca = price.find('CA')
     price_cleaned = price[index_ca:]
-    print(price_cleaned)
-    return float(price_cleaned[3:])
+    print(price_cleaned[4:-2])
+    return float(price_cleaned[4:-2])
 
 def enable_extensions(driver):
 
