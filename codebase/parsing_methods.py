@@ -135,10 +135,6 @@ def get_price_revenue(driver):
     driver.save_screenshot('screenie3.png')
     img = cv2.imread("screenie3.png", cv2.IMREAD_COLOR)
     img = img[kRevenueCrop[0]:kRevenueCrop[1],kRevenueCrop[2]:kRevenueCrop[3]]
-    cv2.imshow('a', img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-    sys.exit()
     # img = img[1080:1115,620:800]
     # cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     custom_config = r'--oem 3 --psm 6'
