@@ -4,7 +4,7 @@ from config_types import DeploymentEnvEnum
 kDeploymentEnvEnum: DeploymentEnvEnum = DeploymentEnvEnum.LOCAL
 kIsHeadless: bool = True
 kDelay: int = 8
-kRevenueCrop: list= [583,599,234,309]
+kRevenueCrop: list= [645,664,320,398]
 
 kParse: bool = False
 kEnableHelium: bool = False
