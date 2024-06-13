@@ -2,11 +2,11 @@ from config_types import DeploymentEnvEnum
 
 
 kDeploymentEnvEnum: DeploymentEnvEnum = DeploymentEnvEnum.LOCAL
-kIsHeadless: bool = True
+kIsHeadless: bool = False
 kDelay: int = 8
 kRevenueCrop: list= [645,664,320,398]
 
-kParse: bool = False
+kParse: bool = True
 kEnableHelium: bool = False
 kEnablePrice: bool =  True
 
