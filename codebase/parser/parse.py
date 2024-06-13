@@ -108,6 +108,8 @@ def parse_loop_us(file_path):
         # Remove the domain key if it causes issues, as some cookies may not have a domain
         if 'domain' in cookie:
             del cookie['domain']
+        if 'sameSite' in cookie:
+            cookie['sameSite'] = 'Lax'
         driver.add_cookie(cookie)
 
     index = 0
@@ -182,6 +184,8 @@ def parse_loop_ca(file_path):
         # Remove the domain key if it causes issues, as some cookies may not have a domain
         if 'domain' in cookie:
             del cookie['domain']
+        if 'sameSite' in cookie:
+            cookie['sameSite'] = 'Lax'
         driver.add_cookie(cookie)
     driver.switch_to.window(driver.window_handles[0])
     for url in url_list_ca[0:3]:
