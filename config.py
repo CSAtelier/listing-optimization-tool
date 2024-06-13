@@ -10,7 +10,7 @@ kParse: bool = True
 kEnableHelium: bool = False
 kEnablePrice: bool =  True
 
-kRevenueWithParse: bool = True
+kRevenueWithParse: bool = False
 
 kDataDir: str = "persistance/siralanmis_ve_temizlenmis_parca3.xlsx.xlsx"
 kRevenueColumn: str = "K"

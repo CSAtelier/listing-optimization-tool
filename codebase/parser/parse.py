@@ -93,11 +93,8 @@ def parse_loop_us(file_path):
     options.add_argument('--disable-gpu')  # Disable GPU hardware acceleration
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    # options.add_argument('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'+ 
-    #                     'KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36')
     if kEnableHelium == True:
         options.add_extension('extensions/helium10_extension.crx')
-    # options.add_argument(f'--display={display}')  # Use the virtual display
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
     index = 0
@@ -150,13 +147,16 @@ def parse_loop_ca(file_path):
     asin_list = loader.load_dataset()
     url_list_us, url_list_ca = asin_to_url(asin_list)
     price_dict = dict()
-    index = 0
-    options = webdriver.ChromeOptions()
+    # display = setup_headful_display()
+    options = Options()
     options.add_argument('--disable-gpu')  # Disable GPU hardware acceleration
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    # options.add_extension('/Users/ardagulersoy/Desktop/Daily/listing-optimization-tool/extensions/helium10_extension.crx')
-    driver = webdriver.Chrome(options=options)
+    if kEnableHelium == True:
+        options.add_extension('extensions/helium10_extension.crx')
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
+    index = 0
     if kEnableHelium == True:
         driver = enable_extensions(driver)
     time.sleep(kDelay*3)
