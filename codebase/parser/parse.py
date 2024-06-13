@@ -93,9 +93,8 @@ def parse_loop_us(file_path):
     options.add_argument('--disable-gpu')  # Disable GPU hardware acceleration
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    options.add_argument(f'--user-agent={test_ua}')
-
     test_ua = 'Mozilla/5.0 (Windows NT 4.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36'
+    options.add_argument(f'--user-agent={test_ua}')
     if kEnableHelium == True:
         options.add_extension('extensions/helium10_extension.crx')
     service = Service(ChromeDriverManager().install())
