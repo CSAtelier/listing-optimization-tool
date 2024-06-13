@@ -163,21 +163,21 @@ def enable_extensions(driver):
         time.sleep(kDelay*5)
         page_source = driver.page_source
         soup = BeautifulSoup(page_source, 'html.parser')
-        if driver.find_element(By.CSS_SELECTOR, 'a.btn.btn-primary.error-container__btn') != None:
-            button = driver.find_element(By.CSS_SELECTOR, 'a.btn.btn-primary.error-container__btn')
-            button.click()
-            time.sleep(kDelay)
-            driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
-            driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
-            # try:
-            #     recaptcha_iframe = driver.find_element(By.XPATH, '//iframe[@title="reCAPTCHA"]')
-            #     solver = RecaptchaSolver(driver=driver)
-            #     solver.click_recaptcha_v2(iframe=recaptcha_iframe)
-            # except:
-            #     pass
-            driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
-            time.sleep(kDelay+2)
-        else:
-            pass
+        # if driver.find_element(By.CSS_SELECTOR, 'a.btn.btn-primary.error-container__btn') != None:
+        button = driver.find_element(By.CSS_SELECTOR, 'a.btn.btn-primary.error-container__btn')
+        button.click()
+        time.sleep(kDelay)
+        driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
+        driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
+        #     try:
+        #         recaptcha_iframe = driver.find_element(By.XPATH, '//iframe[@title="reCAPTCHA"]')
+        #         solver = RecaptchaSolver(driver=driver)
+        #         solver.click_recaptcha_v2(iframe=recaptcha_iframe)
+        #     except:
+        #         pass
+        #     driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
+        #     time.sleep(kDelay+2)
+        # else:
+        #     pass
 
     return driver
