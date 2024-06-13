@@ -172,7 +172,7 @@ def enable_extensions(driver):
         recaptcha_iframe = driver.find_element(By.XPATH, '//iframe[@title="reCAPTCHA"]')
         solver.click_recaptcha_v2(iframe=recaptcha_iframe)
         driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
-        time.sleep(kDelay+2)
+        time.sleep(kDelay*5)
     else:
         pass
 
