@@ -169,7 +169,7 @@ def enable_extensions(driver):
         time.sleep(kDelay)
         driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
         driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
-        driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
+        # driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
         # try: 
         # # driver.find_element(By.XPATH, '//iframe[@title="reCAPTCHA"]') != None:
         recaptcha_iframe = driver.find_element(By.XPATH, '//iframe[@title="reCAPTCHA"]')
