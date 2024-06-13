@@ -10,6 +10,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 import os
 from selenium.webdriver.chrome.options import Options
 from config import kDeploymentEnvEnum, kDelay, kIsHeadless, kEnablePrice
+import json
 
 
 def setup_headful_display():
@@ -99,6 +100,16 @@ def parse_loop_us(file_path):
         options.add_extension('extensions/helium10_extension.crx')
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
+    cookies_file_path = '/home/ubuntu/cookies.json'
+    with open(cookies_file_path, 'r') as file:
+        cookies = json.load(file)
+    # Set the cookies in the browser
+    for cookie in cookies:
+        # Remove the domain key if it causes issues, as some cookies may not have a domain
+        if 'domain' in cookie:
+            del cookie['domain']
+        driver.add_cookie(cookie)
+
     index = 0
     if kEnableHelium == True:
         driver = enable_extensions(driver)
@@ -163,6 +174,15 @@ def parse_loop_ca(file_path):
         driver = enable_extensions(driver)
     time.sleep(kDelay*3)
     driver = open_browser_ca(driver, url='https://www.amazon.ca/')
+    cookies_file_path = '/home/ubuntu/cookies.json'
+    with open(cookies_file_path, 'r') as file:
+        cookies = json.load(file)
+    # Set the cookies in the browser
+    for cookie in cookies:
+        # Remove the domain key if it causes issues, as some cookies may not have a domain
+        if 'domain' in cookie:
+            del cookie['domain']
+        driver.add_cookie(cookie)
     driver.switch_to.window(driver.window_handles[0])
     for url in url_list_ca[0:3]:
         price = 0
