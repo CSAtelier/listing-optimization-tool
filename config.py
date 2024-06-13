@@ -3,7 +3,7 @@ from config_types import DeploymentEnvEnum
 
 kDeploymentEnvEnum: DeploymentEnvEnum = DeploymentEnvEnum.LOCAL
 kIsHeadless: bool = False
-kDelay: int = 3
+kDelay: int = 6
 kRevenueCrop: list= [645,664,320,398]
 
 kParse: bool = True
