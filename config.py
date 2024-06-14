@@ -2,10 +2,10 @@ from config_types import DeploymentEnvEnum
 
 
 kDeploymentEnvEnum: DeploymentEnvEnum = DeploymentEnvEnum.LOCAL
-kIsHeadless: bool = True
-kDelay: int = 7
+kIsHeadless: bool = False
+kDelay: int = 5
 kRevenueCrop: list= [645,664,320,398]
-kStop: int = 4
+kStop: int = -1
 
 kParse: bool = True
 kEnableHelium: bool = True
