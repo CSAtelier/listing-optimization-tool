@@ -106,7 +106,7 @@ def parse_loop_us(file_path):
     time.sleep(kDelay*3)
     driver = open_browser_us(driver, url='https://www.amazon.com/')
     driver.switch_to.window(driver.window_handles[0])
-    for url in url_list_us[0:3]:
+    for url in url_list_us[0:kStop]:
         price = 0
         index = index + 1
         asin = extract_asin(url)
@@ -120,6 +120,8 @@ def parse_loop_us(file_path):
                 price, unit_sale = parse_asin_us(driver=driver)  
                 if kEnablePrice == False:
                     price = 0
+                if unit_sale == 'N/A':
+                    unit_sale = "0"
                 
             except:
                 unit_sale = '0,0'
@@ -176,7 +178,7 @@ def parse_loop_ca(file_path):
             cookie['sameSite'] = 'Lax'
         driver.add_cookie(cookie)
     driver.switch_to.window(driver.window_handles[0])
-    for url in url_list_ca[0:3]:
+    for url in url_list_ca[0:kStop]:
         price = 0
         index = index + 1
         asin = extract_asin(url)

@@ -5,6 +5,7 @@ kDeploymentEnvEnum: DeploymentEnvEnum = DeploymentEnvEnum.LOCAL
 kIsHeadless: bool = False
 kDelay: int = 7
 kRevenueCrop: list= [645,664,320,398]
+kStop: int = 4
 
 kParse: bool = True
 kEnableHelium: bool = True
