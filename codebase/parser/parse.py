@@ -191,6 +191,8 @@ def parse_loop_ca(file_path):
                 price, unit_sale = parse_asin_us(driver=driver)  
                 if kEnablePrice == False:
                     price = 0
+                if unit_sale == 'N/A':
+                    unit_sale = "0"
             except:
                 unit_sale ='0,0'
                 pass
