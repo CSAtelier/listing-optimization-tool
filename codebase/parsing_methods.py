@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from bs4 import BeautifulSoup
 from selenium_recaptcha_solver import RecaptchaSolver
-
+import json
 import time
 import re
 import requests
@@ -154,6 +154,18 @@ def enable_extensions(driver):
     if kDeploymentEnvEnum == DeploymentEnvEnum.LOCAL:
 
         driver.get('https://members.helium10.com/user/signin')
+        driver.delete_all_cookies()  
+        cookies_file_path = '/home/ubuntu/cookies.json'
+        with open(cookies_file_path, 'r') as file:
+            cookies = json.load(file)
+        # Set the cookies in the browser
+        for cookie in cookies:
+            # Remove the domain key if it causes issues, as some cookies may not have a domain
+            if 'sameSite' in cookie:
+                cookie['sameSite'] = 'Lax'
+            driver.add_cookie(cookie)
+        time.sleep(kDelay+1)
+        driver.get('https://members.helium10.com/user/signin')
         driver.switch_to.window(driver.window_handles[0])
         # First login try
         driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
@@ -173,6 +185,7 @@ def enable_extensions(driver):
         solver.click_recaptcha_v2(iframe=recaptcha_iframe)
         driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
         time.sleep(kDelay*5)
+        driver.delete_all_cookies()  
     else:
         pass
 

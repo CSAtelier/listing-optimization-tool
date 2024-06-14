@@ -100,18 +100,6 @@ def parse_loop_us(file_path):
         options.add_extension('extensions/helium10_extension.crx')
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
-    cookies_file_path = '/home/ubuntu/cookies.json'
-    with open(cookies_file_path, 'r') as file:
-        cookies = json.load(file)
-    # Set the cookies in the browser
-    for cookie in cookies:
-        # Remove the domain key if it causes issues, as some cookies may not have a domain
-        if 'domain' in cookie:
-            del cookie['domain']
-        if 'sameSite' in cookie:
-            cookie['sameSite'] = 'Lax'
-        driver.add_cookie(cookie)
-
     index = 0
     if kEnableHelium == True:
         driver = enable_extensions(driver)
