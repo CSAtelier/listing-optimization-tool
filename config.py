@@ -2,7 +2,7 @@ from config_types import DeploymentEnvEnum
 
 
 kDeploymentEnvEnum: DeploymentEnvEnum = DeploymentEnvEnum.LOCAL
-kIsHeadless: bool = False
+kIsHeadless: bool = True
 kDelay: int = 7
 kRevenueCrop: list= [645,664,320,398]
 kStop: int = 4
