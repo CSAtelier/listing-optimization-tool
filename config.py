@@ -9,9 +9,9 @@ kStop: int = 4
 
 kParse: bool = True
 kEnableHelium: bool = True
-kEnablePrice: bool =  True
+kEnablePrice: bool =  False
 
-kRevenueWithParse: bool = False
+kRevenueWithParse: bool = True
 
 kDataDir: str = "persistance/siralanmis_ve_temizlenmis_parca1.xlsx.xlsx"
 kRevenueColumn: str = "K"
