@@ -126,7 +126,7 @@ def parse_loop_us(file_path):
                     unit_sale = "0"
                 
             except:
-                unit_sale = '0,0'
+                unit_sale = '0'
                 pass
 
         price_dict[asin] = [price, unit_sale]
@@ -198,7 +198,7 @@ def parse_loop_ca(file_path):
                 if unit_sale == 'N/A':
                     unit_sale = "0"
             except:
-                unit_sale ='0,0'
+                unit_sale ='0'
                 pass
         print(price)
         price_dict[asin] = [price, unit_sale]
