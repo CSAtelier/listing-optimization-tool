@@ -96,6 +96,8 @@ def parse_loop_us(file_path):
     options.add_argument('--disable-dev-shm-usage')
     test_ua = 'Mozilla/5.0 (Windows NT 4.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36'
     options.add_argument(f'--user-agent={test_ua}')
+    if kIsHeadless == True:
+        options.add_argument("--headless=new")
     if kEnableHelium == True:
         options.add_extension('extensions/helium10_extension.crx')
     service = Service(ChromeDriverManager().install())
@@ -159,6 +161,8 @@ def parse_loop_ca(file_path):
     options.add_argument('--disable-dev-shm-usage')
     if kEnableHelium == True:
         options.add_extension('extensions/helium10_extension.crx')
+    if kIsHeadless == True:
+        options.add_argument("--headless=new")
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
     index = 0
