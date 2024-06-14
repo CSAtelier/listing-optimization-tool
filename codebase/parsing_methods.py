@@ -168,6 +168,7 @@ def enable_extensions(driver):
         driver.get('https://members.helium10.com/user/signin')
         driver.switch_to.window(driver.window_handles[0])
         # First login try
+        """
         driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
         driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
         time.sleep(kDelay)
@@ -186,6 +187,8 @@ def enable_extensions(driver):
         driver.find_element(By.XPATH, '//*[@id="login-form"]/button').click()
         time.sleep(kDelay*5)
         driver.delete_all_cookies()  
+        """
+        time.sleep(kDelay*5)
     else:
         pass
 
