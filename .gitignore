@@ -22,7 +22,8 @@ rad.json
 TestResults.xml
 venv/
 venv/*
-
+myenv/
+myenv/*
 pycache
 # Ignore __pycache__ directories
 __pycache__/
