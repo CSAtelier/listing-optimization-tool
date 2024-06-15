@@ -12,8 +12,8 @@ import requests
 import cv2 
 import pytesseract
 import sys
-from config import kDeploymentEnvEnum
-from config_types import DeploymentEnvEnum
+from config import kDeploymentEnvEnum, kAsınProviderEnum
+from config_types import DeploymentEnvEnum, AsinProviderEnum
 
 def captcha_handle(response,driver):
     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, "field-keywords")))
@@ -122,8 +122,6 @@ def get_price_revenue(driver):
 
 
 def enable_extensions(driver):
-<<<<<<< HEAD
-=======
     driver.get('https://members.helium10.com/user/signin')
     driver.switch_to.window(driver.window_handles[0])
     # First login try
@@ -156,7 +154,6 @@ def enable_extensions(driver):
     #time.sleep(3)
     button = driver.find_element(By.CSS_SELECTOR, 'a.btn.btn-primary.error-container__btn')
     button.click()
->>>>>>> 9b1b79f3ae1e0db5ac5f099b5a33cb3ad039cd08
 
     if kDeploymentEnvEnum == DeploymentEnvEnum.LOCAL:
 

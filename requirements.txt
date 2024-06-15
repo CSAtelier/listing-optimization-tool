@@ -36,3 +36,5 @@ tzdata==2024.1
 urllib3==1.26.18
 webdriver-manager==4.0.1
 wsproto==1.2.0
+async-timeout==4.0.3
+redis==5.0.4
