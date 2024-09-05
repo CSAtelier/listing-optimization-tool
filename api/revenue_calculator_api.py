@@ -1,4 +1,6 @@
+from typing import List
 import requests
+import json
 
 
 default_headers = {
@@ -18,21 +20,56 @@ default_headers = {
 }
 
 def get_detail(asin: str, country_code: str):
+    detail_url = f"https://sellercentral.amazon.com/rcpublic/productmatch?searchKey={asin}&countryCode={country_code}&locale=en-US"
+    further_detail_url = f"https://sellercentral.amazon.com/rcpublic/getadditionalpronductinfo?asin={asin}&countryCode={country_code}&fnsku=&searchType=GENERAL&locale=en-US"
 
-    url = f"https://sellercentral.amazon.com/rcpublic/productmatch?searchKey={asin}&countryCode={country_code}&locale=en-US"
+    detail = requests.get(detail_url, headers= default_headers)
+    further_detail = requests.get(further_detail_url, headers= default_headers)
+    return detail, further_detail
+
+def get_program_ids(country_code: str):
+    url = "https://sellercentral.amazon.com/rcpublic/getprograms?countryCode={country_code}&mSku=&locale=en-US"
     response = requests.get(url, headers= default_headers)
-    return response
+    data = json.loads(response.text)
+    
+    program_ids = []
+    for program in data["programInfoList"]:
+        name = program["name"]
+        display_priority = program["displayPriority"]
+        concatenated_value = f"{name}#{display_priority}"
+        program_ids.append(concatenated_value)
+    return program_ids
+    
 
+def get_fee_details(asin: str, country_code: str, currency: str ,gl: str, price: float, program_ids: List[str]):
+
+    fee_url = f"https://sellercentral.amazon.com/rcpublic/getfees?countryCode={country_code}&locale=en-US"
+    payload =  {"countryCode":country_code,"itemInfo":{"asin":asin,"glProductGroupName":gl,"packageLength":"0","packageWidth":"0","packageHeight":"0","dimensionUnit":"","packageWeight":"0","weightUnit":"","afnPriceStr":str(price),"mfnPriceStr":str(price),"mfnShippingPriceStr":"0","currency":currency,"isNewDefined": False},"programIdList":program_ids,"programParamMap":{}}
+    response = requests.post(fee_url, payload, headers= default_headers)
+    return response
 
 
 
 if __name__ == "__main__":
 
     from pprint import pprint as pp
-    
     country_code = "CA"
+    currency = "CAD"
     asin = "B08B2GFJ1C"
+    detail, further_detail = get_detail(asin, country_code)
 
-    detail = get_detail(asin, country_code)
+    parsed_detail = json.loads(detail.text)
+    gl_value = parsed_detail["data"]["otherProducts"]["products"][0]["gl"]
+
+    parsed_further_detail = json.loads(further_detail.text)
+    price =  parsed_further_detail["data"]["price"]["amount"]
+
+    program_ids = get_program_ids(country_code)
+    fee = get_fee_details(asin, country_code, currency,gl_value, price, program_ids)
+
 
     pp(detail.text)
+    print("--------")
+    pp(further_detail.text)
+    print("--------")
+    pp(fee.text)
