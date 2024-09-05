@@ -3,6 +3,8 @@ from pprint import pprint as pp
 import requests
 import json
 
+from http_utilities import handle_http_fetch
+
 
 default_headers = {
     'Host': 'sellercentral.amazon.com',
@@ -21,18 +23,24 @@ default_headers = {
 }
 
 
-def get_detail(asin: str, country_code: str):
+def request_product_info(asin: str, country_code: str):
     detail_url = f"https://sellercentral.amazon.com/rcpublic/productmatch?searchKey={asin}&countryCode={country_code}&locale=en-US"
-    further_detail_url = f"https://sellercentral.amazon.com/rcpublic/getadditionalpronductinfo?asin={asin}&countryCode={country_code}&fnsku=&searchType=GENERAL&locale=en-US"
-
     detail = requests.get(detail_url, headers=default_headers)
+    return detail
+
+def request_additional_product_info(asin: str, country_code: str):
+    further_detail_url = f"https://sellercentral.amazon.com/rcpublic/getadditionalpronductinfo?asin={asin}&countryCode={country_code}&fnsku=&searchType=GENERAL&locale=en-US"
     further_detail = requests.get(further_detail_url, headers=default_headers)
-    return detail, further_detail
+    return further_detail
 
 
-def get_program_ids(country_code: str):
+def request_program_ids(country_code: str):
     url = f"https://sellercentral.amazon.com/rcpublic/getprograms?countryCode={country_code}&mSku=&locale=en-US"
     response = requests.get(url, headers=default_headers)
+    return response
+    
+    
+def parse_program_ids(response: requests.Response):
     data = json.loads(response.text)
 
     program_ids = []
@@ -43,8 +51,7 @@ def get_program_ids(country_code: str):
         program_ids.append(concatenated_value)
     return program_ids
 
-
-def get_fee_details(asin: str, country_code: str, currency: str, gl: str, price: float, program_ids: List[str]):
+def request_fee_details(asin: str, country_code: str, currency: str, gl: str, price: float, program_ids: List[str]):
 
     fee_url = f"https://sellercentral.amazon.com/rcpublic/getfees?countryCode={country_code}&locale=en-US"
     payload = {"countryCode": country_code, "itemInfo": {"asin": asin, "glProductGroupName": gl, "packageLength": "0", "packageWidth": "0", "packageHeight": "0", "dimensionUnit": "", "packageWeight": "0",
@@ -59,24 +66,27 @@ if __name__ == "__main__":
     country_code = "CA"
     currency = "CAD"
     asin = "B08B2GFJ1C"
-    detail, further_detail = get_detail(asin, country_code)
+    
+    detail_response= handle_http_fetch(request_product_info, asin, country_code)
+    additional_info_response = handle_http_fetch(request_additional_product_info, asin, country_code)
 
-    parsed_detail = json.loads(detail.text)
+    parsed_detail = json.loads(detail_response.text)
     gl_value = parsed_detail["data"]["otherProducts"]["products"][0]["gl"]
-
-    parsed_further_detail = json.loads(further_detail.text)
+    parsed_further_detail = json.loads(additional_info_response.text)
     price = parsed_further_detail["data"]["price"]["amount"]
 
-    program_ids = get_program_ids(country_code)
+    program_ids_response = handle_http_fetch(request_program_ids, country_code)
+    program_ids = parse_program_ids(program_ids_response)
     program_ids.pop()
-    fee = get_fee_details(asin, country_code, currency,
+
+    fee_detail_response = handle_http_fetch(request_fee_details, asin, country_code, currency,
                           gl_value, price, program_ids)
 
-    pp(detail.text)
+    pp(detail_response.text)
     print("--------")
-    pp(further_detail.text)
+    pp(additional_info_response.text)
     print("--------")
-    pp(fee.text)
+    pp(fee_detail_response.text)
 
     # response = get_fee_details("B08B2GFJ1C", "CA", "CAD", "gl_kitchen", 68.9, ["Core#0", "MFN#1"])
 
