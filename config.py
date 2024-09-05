@@ -1,5 +1,10 @@
 from config_types import DeploymentEnvEnum, AsinProviderEnum
 from collections import namedtuple
+import os
+import sys
+
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+
 
 
 kDeploymentEnvEnum: DeploymentEnvEnum = DeploymentEnvEnum.LOCAL

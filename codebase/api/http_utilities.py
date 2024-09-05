@@ -6,6 +6,8 @@ import time
 from config import rate_limit
 from constants import MILISECONDS_IN_A_SECOND
 
+logger = logging.getLogger(__name__)
+
 HttpResponseCallable = Callable[..., requests.Response]
 
 
@@ -16,18 +18,15 @@ def handle_http_fetch(fetch_callback: HttpResponseCallable, *args, **kwargs):
         response = fetch_callback(*args, **kwargs)
 
         if response.status_code < 300:
-            logging.info(f"Recieved http ok trial[{trial_no}]: url = {response.url}")
-            time.sleep(rate_limit.revenue_calculator_wait_time_on_success/ MILISECONDS_IN_A_SECOND)
+            logger.info(f"Received HTTP OK trial[{trial_no}]: url = {response.url}")
+            time.sleep(rate_limit.revenue_calculator_wait_time_on_success / MILISECONDS_IN_A_SECOND)
             return response
         
-        logging.error(f"Failed trial[{trial_no}]: url = {response.url}, code = {response.status_code}")
+        logger.error(f"Failed trial[{trial_no}]: url = {response.url}, code = {response.status_code}")
 
         if response.status_code == 429:
-            logging.error(f"Recieved too many requests: url = {response.url}")
+            logger.error(f"Received too many requests: url = {response.url}")
         
         time.sleep(rate_limit.revenue_calculator_wait_time_on_error / MILISECONDS_IN_A_SECOND)
     
-    
     return None
-
-

@@ -2,6 +2,19 @@ from typing import List
 from pprint import pprint as pp
 import requests
 import json
+import logging
+import sys
+import os
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, PROJECT_ROOT)
+
+logging.basicConfig(
+    filename='app.log',       # Log file name
+    level=logging.DEBUG,        # Logging level (INFO, DEBUG, ERROR, etc.)
+    format='%(asctime)s - %(levelname)s - %(message)s',  # Log format
+    filemode='a'               # Use 'w' to overwrite, 'a' to append
+)
 
 from http_utilities import handle_http_fetch
 
@@ -55,7 +68,7 @@ def request_fee_details(asin: str, country_code: str, currency: str, gl: str, pr
 
     fee_url = f"https://sellercentral.amazon.com/rcpublic/getfees?countryCode={country_code}&locale=en-US"
     payload = {"countryCode": country_code, "itemInfo": {"asin": asin, "glProductGroupName": gl, "packageLength": "0", "packageWidth": "0", "packageHeight": "0", "dimensionUnit": "", "packageWeight": "0",
-                                                         "weightUnit": "", "afnPriceStr": str(price), "mfnPriceStr": str(price), "mfnShippingPriceStr": "0", "currency": currency, "isNewDefined": False}, "programIdList": program_ids, "programParamMap": {}}
+                                                         "weightUnit": "", "afnPriceStr": 10.0, "mfnPriceStr": 10.0, "mfnShippingPriceStr": "0", "currency": currency, "isNewDefined": False}, "programIdList": program_ids, "programParamMap": {}}
     response = requests.post(fee_url, json=payload, headers=default_headers)
     return response
 
