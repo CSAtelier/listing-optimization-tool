@@ -9,7 +9,7 @@ def revenue_calculator(data_path,column):
     # options.add_argument("--window-size=1920,1080")
     options.add_argument("--window-size=1500,900")
     service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service, options=options)
+    driver = webdriver.Chrome(options=options)
     wb = openpyxl.load_workbook(data_path)
     ws = wb.active
     ws[column+'1'] = 'Revenue'
@@ -25,11 +25,16 @@ def revenue_calculator(data_path,column):
         else:
             df = pd.read_csv(data_path)
     for i in range(len(df['ASIN'])):
-        price_ca = parse_ratio(driver=driver, asin=df['ASIN'][i])
-        calc_us = float(df['Price'][i])+4.0
+        try: 
+            price_ca = parse_ratio(driver=driver, asin=df['ASIN'][i])
+        except:
+            price_ca = 1
+        calc_us = (float(df['Price'][i])*1.06)+2.56
         calc_us = float(calc_us)*float(ca_usd)
         try:
-            ws[column+f'{i+2}'] = (price_ca - (calc_us))/calc_us
+            print(price_ca,calc_us,((float(price_ca) - (float(calc_us)))/float(calc_us)),column+f'{i+2}')
+            print((price_ca - (calc_us)))
+            ws[column+f'{i+2}'] = ((float(price_ca) - (float(calc_us)))/float(calc_us))
         except: 
             ws[column+f'{i+2}'] = 0
     wb.save(data_path)

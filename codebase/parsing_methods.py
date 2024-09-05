@@ -14,6 +14,7 @@ import pytesseract
 import sys
 from config import *
 from config_types import DeploymentEnvEnum
+from matplotlib import pyplot as plt
 
 def captcha_handle(response,driver):
     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, "field-keywords")))
@@ -138,15 +139,17 @@ def get_price_revenue(driver):
     # img = img[1080:1115,620:800]
     # cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     custom_config = r'--oem 3 --psm 6'
+    # plt.imshow(img)
+    # plt.show()
     price = pytesseract.image_to_string(img, config=custom_config)
-    print(price)
-    index_ca = price.find('CA')
-    price_cleaned = price[index_ca:]
-    print(price_cleaned[3:])
-    try:
-        price = float(price_cleaned[3:])
-    except:
-        price = 0
+    # try:
+    #     price = price.replace("CA$", "").strip()
+    #     print(price)
+    # except:
+    #     price = 0
+    #     print(price)
+    dollar_index = price.find('$')
+    price = price[dollar_index + 1:].strip()
     return price
 
 def enable_extensions(driver):

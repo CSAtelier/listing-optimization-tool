@@ -95,13 +95,13 @@ def parse_loop_us(file_path):
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     test_ua = 'Mozilla/5.0 (Windows NT 4.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36'
-    options.add_argument(f'--user-agent={test_ua}')
+    # options.add_argument(f'--user-agent={test_ua}')
     if kIsHeadless == True:
         options.add_argument("--headless=new")
     if kEnableHelium == True:
         options.add_extension('extensions/helium10_extension.crx')
     service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service, options=options)
+    driver = webdriver.Chrome(options=options)
     index = 0
     if kEnableHelium == True:
         driver = enable_extensions(driver)
@@ -164,23 +164,23 @@ def parse_loop_ca(file_path):
     if kIsHeadless == True:
         options.add_argument("--headless=new")
     service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service, options=options)
+    driver = webdriver.Chrome(options=options)
     index = 0
     if kEnableHelium == True:
         driver = enable_extensions(driver)
     time.sleep(kDelay*3)
     driver = open_browser_ca(driver, url='https://www.amazon.ca/')
-    cookies_file_path = '/home/ubuntu/cookies.json'
-    with open(cookies_file_path, 'r') as file:
-        cookies = json.load(file)
-    # Set the cookies in the browser
-    for cookie in cookies:
-        # Remove the domain key if it causes issues, as some cookies may not have a domain
-        if 'domain' in cookie:
-            del cookie['domain']
-        if 'sameSite' in cookie:
-            cookie['sameSite'] = 'Lax'
-        driver.add_cookie(cookie)
+    # cookies_file_path = '/home/ubuntu/cookies.json'
+    # with open(cookies_file_path, 'r') as file:
+    #     cookies = json.load(file)
+    # # Set the cookies in the browser
+    # for cookie in cookies:
+    #     # Remove the domain key if it causes issues, as some cookies may not have a domain
+    #     if 'domain' in cookie:
+    #         del cookie['domain']
+    #     if 'sameSite' in cookie:
+    #         cookie['sameSite'] = 'Lax'
+    #     driver.add_cookie(cookie)
     driver.switch_to.window(driver.window_handles[0])
     for url in url_list_ca[0:kStop]:
         price = 0
