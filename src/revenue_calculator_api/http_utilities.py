@@ -6,7 +6,7 @@ import time
 from config import rate_limit
 from constants import MILISECONDS_IN_A_SECOND
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("RevenueCalculator")
 
 HttpResponseCallable = Callable[..., requests.Response]
 
@@ -29,4 +29,4 @@ def handle_http_fetch(fetch_callback: HttpResponseCallable, *args, **kwargs):
         
         time.sleep(rate_limit.revenue_calculator_wait_time_on_error / MILISECONDS_IN_A_SECOND)
     
-    return None
+    return ""

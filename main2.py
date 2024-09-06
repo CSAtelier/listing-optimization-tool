@@ -1,6 +1,6 @@
-from codebase.parser.parse import *
-from codebase.util.utils import *
-from codebase.revenue_excel.clean_excel import * 
+from src.parser.parse import *
+from src.util.utils import *
+from src.revenue_excel.clean_excel import * 
 import threading
 
 # Parse US Amazon with 

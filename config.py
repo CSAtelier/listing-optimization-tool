@@ -12,6 +12,7 @@ kAsınProviderEnum: AsinProviderEnum = AsinProviderEnum.REDIS
 kIsHeadless: bool = True
 
 
+tax_rate = 0.15
 
 RateLimit = namedtuple('RateLimit', [
     'revenue_calculator_wait_time_on_success',

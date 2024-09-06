@@ -1,3 +1,3 @@
-from codebase.UI.graphics import *
+from src.UI.graphics import *
 
 run_UI()
