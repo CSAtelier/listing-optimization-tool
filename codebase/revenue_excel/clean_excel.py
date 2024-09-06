@@ -3,41 +3,53 @@ from codebase.parser.parse import *
 import os
 import csv
 import pandas as pd 
+from api.revenue_calculator_api import *
 
 def revenue_calculator(data_path,column):
-    options = Options()
-    # options.add_argument("--window-size=1920,1080")
-    options.add_argument("--window-size=1500,900")
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(options=options)
-    wb = openpyxl.load_workbook(data_path)
-    ws = wb.active
-    ws[column+'1'] = 'Revenue'
-    driver.get('https://www.google.com/search?q=us+to+ca&rlz=1C5CHFA_enTR987TR987&oq=us+to+ca&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQABiPAjIHCAIQABiPAjIHCAMQABiPAjIGCAQQRRg9MgYIBRBFGDwyBggGEEUYPdIBCDMyMDVqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8')
-    time.sleep(2)
-    html = driver.page_source
-    response = BeautifulSoup(html,features="lxml")
-    ca_usd = response.find('span', attrs = {'class':'DFlfde SwHCTb'})
-    ca_usd = ca_usd.text.replace(',', '.')
+
     with open(data_path, 'r', newline='') as csvfile:
         if data_path.endswith('xlsx'):
             df =  pd.DataFrame(pd.read_excel(data_path)) 
         else:
             df = pd.read_csv(data_path)
     for i in range(len(df['ASIN'])):
-        try: 
-            price_ca = parse_ratio(driver=driver, asin=df['ASIN'][i])
-        except:
-            price_ca = 1
-        calc_us = (float(df['Price'][i])*1.06)+2.56
-        calc_us = float(calc_us)*float(ca_usd)
-        try:
-            print(price_ca,calc_us,((float(price_ca) - (float(calc_us)))/float(calc_us)),column+f'{i+2}')
-            print((price_ca - (calc_us)))
-            ws[column+f'{i+2}'] = ((float(price_ca) - (float(calc_us)))/float(calc_us))
-        except: 
-            ws[column+f'{i+2}'] = 0
-    wb.save(data_path)
+        get_info(asin=df['ASIN'][i])
+
+    
+
+    # options = Options()
+    # # options.add_argument("--window-size=1920,1080")
+    # options.add_argument("--window-size=1500,900")
+    # service = Service(ChromeDriverManager().install())
+    # driver = webdriver.Chrome(options=options)
+    # wb = openpyxl.load_workbook(data_path)
+    # ws = wb.active
+    # ws[column+'1'] = 'Revenue'
+    # driver.get('https://www.google.com/search?q=us+to+ca&rlz=1C5CHFA_enTR987TR987&oq=us+to+ca&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQABiPAjIHCAIQABiPAjIHCAMQABiPAjIGCAQQRRg9MgYIBRBFGDwyBggGEEUYPdIBCDMyMDVqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8')
+    # time.sleep(2)
+    # html = driver.page_source
+    # response = BeautifulSoup(html,features="lxml")
+    # ca_usd = response.find('span', attrs = {'class':'DFlfde SwHCTb'})
+    # ca_usd = ca_usd.text.replace(',', '.')
+    # with open(data_path, 'r', newline='') as csvfile:
+    #     if data_path.endswith('xlsx'):
+    #         df =  pd.DataFrame(pd.read_excel(data_path)) 
+    #     else:
+    #         df = pd.read_csv(data_path)
+    # for i in range(len(df['ASIN'])):
+    #     try: 
+    #         price_ca = parse_ratio(driver=driver, asin=df['ASIN'][i])
+    #     except:
+    #         price_ca = 1
+    #     calc_us = (float(df['Price'][i])*1.06)+2.56
+    #     calc_us = float(calc_us)*float(ca_usd)
+    #     try:
+    #         print(price_ca,calc_us,((float(price_ca) - (float(calc_us)))/float(calc_us)),column+f'{i+2}')
+    #         print((price_ca - (calc_us)))
+    #         ws[column+f'{i+2}'] = ((float(price_ca) - (float(calc_us)))/float(calc_us))
+    #     except: 
+    #         ws[column+f'{i+2}'] = 0
+    # wb.save(data_path)
     # ws['A1'] = 'ASIN'
     # ws['B1'] = 'US Prices'
     # ws['C1'] = 'CA Prices'
