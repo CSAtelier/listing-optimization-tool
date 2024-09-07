@@ -4,6 +4,8 @@ import os
 import csv
 import pandas as pd 
 from api.revenue_calculator_api import *
+from src.revenue_calculator_api.entities import Country, Currency
+from src.revenue_calculator_api.revenue_calculator import get_arbitrage_product
 
 def revenue_calculator(data_path,column):
 
@@ -13,7 +15,8 @@ def revenue_calculator(data_path,column):
         else:
             df = pd.read_csv(data_path)
     for i in range(len(df['ASIN'])):
-        get_info(asin=df['ASIN'][i])
+        get_arbitrage_product(df['ASIN'][i], base_country=Country.USA, target_country=Country.CANADA, base_currency=Currency.USD, target_currency=Currency.CAD, exchange_rate= 1.36 , cost_of_shipment = 2.5)
+        # get_info(asin=df['ASIN'][i])
 
     
 

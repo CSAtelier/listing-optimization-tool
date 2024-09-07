@@ -16,7 +16,7 @@ kRevenueCrop: list= [226,266,624,787]
 kStop: int = -1
 # [226,266,624,787][624,787,226,266]
 
-kParse: bool = True
+kParse: bool = False
 kEnableHelium: bool = False
 kEnablePrice: bool =  False
 
