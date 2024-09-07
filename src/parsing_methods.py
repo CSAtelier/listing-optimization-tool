@@ -9,7 +9,6 @@ from matplotlib import pyplot as plt
 import time
 import re
 import requests
-import cv2 
 import pytesseract
 import sys
 from config import kDeploymentEnvEnum, kAsınProviderEnum
