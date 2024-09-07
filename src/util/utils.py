@@ -1,6 +1,6 @@
 import openpyxl
 import random
-from codebase.dataset_loader import DatasetLoader
+from src.dataset_loader import DatasetLoader
 
 
 def asin_to_url(asin_list):

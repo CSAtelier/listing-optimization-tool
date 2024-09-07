@@ -2,8 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 from ..parsing_methods import *
-from codebase.util.utils import *
-from codebase.dataset_loader import DatasetLoader
+from src.util.utils import *
+from src.dataset_loader import DatasetLoader
 import subprocess
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager

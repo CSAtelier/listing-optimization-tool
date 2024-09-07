@@ -1,5 +1,5 @@
 import openpyxl
-from codebase.parser.parse import *
+from src.parser.parse import *
 import os
 import csv
 import pandas as pd 
