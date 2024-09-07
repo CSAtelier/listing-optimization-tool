@@ -6,6 +6,8 @@ import sys
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 
+kDataPath: str = 'persistance/data/Serhat_list.xlsx'
+
 
 kDeploymentEnvEnum: DeploymentEnvEnum = DeploymentEnvEnum.LOCAL
 kAsınProviderEnum: AsinProviderEnum = AsinProviderEnum.REDIS
