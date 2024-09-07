@@ -14,7 +14,7 @@ def revenue_calculator(data_path,column):
         else:
             df = pd.read_csv(data_path)
     for i in range(len(df['ASIN'])):
-        product = get_arbitrage_product(df['ASIN'][i], Country.US, Country.CA, Currency.USD, Currency.CAD, 1.3, 4.0)
+        product = get_arbitrage_product(df['ASIN'][i], Country.USA, Country.CANADA, Currency.USD, Currency.CAD, 1.3, 4.0)
         print(product)
 
 

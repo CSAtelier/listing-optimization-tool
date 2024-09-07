@@ -12,7 +12,6 @@ from src.revenue_calculator_api.revenue_calculator_api import handle_http_fetch,
 
 
 
-
 from config import tax_rate
 
 

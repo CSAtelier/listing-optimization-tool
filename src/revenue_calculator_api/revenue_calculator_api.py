@@ -16,8 +16,8 @@ logging.basicConfig(
     filemode='a'               # Use 'w' to overwrite, 'a' to append
 )
 
-from http_utilities import handle_http_fetch
-
+# from http_utilities import handle_http_fetch
+from src.revenue_calculator_api.http_utilities import handle_http_fetch
 
 default_headers = {
     'Host': 'sellercentral.amazon.com',
