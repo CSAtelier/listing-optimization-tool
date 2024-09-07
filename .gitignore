@@ -20,6 +20,33 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+venv/
+venv/*
+myenv/
+myenv/*
+pycache
+# Ignore __pycache__ directories
+__pycache__/
+
+# Other common Python ignores
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environment directories
+venv/
+env/
+src/__pycache__/dataset_loader.cpython-310.pyc
+src/parser/__pycache__/parse.cpython-310.pyc
+**/__pycache__/
+
+
 
 myenv/
 myenv

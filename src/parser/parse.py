@@ -27,7 +27,6 @@ def setup_headful_display():
 
 
 def open_browser_ratio(driver):
-
     calc_revenue(driver=driver)
     
 

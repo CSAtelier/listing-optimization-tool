@@ -9,12 +9,12 @@ import json
 import time
 import re
 import requests
-import cv2 
 import pytesseract
 import sys
 from config import *
 from config_types import DeploymentEnvEnum
 from matplotlib import pyplot as plt
+import cv2
 
 def captcha_handle(response,driver):
     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, "field-keywords")))
@@ -33,6 +33,7 @@ def change_location_us(driver):
     postcode_form = driver.find_element(By.ID, "GLUXZipUpdateInput").send_keys("73001") 
     postcode_button = driver.find_element(By.XPATH, '//*[@id="GLUXZipUpdate"]/span/input').click()
     element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="a-popover-1"]/div/div[2]/span/span')))
+
     time.sleep(kDelay)
     continue_button = driver.find_element(By.XPATH, '//*[@id="a-popover-1"]/div/div[2]/span/span').click()
     time.sleep(kDelay)
@@ -75,7 +76,7 @@ def change_location_ca(driver):
     # postcode_form0 = driver.find_element(By.ID, "GLUXZipUpdateInput_0").send_keys("M5V") 
     # postcode_form1 = driver.find_element(By.ID, "GLUXZipUpdateInput_1").send_keys("3L9") 
     # postcode_button = driver.find_element(By.XPATH, '//*[@id="GLUXZipUpdate"]/span/input').click()
-    # time.sleep(2)
+    # #time.sleep(2)
     # continue_button = driver.find_element(By.XPATH, '//*[@id="a-popover-3"]/div/div[2]/span').click()
 
 
@@ -115,10 +116,10 @@ def change_revenue_country(driver, asin):
     # element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "GLUXZipUpdateInput")))
     # postcode_form = driver.find_element(By.ID, "GLUXZipUpdateInput").send_keys("73001") 
     # postcode_button = driver.find_element(By.XPATH, '//*[@id="GLUXZipUpdate"]/span/input').click()
-    # time.sleep(2)
+    # #time.sleep(2)
     # continue_button = driver.find_element(By.XPATH, '//*[@id="a-popover-1"]/div/div[2]/span/span').click()
     # # continue_button.click()
-    # time.sleep(2)
+    # #time.sleep(2)
 
 
 def calc_revenue(driver):
@@ -137,6 +138,7 @@ def get_price_revenue(driver):
     img = cv2.imread("screenie3.png", cv2.IMREAD_COLOR)
     img = img[kRevenueCrop[0]:kRevenueCrop[1],kRevenueCrop[2]:kRevenueCrop[3]]
     # img = img[1080:1115,620:800]
+
     # cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     custom_config = r'--oem 3 --psm 6'
     # plt.imshow(img)
@@ -153,6 +155,38 @@ def get_price_revenue(driver):
     return price
 
 def enable_extensions(driver):
+    driver.get('https://members.helium10.com/user/signin')
+    driver.switch_to.window(driver.window_handles[0])
+    # First login try
+    driver.find_element(By.ID, "loginform-email").send_keys('akucukoduk16@ku.edu.tr')
+    driver.find_element(By.ID, "loginform-password").send_keys('Abdullah1.')
+    page_source = driver.page_source
+    soup = BeautifulSoup(page_source, 'lxml')
+    buttons = soup.find_all('button')
+    # Assuming there's only one button, get the first one
+    if buttons:
+        print(buttons)
+        button = buttons[0]
+    #time.sleep(3)
+    button = driver.find_element(By.CSS_SELECTOR, 'button.btn.btn-secondary.btn-block')
+    driver.execute_script("arguments[0].click();", button)
+    # Error page
+    time.sleep(3)
+    page_source = driver.page_source
+    soup = BeautifulSoup(page_source, 'lxml')
+    buttons = soup.find_all('a')
+    if buttons:
+        print(buttons)
+        button = buttons[0]
+    button = driver.find_element(By.CSS_SELECTOR, 'a.btn.btn-primary.error-container__btn')
+    driver.execute_script("arguments[0].click();", button)
+    time.sleep(3)
+    print(driver.page_source)
+    sys.exit()
+    # Error page
+    #time.sleep(3)
+    button = driver.find_element(By.CSS_SELECTOR, 'a.btn.btn-primary.error-container__btn')
+    button.click()
 
     if kDeploymentEnvEnum == DeploymentEnvEnum.LOCAL:
 
