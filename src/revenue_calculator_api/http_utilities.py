@@ -29,4 +29,4 @@ def handle_http_fetch(fetch_callback: HttpResponseCallable, *args, **kwargs):
         
         time.sleep(rate_limit.revenue_calculator_wait_time_on_error / MILISECONDS_IN_A_SECOND)
     
-    return ""
+    raise ValueError("Failed to fetch data")
