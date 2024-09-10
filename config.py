@@ -16,11 +16,11 @@ kRevenueCrop: list= [226,266,624,787]
 kStop: int = -1
 # [226,266,624,787][624,787,226,266]
 
-kParse: bool = False
+kParse: bool = True
 kEnableHelium: bool = False
-kEnablePrice: bool =  False
+kEnablePrice: bool =  True
 
-kRevenueWithParse: bool = True
+kRevenueWithParse: bool = False
 
 kDataDir: str = "persistance/data/Serhat_list.xlsx"
 kRevenueColumn: str = "J"
