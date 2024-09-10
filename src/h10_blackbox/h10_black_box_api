@@ -1,0 +1,107 @@
+import requests
+
+def send_helium10_request(filters, marketplace_id, filters_type, authorization_token):
+    url = "https://research-tools.helium10.com/api/blackbox/v1/search/products?accountId=1546710353"
+
+    headers = {
+        'authority': 'research-tools.helium10.com',
+        'accept': 'application/json',
+        'accept-encoding': 'gzip, deflate, br, zstd',
+        'accept-language': 'tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7',
+        'authorization': f'Bearer {authorization_token}',
+        'cache-control': 'no-cache',
+        'content-type': 'application/json',
+        'origin': 'https://members.helium10.com',
+        'pragma': 'no-cache',
+        'referer': 'https://members.helium10.com/',
+        'sec-ch-ua': '"Not)A;Brand";v="99", "Google Chrome";v="127", "Chromium";v="127"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"macOS"',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'same-site',
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36'
+    }
+
+    payload = {
+        "filters": filters,
+        "marketplaceId": marketplace_id,
+        "filtersType": filters_type
+    }
+
+    response = requests.post(url, json=payload, headers=headers)
+    
+    if response.status_code == 201:
+        print("Request successful, response data:")
+        return response.json()
+    else:
+        print(f"Request failed with status code {response.status_code}")
+        return None
+
+
+def fetch_helium10_results(account_id, product_id, page, per_page, authorization_token):
+    url = f"https://research-tools.helium10.com/api/blackbox/v1/search/products/{product_id}/results"
+    
+    # Add query parameters
+    params = {
+        'accountId': account_id,
+        'page': page,
+        'per_page': per_page
+    }
+
+    headers = {
+        'authority': 'research-tools.helium10.com',
+        'accept': 'application/json',
+        'accept-encoding': 'gzip, deflate, br, zstd',
+        'accept-language': 'tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7',
+        'authorization': f'Bearer {authorization_token}',
+        'cache-control': 'no-cache',
+        'content-type': 'application/json',
+        'origin': 'https://members.helium10.com',
+        'pragma': 'no-cache',
+        'referer': 'https://members.helium10.com/',
+        'sec-ch-ua': '"Not)A;Brand";v="99", "Google Chrome";v="127", "Chromium";v="127"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"macOS"',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'same-site',
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36'
+    }
+
+    response = requests.get(url, headers=headers, params=params)
+    
+    if response.status_code == 200:
+        print("Request successful, response data:")
+        return response.json()
+    else:
+        print(f"Request failed with status code {response.status_code}")
+        return None
+
+if __name__ == "__main__":
+    
+    filters = {
+        "category": ["85709"],
+        "monthlySalesFrom": 20,
+        "variationCountFrom": 2,
+        "variationCountTo": 3,
+        "weightTo": 1
+    }
+    marketplace_id = 2
+    filters_type = "advanced"
+    authorization_token = "PGpiocTX-NF_nmNR-VloKKJi0lyA6l0X_SolKLRocMIpVtIfi7MBJdZocwRfN21l4a0a695dd6c5891c51c2a8f73b31bb40"
+
+    response_data = send_helium10_request(filters, marketplace_id, filters_type, authorization_token)
+    print(response_data)
+
+
+    product_id = "14250609"
+    page = 1
+    per_page = 100
+    account_id = "1546710353"
+
+    response_data = fetch_helium10_results(account_id, product_id, page, per_page, authorization_token)
+    print(response_data)
+
+
+
