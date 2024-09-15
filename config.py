@@ -17,8 +17,8 @@ kStop: int = -1
 # [226,266,624,787][624,787,226,266]
 
 kParse: bool = True
-kEnableHelium: bool = False
-kEnablePrice: bool =  True
+kEnableHelium: bool = True
+kEnablePrice: bool =  False
 
 kRevenueWithParse: bool = False
 
@@ -29,7 +29,7 @@ kCaPriceColumn: str = "L"
 kUsSaleColumn: str = "M"
 kCaSaleColumn: str = "N"
 kAsınProviderEnum: AsinProviderEnum = AsinProviderEnum.REDIS
-kIsHeadless: bool = True
+
 
 
 tax_rate = 0.15
