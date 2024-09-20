@@ -12,6 +12,32 @@ from selenium.webdriver.chrome.options import Options
 from config import kDeploymentEnvEnum, kDelay, kIsHeadless, kEnablePrice
 import json
 
+def setup_driver():
+
+    options = Options()
+    if kIsHeadless == True:
+        options.add_argument("--headless=new")
+    if kEnableHelium == True:
+        extension_path = "extensions/oay"
+        options.add_extension('extensions/helium10_extension.crx')
+        options.add_argument(f"--load-extension={extension_path}") 
+    driver = webdriver.Chrome(options=options)
+    # if kEnableHelium == True:
+    #     extension_popup_url = "chrome://extensions/?id=ankbemgeefkagbfgnjjaboocalfnoehb/index.html"
+    #     # # Navigate to the extension's popup page
+    #     driver.get(extension_popup_url)
+    #     time.sleep(2)
+    #     page_source = driver.page_source
+    #     response = BeautifulSoup(page_source, 'lxml')
+    #     root = response.find('div', attrs = {'id':'__root'})
+    #     # print(root)
+    #     # main = root.find('main', attrs = {'class':'flex flex-col h-full text-white w-full h-full'})
+    #     while True:
+    #         continue
+    #     # driver.find_element(By.CLASS_NAME, 'bg-primary text-white cursor-pointer gap-2 inline-flex justify-center items-center rounded-md text-center font-medium text-xl w-full h-[50px]').click()
+    
+    return driver
+
 
 def setup_headful_display():
     """ Set up virtual display for running headful Chrome. """
@@ -39,10 +65,9 @@ def open_browser_us(driver, url,):
         captcha_handle(soup,driver)
     except:
         pass
-    try:
-        change_location_us(driver)
-    except:
-        pass
+
+    change_location_us(driver)
+
     return driver
 
 
@@ -64,8 +89,9 @@ def parse_asin_us(driver):
         price = 0
         html_updated = driver.page_source
         soup_updated = BeautifulSoup(html_updated,features="lxml")
-        price, sale = get_price_us(soup_updated)
-        return price, sale
+        price, sale, revenue = get_price_us(soup_updated,driver=driver)
+        print(price, sale, revenue)
+        return price, sale, revenue
     
     except ValueError as e :
         print(e)
@@ -83,33 +109,19 @@ def parse_ratio(driver, asin):
     return price
 
 
-def parse_loop_us(file_path):
+def parse_loop_us(driver,file_path):
     loader = DatasetLoader(file_path=file_path)
     asin_list = loader.load_dataset()
     url_list_us, url_list_ca = asin_to_url(asin_list)
     price_dict = dict()
-    # display = setup_headful_display()
-    options = Options()
-    options.add_argument('--disable-gpu')  # Disable GPU hardware acceleration
-    options.add_argument('--no-sandbox')
-    # options.add_argument('--disable-dev-shm-usage')
-    test_ua = 'Mozilla/5.0 (Windows NT 4.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36'
-    # options.add_argument(f'--user-agent={test_ua}')
-    if kIsHeadless == True:
-        options.add_argument("--headless=new")
-    if kEnableHelium == True:
-        options.add_extension('extensions/helium10_extension.crx')
-        extension_path = "extensions/oay"
-        options.add_argument(f"--load-extension={extension_path}")
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(options=options)
+    display = setup_headful_display()
     index = 0
     if kEnableHelium == True:
         # driver = enable_extensions(driver)
         pass
     time.sleep(kDelay*3)
     driver = open_browser_us(driver, url='https://www.amazon.com/')
-    driver.switch_to.window(driver.window_handles[0])
+    # driver.switch_to.window(driver.window_handles[0])
     for url in url_list_us[0:kStop]:
         price = 0
         index = index + 1
@@ -121,7 +133,7 @@ def parse_loop_us(file_path):
         if 'amazon.com' in url:
             
             try:
-                price, unit_sale = parse_asin_us(driver=driver)  
+                price, unit_sale,revenue = parse_asin_us(driver=driver)
                 if kEnablePrice == False:
                     price = 0
                 if unit_sale == 'N/A':
@@ -131,8 +143,8 @@ def parse_loop_us(file_path):
                 unit_sale = '0'
                 pass
 
-        price_dict[asin] = [price, unit_sale]
-        print(price)
+        price_dict[asin] = [price, unit_sale, revenue]
+
     return price_dict
         
 
@@ -142,8 +154,9 @@ def parse_asin_ca(driver):
         price = 0
         html_updated = driver.page_source
         soup_updated = BeautifulSoup(html_updated,features="lxml")
-        price, sale = get_price_us(soup_updated)
-        return price, sale
+        price, sale,revenue = get_price_ca(soup_updated,driver=driver)
+        print(price, sale, revenue)
+        return price, sale, revenue
     
     except ValueError as e :
         print(e)
@@ -151,28 +164,18 @@ def parse_asin_ca(driver):
         pass
     
 
-def parse_loop_ca(file_path):
+def parse_loop_ca(driver,file_path):
     loader = DatasetLoader(file_path=file_path)
     asin_list = loader.load_dataset()
     url_list_us, url_list_ca = asin_to_url(asin_list)
     price_dict = dict()
-    # display = setup_headful_display()
-    options = Options()
-    options.add_argument('--disable-gpu')  # Disable GPU hardware acceleration
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-    if kEnableHelium == True:
-        options.add_extension('extensions/helium10_extension.crx')
-    if kIsHeadless == True:
-        options.add_argument("--headless=new")
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(options=options)
+    display = setup_headful_display()
     index = 0
     if kEnableHelium == True:
-        driver = enable_extensions(driver)
+        pass
     time.sleep(kDelay*3)
     driver = open_browser_ca(driver, url='https://www.amazon.ca/')
-    driver.switch_to.window(driver.window_handles[0])
+    # driver.switch_to.window(driver.window_handles[0])
     for url in url_list_ca[0:kStop]:
         price = 0
         index = index + 1
@@ -182,26 +185,29 @@ def parse_loop_ca(file_path):
         if kEnableHelium == True:
             time.sleep(kDelay)
         if 'amazon.ca' in url:
+            
             try:
-                price, unit_sale = parse_asin_us(driver=driver)  
+                price, unit_sale,revenue = parse_asin_ca(driver=driver)
                 if kEnablePrice == False:
                     price = 0
                 if unit_sale == 'N/A':
                     unit_sale = "0"
+                
             except:
-                unit_sale ='0'
+                unit_sale = '0'
                 pass
-        print(price)
-        price_dict[asin] = [price, unit_sale]
-  
+
+        price_dict[asin] = [price, unit_sale, revenue]
 
     return price_dict
+        
 
 def parse_amazon(data_path,us_price_column=None,us_sale_column=None,
-                      ca_price_column=None,ca_sale_column=None):
-    dict_us = parse_loop_us(file_path=data_path)
-    dict_ca = parse_loop_ca(file_path=data_path)
+                      ca_price_column=None,ca_sale_column=None,revenue_column=None):
+    driver = setup_driver()
+    dict_us = parse_loop_us(driver=driver,file_path=data_path)
+    dict_ca = parse_loop_ca(driver=driver,file_path=data_path)
     print(dict_us, dict_ca)
     create_excel(dict_us, dict_ca,data_path=data_path,us_price_column=us_price_column,us_sale_column=us_sale_column,
-                      ca_price_column=ca_price_column,ca_sale_column=ca_sale_column)
+                      ca_price_column=ca_price_column,ca_sale_column=ca_sale_column,revenue_column=revenue_column)
     return dict_us,dict_ca

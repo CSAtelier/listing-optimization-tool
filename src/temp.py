@@ -1,9 +1,8 @@
-from amazoncaptcha import AmazonCaptcha
 from selenium import webdriver
+import time
 
-driver = webdriver.Chrome() # This is a simplified example
-driver.get('https://www.amazon.com/errors/validateCaptcha')
-
-captcha = AmazonCaptcha.fromdriver(driver)
-solution = captcha.solve()
-print(solution)
+browser = webdriver.Chrome()
+browser.get('https://chrome.google.com/webstore/detail/dynamic-assessment-plugin/fnapgcgphlfhecijolobjodbbnjjpdga')
+browser.maximize_window()
+browser.implicitly_wait(15)
+browser.find_element_by_css_selector("[aria-label='Add to Chrome']").click()

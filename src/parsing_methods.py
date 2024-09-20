@@ -26,34 +26,144 @@ def captcha_handle(response,driver):
 
 
 def change_location_us(driver):
-    
-    element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "nav-global-location-popover-link")))
+    time.sleep(kDelay+5)
     driver.find_element(By.ID, "nav-global-location-popover-link").click()
-    element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "GLUXZipUpdateInput")))
+    time.sleep(kDelay+5)
     postcode_form = driver.find_element(By.ID, "GLUXZipUpdateInput").send_keys("73001") 
+    time.sleep(kDelay+5)
     postcode_button = driver.find_element(By.XPATH, '//*[@id="GLUXZipUpdate"]/span/input').click()
-    element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="a-popover-1"]/div/div[2]/span/span')))
-
-    time.sleep(kDelay)
+    time.sleep(kDelay+5)
     continue_button = driver.find_element(By.XPATH, '//*[@id="a-popover-1"]/div/div[2]/span/span').click()
-    time.sleep(kDelay)
+    print(continue_button)
+    time.sleep(kDelay+5)
+
+def get_revenue(driver,price):
+            js_code = """
+            // Log start of the process
+            console.log("Starting the search for 'Revenue Calculator' div...");
+
+        
+            // Step 1: Get the shadow host
+            let shadowHost = document.querySelector('#h10-bsr-graph');
+            console.log("Shadow host found:", shadowHost);
+
+            // Step 2: Access the first shadow root
+            let firstShadowRoot = shadowHost.querySelector('div').shadowRoot;
+            console.log("First shadow root accessed:", firstShadowRoot);
+
+            // Step 3: Access the second shadow root inside the first one
+            let secondShadowRoot = firstShadowRoot.querySelector('#h10-style-container').shadowRoot;
+            console.log("Second shadow root accessed:", secondShadowRoot);
+
+            // Step 4: Get all the divs inside the second shadow root
+            let divs = secondShadowRoot.querySelectorAll('div');
+            console.log("Divs found in second shadow root:", divs);
+
+            // Step 5: Search for the target div with the text 'Revenue Calculator'
+            let targetDiv = Array.from(divs).find(div => div.textContent.trim() === 'Revenue Calculator');
+            
+            if (targetDiv) {
+                console.log("'Revenue Calculator' div found:", targetDiv);
+
+                // Step 6: Log and click the target div
+                targetDiv.click();
+                console.log("Click action performed on 'Revenue Calculator' div.");
+                return true;
+
+            } else {
+                console.warn("'Revenue Calculator' div not found.");
+                return false;
+
+            }
+            
+            """
+    
+
+            # Execute the JavaScript code
+            click_successful = driver.execute_script(js_code)
+
+            time.sleep(3)
+            if click_successful:
+                # Wait for the input field to be present and interactable
+                try:
+                    # Define the JavaScript to locate the input field of type number
+                    wait_for_input_js = f"""
+                        
+
+                        // Step 1: Get the shadow host
+                        let shadowHost = document.querySelector('#h10-bsr-graph');
+                        console.log("Shadow host found:", shadowHost);
+
+                        // Step 2: Access the first shadow root
+                        let firstShadowRoot = shadowHost.querySelector('div').shadowRoot;
+                        console.log("First shadow root accessed:", firstShadowRoot);
+
+                        // Step 3: Access the second shadow root inside the first one
+                        let secondShadowRoot = firstShadowRoot.querySelector('#h10-style-container').shadowRoot;
+                        console.log("Second shadow root accessed:", secondShadowRoot);
+                        let inputs = secondShadowRoot.querySelectorAll('input');
+                        let fba_selling_price = inputs[3];   
+
+                        // fba_selling_price.value = '{price}';  // Replace with the desired value for 'fba_selling_price'
+
+                        // Trigger input event to ensure the values are updated
+                        // fba_selling_price.dispatchEvent(new Event('input', {{ bubbles: true }}));
+                        
+                        let spans = secondShadowRoot.querySelectorAll('span'); // Select all span elements
+                        let dollarSignSpans = Array.from(spans).filter(span => span.textContent.includes('$'));
+                        console.log(dollarSignSpans);
+                        fba_net = dollarSignSpans[3].textContent.trim()
+                        console.log(fba_net);
+                        return fba_net;
+
+                        
+                    """
+
+                    fba_net = driver.execute_script(wait_for_input_js)
+                    time.sleep(1)
+                    return fba_net
+                    
+
+                except Exception as e:
+                    print("Error while handling the input field:", e)
+            else:
+                print("Target div not clicked or not found.")
+
+            # Check if the click was successful
+            if click_successful:
+                print("Target div clicked successfully.")
+            else:
+                print("Target div not found or click failed.")
+
+            time.sleep(2)
 
 
-def get_price_us(response):
+
+def get_price_us(response,driver):
     if kEnableHelium == True:
         try:
+            time.sleep(2)
             sale = 0
             price = response.find('span', attrs = {'class':'a-offscreen'})
             unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
             price = re.search(r'\$\d+\.\d+', price.text).group()
             sale = unit_sale.text
+            revenue = get_revenue(driver,price=price[-1:])
+            # revenue = 0.0
 
-        except:
+
+
+        except Exception as error:
+            print(error)
             sale = 0
             price = response.find('span', attrs = {'class':'a-price aok-align-center reinventPricePriceToPayMargin priceToPay'})
             price = re.search(r'\$\d+\.\d+', price.text).group()
             unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
             sale = unit_sale.text
+            revenue = get_revenue(driver)
+            # revenue = 0.0
+
+
 
     else:
         try:
@@ -66,7 +176,11 @@ def get_price_us(response):
             price = response.find('span', attrs = {'class':'a-price aok-align-center reinventPricePriceToPayMargin priceToPay'})
             price = re.search(r'\$\d+\.\d+', price.text).group()
 
-    return float(price[1:]), sale
+    index = revenue.find('$')
+    revenue = revenue[index+1:]
+    if "," in sale:
+        sale = sale.replace(",", ".")
+    return float(price[1:]), float(sale), float(revenue)
 
 
 def change_location_ca(driver):
@@ -80,7 +194,7 @@ def change_location_ca(driver):
     # continue_button = driver.find_element(By.XPATH, '//*[@id="a-popover-3"]/div/div[2]/span').click()
 
 
-def get_price_ca(response):
+def get_price_ca(response,driver):
     if kEnableHelium == True:
         try:
             sale = 0
@@ -88,12 +202,14 @@ def get_price_ca(response):
             price = re.search(r'\$\d+\.\d+', price.text).group()
             unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
             sale = unit_sale.text
+            revenue = get_revenue(driver,price=price[-1:])
         except:
             sale = 0
             price = response.find('span', attrs = {'class':'a-price aok-align-center reinventPricePriceToPayMargin priceToPay'})
             price = re.search(r'\$\d+\.\d+', price.text).group()
             unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
             sale = unit_sale.text
+            revenue = get_revenue(driver,price=price[-1:])
     else:
         try:
             sale = 0
@@ -103,7 +219,12 @@ def get_price_ca(response):
             sale = 0
             price = response.find('span', attrs = {'class':'a-price aok-align-center reinventPricePriceToPayMargin priceToPay'})
             price = re.search(r'\$\d+\.\d+', price.text).group()
-    return float(price[1:]),sale
+    
+    index = revenue.find('$')
+    revenue = revenue[index+1:]
+    if "," in sale:
+        sale = sale.replace(",", ".")
+    return float(price[1:]), float(sale), float(revenue)
 
 
 def change_revenue_country(driver, asin):
@@ -176,12 +297,10 @@ def enable_extensions(driver):
     soup = BeautifulSoup(page_source, 'lxml')
     buttons = soup.find_all('a')
     if buttons:
-        print(buttons)
         button = buttons[0]
     button = driver.find_element(By.CSS_SELECTOR, 'a.btn.btn-primary.error-container__btn')
     driver.execute_script("arguments[0].click();", button)
     time.sleep(3)
-    print(driver.page_source)
     sys.exit()
     # Error page
     #time.sleep(3)
