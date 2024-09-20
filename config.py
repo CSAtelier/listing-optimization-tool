@@ -13,7 +13,7 @@ kDeploymentEnvEnum: DeploymentEnvEnum = DeploymentEnvEnum.LOCAL
 kIsHeadless: bool = False
 kDelay: int = 6
 kRevenueCrop: list= [226,266,624,787]
-kStop: int = 1
+kStop: int = -1
 # [226,266,624,787][624,787,226,266]
 
 kParse: bool = True
@@ -22,7 +22,7 @@ kEnablePrice: bool =  True
 
 kRevenueWithParse: bool = False
 
-kDataDir: str = "persistance/data/Serhat_list.xlsx"
+kDataDir: str = "persistance/data/18-09-2024.xlsx"
 kRevenueColumn: str = "J"
 kUsPriceColumn: str = "K"
 kCaPriceColumn: str = "L"
