@@ -141,6 +141,7 @@ def parse_loop_us(driver,file_path):
                 
             except:
                 unit_sale = '0'
+                revenue = 0
                 pass
 
         price_dict[asin] = [price, unit_sale, revenue]

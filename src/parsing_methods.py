@@ -180,6 +180,8 @@ def get_price_us(response,driver):
     revenue = revenue[index+1:]
     if "," in sale:
         sale = sale.replace(",", ".")
+    if sale == 'N/A':
+        sale = 0
     return float(price[1:]), float(sale), float(revenue)
 
 
@@ -224,6 +226,8 @@ def get_price_ca(response,driver):
     revenue = revenue[index+1:]
     if "," in sale:
         sale = sale.replace(",", ".")
+    if sale == 'N/A':
+        sale = 0
     return float(price[1:]), float(sale), float(revenue)
 
 
