@@ -62,8 +62,11 @@ def open_browser_us(driver, url,flag=False):
     html = driver.page_source
     soup = BeautifulSoup(html,features="lxml")
     if flag == True:
-        captcha_handle(soup,driver)
-        change_location_us(driver)
+        try:
+            captcha_handle(soup,driver)
+            change_location_us(driver)
+        except:
+            pass
     else:
         pass
 
@@ -75,7 +78,10 @@ def open_browser_ca(driver, url,flag=False):
     html = driver.page_source
     soup = BeautifulSoup(html,features="lxml")
     if flag == True:
-        captcha_handle(soup,driver)
+        try:
+            captcha_handle(soup,driver)
+        except:
+            pass
     else:
         pass
     # change_location_ca(driver)
