@@ -13,7 +13,7 @@ kDeploymentEnvEnum: DeploymentEnvEnum = DeploymentEnvEnum.LOCAL
 kIsHeadless: bool = False
 kDelay: int = 6
 kRevenueCrop: list= [226,266,624,787]
-kStop: int = 10
+kStop: int = 2
 # [226,266,624,787][624,787,226,266]
 
 kParse: bool = True
