@@ -110,7 +110,7 @@ def parse_ratio(driver, asin):
 
 def parse_loop_us(driver,url,flag=False):
     price_dict = dict()
-    display = setup_headful_display()
+    # display = setup_headful_display()
     index = 0
     if kEnableHelium == True:
         # driver = enable_extensions(driver)
@@ -166,7 +166,7 @@ def parse_loop_ca(driver,url,flag=False):
     # asin_list = loader.load_dataset()
     # url_list_us, url_list_ca = asin_to_url(asin_list)
     price_dict = dict()
-    display = setup_headful_display()
+    # display = setup_headful_display()
     index = 0
     if kEnableHelium == True:
         pass
@@ -212,8 +212,8 @@ def parse_amazon(data_path,us_price_column=None,us_sale_column=None,
         else:
             dict_us = parse_loop_us(driver=driver,url=url_list_us[i],flag=False)
             dict_ca = parse_loop_ca(driver=driver,url=url_list_ca[i],flag=False)
-        if i % 2 == 0:
-            print(dict_us, dict_ca)
+        if i % 1 == 0:
+            print(dict_us, dict_ca,i)
             create_excel(dict_us, dict_ca,data_path=data_path,us_price_column=us_price_column,us_sale_column=us_sale_column,
                             ca_price_column=ca_price_column,ca_sale_column=ca_sale_column,revenue_column=revenue_column,excel_index=i)
     return dict_us,dict_ca
