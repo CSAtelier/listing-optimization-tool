@@ -191,6 +191,7 @@ def parse_loop_ca(driver,url,flag=False):
                 unit_sale = "0"
             
         except:
+            revenue = 0
             unit_sale = '0'
             pass
 
