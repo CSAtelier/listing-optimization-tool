@@ -11,7 +11,7 @@ kDataPath: str = 'persistance/data/Serhat_list.xlsx'
 
 kDeploymentEnvEnum: DeploymentEnvEnum = DeploymentEnvEnum.LOCAL
 kIsHeadless: bool = False
-kDelay: int = 6
+kDelay: int = 10
 kRevenueCrop: list= [226,266,624,787]
 kStop: int = -1
 # [226,266,624,787][624,787,226,266]
