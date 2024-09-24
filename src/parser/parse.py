@@ -170,7 +170,7 @@ def parse_amazon(data_path, us_price_column=None, us_sale_column=None,
     loader = DatasetLoader(file_path=data_path)
     asin_list = loader.load_dataset()
     url_list_us, url_list_ca = asin_to_url(asin_list)
-    for i in range(len(url_list_us[662:670])):
+    for i in range(len(url_list_us[:kStop])):
         if i == 0:
             dict_us = parse_loop_us(driver=driver, url=url_list_us[i], flag=True)
             dict_ca = parse_loop_ca(driver=driver, url=url_list_ca[i], flag=True)
