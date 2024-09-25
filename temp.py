@@ -1,24 +1,20 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+from seleniumwire import webdriver  # Import from seleniumwire instead of selenium
 
-options = Options()
-driver = webdriver.Chrome(options=options)
+# Set up Selenium Wire
+chrome_options = webdriver.ChromeOptions()
 
-# Replace with your extension ID and popup HTML page path
-extension_id = "ebhjdojccenkgmoojgbpklmlmmkmamiid"
-extension_popup_url = f"chrome-extension://{extension_id}/popup.html"
+# Initialize the driver
+driver = webdriver.Chrome(options=chrome_options)
 
-# # Navigate to the extension's popup page
-driver.get(extension_popup_url)
+# Open the desired URL
+driver.get("https://www.amazon.com/NEW-ENGLAND-CHEESEMAKING-Organic-Vegetable/dp/B00DHHOQSA")
 
-# # Now interact with the elements of the extension's popup page
-# username_field = driver.find_element_by_id("username")
-# password_field = driver.find_element_by_id("password")
-# login_button = driver.find_element_by_id("login")
+# Capture network traffic
+for request in driver.requests:
+    if request.response:
+        request_url = request.url
+        response_status = request.response.status_code
+        print(f"URL: {request_url}, Status Code: {response_status}")
 
-# # Enter credentials
-# username_field.send_keys("your_username")
-# password_field.send_keys("your_password")
-
-# # Click login
-# login_button.click()
+# Quit the browser
+driver.quit()

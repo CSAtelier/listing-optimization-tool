@@ -1,5 +1,5 @@
 import logging
-from selenium import webdriver
+from seleniumwire import webdriver  # Import from seleniumwire instead of selenium
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 from ..parsing_methods import *
@@ -9,10 +9,11 @@ import subprocess
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 import os
-from selenium.webdriver.chrome.options import Options
-from config import kDeploymentEnvEnum, kDelay, kIsHeadless, kEnablePrice
+from config import kDeploymentEnvEnum, kDelay, kIsHeadless, kEnablePrice, kEnableHelium
 import json
 import sys
+import time
+
 # Configure logging to write to a file
 log_filename = "amazon_parser.log"
 logging.basicConfig(
@@ -27,15 +28,19 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 def setup_driver():
-    logger.info("Setting up the WebDriver")
-    options = Options()
+    logger.info("Setting up the Selenium Wire WebDriver")
+    options = webdriver.ChromeOptions()
+    
     if kIsHeadless:
         options.add_argument("--headless=new")
+    
     if kEnableHelium:
         logger.info("Helium extension enabled")
         extension_path = "extensions/oay"
         options.add_extension('extensions/helium10_extension.crx')
         options.add_argument(f"--load-extension={extension_path}") 
+    
+    # Use Selenium Wire WebDriver
     driver = webdriver.Chrome(options=options)
     return driver
 
@@ -51,13 +56,24 @@ def setup_headful_display():
     subprocess.Popen(['Xvfb', f':{display_number}'])
     return f':{display_number}'
 
+def capture_network_traffic(driver):
+    """ Capture network traffic and log the URLs and status codes. """
+    logger.info("Capturing network traffic")
+    for request in driver.requests:
+        if request.response:
+            request_url = request.url
+            response_status = request.response.status_code
+            logger.info(f"URL: {request_url}, Status Code: {response_status}")
+
 def open_browser_ratio(driver):
     logger.info("Opening browser to calculate revenue")
     calc_revenue(driver=driver)
+    capture_network_traffic(driver)
 
 def open_browser_us(driver, url, flag=False):
     logger.info(f"Opening US browser for URL: {url}")
     driver.get(url)
+    capture_network_traffic(driver)
     html = driver.page_source
     soup = BeautifulSoup(html, features="lxml")
     if flag:
@@ -72,6 +88,7 @@ def open_browser_us(driver, url, flag=False):
 def open_browser_ca(driver, url, flag=False):
     logger.info(f"Opening CA browser for URL: {url}")
     driver.get(url)
+    capture_network_traffic(driver)
     html = driver.page_source
     soup = BeautifulSoup(html, features="lxml")
     if flag:
@@ -94,14 +111,17 @@ def parse_asin_us(driver):
         logger.error(f"Error in parsing ASIN for US: {e}")
         pass
 
-def parse_ratio(driver, asin):
-    logger.info(f"Parsing ratio for ASIN: {asin}")
-    open_browser_ratio(driver=driver)
-    change_revenue_country(driver=driver, asin=asin)
-    html_updated = driver.page_source
-    soup = BeautifulSoup(html_updated, features="lxml")
-    price = get_price_revenue(driver=driver)
-    return price
+def parse_asin_ca(driver):
+    logger.info("Parsing ASIN for CA")
+    try:
+        price = 0
+        html_updated = driver.page_source
+        soup_updated = BeautifulSoup(html_updated, features="lxml")
+        price, sale, revenue = get_price_ca(soup_updated, driver=driver)
+        return price, sale, revenue
+    except ValueError as e:
+        logger.error(f"Error in parsing ASIN for CA: {e}")
+        pass
 
 def parse_loop_us(driver, url, flag=False):
     logger.info(f"Parsing US loop for URL: {url}")
@@ -126,18 +146,6 @@ def parse_loop_us(driver, url, flag=False):
         revenue = 0
     price_dict[asin] = [price, unit_sale, revenue]
     return price_dict
-
-def parse_asin_ca(driver):
-    logger.info("Parsing ASIN for CA")
-    try:
-        price = 0
-        html_updated = driver.page_source
-        soup_updated = BeautifulSoup(html_updated, features="lxml")
-        price, sale, revenue = get_price_ca(soup_updated, driver=driver)
-        return price, sale, revenue
-    except ValueError as e:
-        logger.error(f"Error in parsing ASIN for CA: {e}")
-        pass
 
 def parse_loop_ca(driver, url, flag=False):
     logger.info(f"Parsing CA loop for URL: {url}")
@@ -170,8 +178,8 @@ def parse_amazon(data_path, us_price_column=None, us_sale_column=None,
     loader = DatasetLoader(file_path=data_path)
     asin_list = loader.load_dataset()
     url_list_us, url_list_ca = asin_to_url(asin_list)
-    # url_list_us =[url_list_us[51]]
-    # url_list_ca =[url_list_ca[51]]
+    url_list_us = [url_list_us[65]]
+    url_list_ca = [url_list_ca[65]]
     for i in range(len(url_list_us)):
         if i == 0:
             dict_us = parse_loop_us(driver=driver, url=url_list_us[i], flag=True)
@@ -179,9 +187,19 @@ def parse_amazon(data_path, us_price_column=None, us_sale_column=None,
         else:
             dict_us = parse_loop_us(driver=driver, url=url_list_us[i], flag=False)
             dict_ca = parse_loop_ca(driver=driver, url=url_list_ca[i], flag=False)
+        
         if i % 1 == 0:
             logger.info(f"Parsed {i} URLs. US: {dict_us}, CA: {dict_ca}")
             create_excel(dict_us, dict_ca, data_path=data_path, us_price_column=us_price_column, 
                          us_sale_column=us_sale_column, ca_price_column=ca_price_column, 
                          ca_sale_column=ca_sale_column, revenue_column=revenue_column, excel_index=i)
+        page_html = driver.page_source
+        
+        if i > 500 and i % 10 == 0:
+            filename = f'trash/page_source_{i}.html'
+            with open(filename, 'w', encoding='utf-8') as file:
+                file.write(page_html)
+        with open('trash/page_source.html', 'w', encoding='utf-8') as file:
+            file.write(page_html)
+    driver.quit()  # Ensure driver is closed after parsing is done
     return dict_us, dict_ca
