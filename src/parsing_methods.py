@@ -149,7 +149,7 @@ def get_price_us(response,driver):
             price = re.search(r'\$\d+\.\d+', price.text).group()
             sale = unit_sale.text
             revenue = get_revenue(driver,price=price[-1:])
-            # revenue = 0.0
+
 
 
 
@@ -161,27 +161,34 @@ def get_price_us(response,driver):
             unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
             sale = unit_sale.text
             revenue = get_revenue(driver)
-            # revenue = 0.0
+
 
 
 
     else:
         try:
-            sale = '0,0'
+            
             price = response.find('span', attrs = {'class':'a-offscreen'})
             price = re.search(r'\$\d+\.\d+', price.text).group()
+            revenue = 0.0
+            sale = 0.0
 
         except:
-            sale = '0,0'
+            
             price = response.find('span', attrs = {'class':'a-price aok-align-center reinventPricePriceToPayMargin priceToPay'})
             price = re.search(r'\$\d+\.\d+', price.text).group()
+            revenue = 0.0
+            sale = 0.0
 
-    index = revenue.find('$')
-    revenue = revenue[index+1:]
-    if "," in sale:
-        sale = sale.replace(",", ".")
-    if sale == 'N/A':
-        sale = 0
+    try:
+        index = revenue.find('$')
+        revenue = revenue[index+1:]
+        if "," in sale:
+            sale = sale.replace(",", ".")
+        if sale == 'N/A':
+            sale = 0
+    except:
+        pass
     return float(price[1:]), float(sale), float(revenue)
 
 
@@ -214,20 +221,28 @@ def get_price_ca(response,driver):
             revenue = get_revenue(driver,price=price[-1:])
     else:
         try:
-            sale = 0
+            
             price = response.find('span', attrs = {'class':'a-offscreen'})
             price = re.search(r'\$\d+\.\d+', price.text).group()
+            revenue = 0.0
+            sale = 0.0
         except:
             sale = 0
             price = response.find('span', attrs = {'class':'a-price aok-align-center reinventPricePriceToPayMargin priceToPay'})
             price = re.search(r'\$\d+\.\d+', price.text).group()
+            revenue = 0.0
+            sale = 0.0
     
-    index = revenue.find('$')
-    revenue = revenue[index+1:]
-    if "," in sale:
-        sale = sale.replace(",", ".")
-    if sale == 'N/A':
-        sale = 0
+    try:
+        index = revenue.find('$')
+        revenue = revenue[index+1:]
+        if "," in sale:
+            sale = sale.replace(",", ".")
+        if sale == 'N/A':
+            sale = 0
+    except:
+        pass
+
     return float(price[1:]), float(sale), float(revenue)
 
 
