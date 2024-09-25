@@ -17,7 +17,7 @@ kStop: int = -1
 # [226,266,624,787][624,787,226,266]
 
 kParse: bool = True
-kEnableHelium: bool = False
+kEnableHelium: bool = True
 kEnablePrice: bool =  True
 
 kRevenueWithParse: bool = False
