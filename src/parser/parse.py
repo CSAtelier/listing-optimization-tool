@@ -177,7 +177,9 @@ def parse_amazon(data_path, us_price_column=None, us_sale_column=None,
     driver = setup_driver()
     loader = DatasetLoader(file_path=data_path)
     asin_list = loader.load_dataset()
-    url_list_us, url_list_ca = asin_to_url(asin_list)
+    url_list_us, url_list_ca = asin_to_url(asin_list)   
+    print(len(url_list_us))
+
     for i in range(len(url_list_us[:kStop])):
         if i == 0:
             dict_us = parse_loop_us(driver=driver, url=url_list_us[i], flag=True)
@@ -193,11 +195,11 @@ def parse_amazon(data_path, us_price_column=None, us_sale_column=None,
                          ca_sale_column=ca_sale_column, revenue_column=revenue_column, excel_index=i)
         page_html = driver.page_source
         
-        if i > 500 and i % 10 == 0:
-            filename = f'trash/page_source_{i}.html'
-            with open(filename, 'w', encoding='utf-8') as file:
-                file.write(page_html)
-        with open('trash/page_source.html', 'w', encoding='utf-8') as file:
+       
+        filename = f'trash/page_source_{i}.html'
+        with open(filename, 'w', encoding='utf-8') as file:
             file.write(page_html)
+            print(f"Page source saved to {filename}")
+
     driver.quit()  # Ensure driver is closed after parsing is done
     return dict_us, dict_ca

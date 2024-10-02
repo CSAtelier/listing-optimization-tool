@@ -160,7 +160,7 @@ def get_price_us(response,driver):
             price = re.search(r'\$\d+\.\d+', price.text).group()
             unit_sale = response.find('div', attrs = {'class':'sc-ipbtP bpzecP'})
             sale = unit_sale.text
-            revenue = get_revenue(driver)
+            revenue = get_revenue(driver,price=price[-1:])
 
 
 

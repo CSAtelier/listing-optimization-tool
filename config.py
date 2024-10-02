@@ -6,9 +6,6 @@ import sys
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 
-kDataPath: str = 'persistance/data/Serhat_list.xlsx'
-
-
 kDeploymentEnvEnum: DeploymentEnvEnum = DeploymentEnvEnum.LOCAL
 kIsHeadless: bool = False
 kDelay: int = 10
@@ -17,12 +14,12 @@ kStop: int = -1
 # [226,266,624,787][624,787,226,266]
 
 kParse: bool = True
-kEnableHelium: bool = True
+kEnableHelium: bool = False
 kEnablePrice: bool =  True
 
 kRevenueWithParse: bool = False
 
-kDataDir: str = "persistance/data/18-09-2024.xlsx"
+kDataPath: str = "persistance/data/New_ASINS.xlsx"
 kRevenueColumn: str = "J"
 kUsPriceColumn: str = "K"
 kCaPriceColumn: str = "L"
