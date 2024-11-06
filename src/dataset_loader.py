@@ -54,5 +54,6 @@ class DatasetLoader:
 
     def load_dataset_from_redis(self):
         """Load ASINs from Redis sorted set in batches."""
+        print(f"Loading ASINs from Redis with priority {self.priority}...")
         asin_batch = self.redis_client.zrange('asin_queue', 0, self.batch_size - 1)
         return asin_batch
