@@ -19,7 +19,7 @@ kEnablePrice: bool =  True
 
 kRevenueWithParse: bool = False
 
-kDataPath: str = "persistance/data/NEW_ASIN.csv"
+kDataPath: str = "persistance/data/NEW_ASINS.csv"
 kRevenueColumn: str = "J"
 kUsPriceColumn: str = "K"
 kCaPriceColumn: str = "L"

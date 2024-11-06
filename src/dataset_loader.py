@@ -31,6 +31,7 @@ class DatasetLoader:
         """Load ASINs from the specified CSV file."""
         try:
             df = pd.read_csv(self.csv_path)
+            print(self.csv_path)
             if 'ASIN' not in df.columns:
                 raise ValueError("CSV file does not contain 'ASIN' column.")
             return df['ASIN'].dropna().tolist()  # Drop missing values
