@@ -115,7 +115,7 @@ def parse_amazon(data_path=None, us_price_column=None, us_sale_column=None,
     driver = setup_driver()
 
     priority = 1
-    batch_size = 10
+    batch_size = 400
 
     loader = DatasetLoader(csv_path=data_path, priority=priority, batch_size=batch_size)
     redis_empty_retry_interval = 30
