@@ -128,7 +128,7 @@ def parse_amazon(data_path=None, us_price_column=None, us_sale_column=None,
         # Filter out already processed ASINs
         new_asins = [asin for asin in asin_list if asin not in processed_asins]
 
-
+        print(f"New ASINs to process: {new_asins}")
         if new_asins:
             for asin in new_asins:
                 url_us, url_ca = asin_to_url([asin])
