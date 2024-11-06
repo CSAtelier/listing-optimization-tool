@@ -81,7 +81,6 @@ def parse_asin_ca(driver):
 def parse_loop_us(driver, url, flag=False):
     price_dict = {}
     driver = open_browser_us(driver, url='https://www.amazon.com/', flag=flag)
-    print(url[0])
     asin = extract_asin(url[0])
     driver.get(url[0])
     time.sleep(kDelay)
