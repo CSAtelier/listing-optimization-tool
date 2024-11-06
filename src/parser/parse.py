@@ -114,7 +114,6 @@ def parse_amazon(data_path=None, us_price_column=None, us_sale_column=None,
                  ca_price_column=None, ca_sale_column=None, revenue_column=None):
     driver = setup_driver()
 
-    data_path = "/Users/ardagulersoy/Desktop/Personal/listing-optimization-tool/persistance/data/try.csv"
     priority = 1
     batch_size = 10
 
