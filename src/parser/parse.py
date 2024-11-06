@@ -120,7 +120,7 @@ def parse_amazon(data_path=None, us_price_column=None, us_sale_column=None,
     loader = DatasetLoader(csv_path=data_path, priority=priority, batch_size=batch_size)
     redis_empty_retry_interval = 30
     processed_asins = set()
-
+    print(priority)
     while True:
         loader.load_dataset()
         asin_list = loader.load_dataset_from_redis()
