@@ -26,9 +26,9 @@ def captcha_handle(response,driver):
 
 
 def change_location_us(driver):
-    time.sleep(kDelay+5)
+    time.sleep(kDelay+10)
     driver.find_element(By.ID, "nav-global-location-popover-link").click()
-    time.sleep(kDelay+5)
+    time.sleep(kDelay+10)
     postcode_form = driver.find_element(By.ID, "GLUXZipUpdateInput").send_keys("73001") 
     time.sleep(kDelay+5)
     postcode_button = driver.find_element(By.XPATH, '//*[@id="GLUXZipUpdate"]/span/input').click()

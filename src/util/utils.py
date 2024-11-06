@@ -16,14 +16,6 @@ def create_excel(price_dict_us, price_dict_ca,
 
     wb = openpyxl.load_workbook(data_path)
     ws = wb.active
-    # ws['A1'] = 'ASIN'
-    # ws['B1'] = 'US Prices'
-    # ws['C1'] = 'US Sale'
-    # ws['D1'] = 'CA Prices'
-    # ws['E1'] = 'CA Sale'
-    # ws['F1'] = 'US/CA'
-    # ws['G1'] = 'URL Amazon US'
-    # ws['H1'] = 'URL Amazon CA'
     key_list = list(price_dict_us.keys())
     for i in range(len(key_list)):
         if us_price_column != None:
@@ -58,6 +50,55 @@ def create_excel(price_dict_us, price_dict_ca,
                 ws[f'F{excel_index+2}'] = 0
 
     wb.save(data_path)
+
+import pandas as pd
+
+def create_csv(price_dict_us, price_dict_ca,
+               data_path, us_price_column=None, ca_price_column=None,
+               us_sale_column=None, ca_sale_column=None,
+               revenue_column=None, excel_index=0):
+    
+    # Read the existing CSV file into a DataFrame
+    df = pd.read_csv(data_path)
+    
+    # Prepare to update the DataFrame
+    key_list = list(price_dict_us.keys())
+    
+    for i in range(len(key_list)):
+        asin = key_list[i]
+        
+        # Create a new row if it doesn't exist
+        if excel_index + 2 > len(df):  # Adjust for header
+            df.loc[excel_index + 1] = [None] * len(df.columns)
+
+        if us_price_column is not None:
+            df.at[excel_index + 1, us_price_column] = price_dict_us[asin][0]
+        if ca_price_column is not None:
+            df.at[excel_index + 1, ca_price_column] = price_dict_ca[asin][0]
+        if us_sale_column is not None:
+            df.at[excel_index + 1, us_sale_column] = float(price_dict_us[asin][1])
+        if ca_sale_column is not None:
+            df.at[excel_index + 1, ca_sale_column] = float(price_dict_ca[asin][1])
+        if revenue_column is not None:
+            c = CurrencyConverter()
+            usd_cad = c.convert(1, 'USD', 'CAD') 
+            usd_cad_price = (float(price_dict_us[asin][0]) * 1.06) * usd_cad
+            shipping = 2.5 * usd_cad
+            cost = usd_cad_price + shipping
+            print(usd_cad_price, shipping, cost, float(price_dict_ca[asin][2]))
+            df.at[excel_index + 1, revenue_column] = ((float(price_dict_ca[asin][2]) - cost) * 100.0) / cost
+
+        # Calculate the price ratio
+        if price_dict_ca[asin] == 0 or price_dict_us[asin] == 0:
+            df.at[excel_index + 1, 'Price_Ratio'] = 0  # Ensure you have a column named 'Price_Ratio' in your DataFrame
+        else:
+            try:
+                df.at[excel_index + 1, 'Price_Ratio'] = price_dict_us[asin][0] / price_dict_ca[asin][0]
+            except:
+                df.at[excel_index + 1, 'Price_Ratio'] = 0
+
+    # Save the updated DataFrame back to the CSV file
+    df.to_csv(data_path, index=False)
 
 
     
