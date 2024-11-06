@@ -51,6 +51,7 @@ class DatasetLoader:
         asin_list = self.load_dataset_from_csv()
         if asin_list:
             self.push_to_redis(asin_list)
+        print(f"Pushed {len(asin_list)} ASINs to Redis with priority {self.priority}.")
 
     def load_dataset_from_redis(self):
         """Load ASINs from Redis sorted set in batches."""
