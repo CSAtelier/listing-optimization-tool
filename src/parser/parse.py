@@ -132,7 +132,7 @@ def parse_amazon(data_path=None, us_price_column=None, us_sale_column=None,
         if new_asins:
             for asin in new_asins:
                 url_us, url_ca = asin_to_url([asin])
-
+                print(asin)
                 dict_us = parse_loop_us(driver, url_us, flag=True)
                 dict_ca = parse_loop_ca(driver, url_ca, flag=True)
 
