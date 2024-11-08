@@ -11,12 +11,12 @@ from dataclasses import dataclass, asdict
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, PROJECT_ROOT)
 
-logging.basicConfig(
-    filename='app.log',       # Log file name
-    level=logging.DEBUG,        # Logging level (INFO, DEBUG, ERROR, etc.)
-    format='%(asctime)s - %(levelname)s - %(message)s',  # Log format
-    filemode='a'               # Use 'w' to overwrite, 'a' to append
-)
+# logging.basicConfig(
+#     filename='app.log',       # Log file name
+#     level=logging.DEBUG,        # Logging level (INFO, DEBUG, ERROR, etc.)
+#     format='%(asctime)s - %(levelname)s - %(message)s',  # Log format
+#     filemode='a'               # Use 'w' to overwrite, 'a' to append
+# )
 
 # from http_utilities import handle_http_fetch
 from src.revenue_calculator_api.http_utilities import handle_http_fetch

@@ -120,11 +120,10 @@ def parse_amazon(data_path=None, us_price_column=None, us_sale_column=None,
     loader = DatasetLoader(csv_path=data_path, priority=priority, batch_size=batch_size)
     redis_empty_retry_interval = 30
     processed_asins = set()
-    print(priority)
     while True:
         loader.load_dataset()
         asin_list = loader.load_dataset_from_redis()
-
+        asin_list = asin_list[49:]
         # Filter out already processed ASINs
         new_asins = [asin for asin in asin_list if asin not in processed_asins]
 
@@ -134,28 +133,32 @@ def parse_amazon(data_path=None, us_price_column=None, us_sale_column=None,
             for asin in new_asins:
                 url_us, url_ca = asin_to_url([asin])
                 print(asin)
-                dict_us = parse_loop_us(driver, url_us, flag=True)
-                dict_ca = parse_loop_ca(driver, url_ca, flag=True)
+                try:
+                    dict_us = parse_loop_us(driver, url_us, flag=True)
+                    dict_ca = parse_loop_ca(driver, url_ca, flag=True)
+                
 
-                # Retry for US parsing
-                if any(value[0] == 0 for value in dict_us.values()):
-                    dict_us = parse_loop_us(driver, url_us, flag=False)
+                    # # Retry for US parsing
+                    # if any(value[0] == 0 for value in dict_us.values()):
+                    #     dict_us = parse_loop_us(driver, url_us, flag=False)
 
-                # Retry for CA parsing
-                if any(value[0] == 0 for value in dict_ca.values()):
-                    dict_ca = parse_loop_ca(driver, url_ca, flag=False)
+                    # # Retry for CA parsing
+                    # if any(value[0] == 0 for value in dict_ca.values()):
+                    #     dict_ca = parse_loop_ca(driver, url_ca, flag=False)
 
-                # Create CSV files with parsed results
-                print(dict_us, dict_ca,index)
-                index += 1
-                create_excel(dict_us, dict_ca, data_path=data_path, us_price_column=us_price_column, 
-                        us_sale_column=us_sale_column, ca_price_column=ca_price_column, 
-                        ca_sale_column=ca_sale_column, revenue_column=revenue_column, excel_index=index)
+                    # Create CSV files with parsed results
+                    print(dict_us, dict_ca,index)
+                    index += 1
+                    create_excel(dict_us, dict_ca, data_path=data_path, us_price_column=us_price_column, 
+                            us_sale_column=us_sale_column, ca_price_column=ca_price_column, 
+                            ca_sale_column=ca_sale_column, revenue_column=revenue_column, excel_index=index)
 
-                # Add processed ASIN to the set
-                processed_asins.add(asin)
-                # Remove the ASIN from Redis
-                loader.redis_client.zrem('asin_queue', asin)
+                    # Add processed ASIN to the set
+                    processed_asins.add(asin)
+                    # Remove the ASIN from Redis
+                    loader.redis_client.zrem('asin_queue', asin)
+                except:
+                    continue
 
         else:
             # If there are no new ASINs, listen for new ones
