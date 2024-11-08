@@ -129,6 +129,7 @@ def parse_amazon(data_path=None, us_price_column=None, us_sale_column=None,
         new_asins = [asin for asin in asin_list if asin not in processed_asins]
 
         print(f"New ASINs to process: {new_asins}")
+        index = 0
         if new_asins:
             for asin in new_asins:
                 url_us, url_ca = asin_to_url([asin])
@@ -145,10 +146,11 @@ def parse_amazon(data_path=None, us_price_column=None, us_sale_column=None,
                     dict_ca = parse_loop_ca(driver, url_ca, flag=False)
 
                 # Create CSV files with parsed results
-                print(dict_us, dict_ca)
+                print(dict_us, dict_ca,index)
+                index += 1
                 create_excel(dict_us, dict_ca, data_path=data_path, us_price_column=us_price_column, 
                         us_sale_column=us_sale_column, ca_price_column=ca_price_column, 
-                        ca_sale_column=ca_sale_column, revenue_column=revenue_column)
+                        ca_sale_column=ca_sale_column, revenue_column=revenue_column, excel_index=index)
 
                 # Add processed ASIN to the set
                 processed_asins.add(asin)
