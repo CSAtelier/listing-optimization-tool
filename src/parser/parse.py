@@ -123,7 +123,7 @@ def parse_amazon(data_path=None, us_price_column=None, us_sale_column=None,
     while True:
         loader.load_dataset()
         asin_list = loader.load_dataset_from_redis()
-        asin_list = asin_list[49:]
+        # asin_list = asin_list[49:]
         # Filter out already processed ASINs
         new_asins = [asin for asin in asin_list if asin not in processed_asins]
 
