@@ -14,6 +14,8 @@ def asin_to_url(asin_list):
 def create_excel(price_dict_us, price_dict_ca,
                  data_path,us_price_column=None,ca_price_column=None,us_sale_column=None,ca_sale_column=None,revenue_column=None,excel_index=0):
 
+    data_path = data_path.replace('.csv', '.xlsx')
+    print(data_path)
     wb = openpyxl.load_workbook(data_path)
     ws = wb.active
     key_list = list(price_dict_us.keys())

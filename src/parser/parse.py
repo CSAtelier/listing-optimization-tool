@@ -146,7 +146,7 @@ def parse_amazon(data_path=None, us_price_column=None, us_sale_column=None,
 
                 # Create CSV files with parsed results
                 print(dict_us, dict_ca)
-                create_csv(dict_us, dict_ca, data_path=data_path, us_price_column=us_price_column, 
+                create_excel(dict_us, dict_ca, data_path=data_path, us_price_column=us_price_column, 
                         us_sale_column=us_sale_column, ca_price_column=ca_price_column, 
                         ca_sale_column=ca_sale_column, revenue_column=revenue_column)
 
