@@ -2,6 +2,7 @@ import openpyxl
 import random
 from src.dataset_loader import DatasetLoader
 from currency_converter import CurrencyConverter
+import os
 
 def asin_to_url(asin_list):
     url_list_us = []
@@ -11,47 +12,56 @@ def asin_to_url(asin_list):
         url_list_ca.append(f"https://www.amazon.ca/dp/{asin}")
     return url_list_us, url_list_ca
 
-def create_excel(price_dict_us, price_dict_ca,
-                 data_path,us_price_column=None,ca_price_column=None,us_sale_column=None,ca_sale_column=None,revenue_column=None,excel_index=0):
+def create_excel(price_dict_us, price_dict_ca, data_path,
+                 us_price_column=None, ca_price_column=None,
+                 us_sale_column=None, ca_sale_column=None,
+                 revenue_column=None, excel_index=0):
 
-    data_path = data_path.replace('.csv', '.xlsx')
-    print(data_path)
-    wb = openpyxl.load_workbook(data_path)
+    # Set the path for the Excel file
+    excel_path = data_path.replace('.csv', '.xlsx')
+    print(excel_path)
+
+    # Check if the Excel file already exists, if not, convert CSV to Excel
+    if not os.path.exists(excel_path):
+        # Convert CSV to Excel
+        csv_data = pd.read_csv(data_path)
+        csv_data.to_excel(excel_path, index=False)
+    
+    # Load the Excel file
+    wb = openpyxl.load_workbook(excel_path)
     ws = wb.active
+
+    # Process and populate data
     key_list = list(price_dict_us.keys())
     for i in range(len(key_list)):
-        if us_price_column != None:
-            ws[us_price_column+f'{excel_index+2}'] = price_dict_us[key_list[i]][0]
-        if ca_price_column != None:
-            ws[ca_price_column+f'{excel_index+2}']  = price_dict_ca[key_list[i]][0]
-        if us_sale_column != None:
-            ws[us_sale_column+f'{excel_index+2}']  = float(price_dict_us[key_list[i]][1])
-        if ca_sale_column != None:
-            ws[ca_sale_column+f'{excel_index+2}']  = float(price_dict_ca[key_list[i]][1])
-        if revenue_column != None:
+        if us_price_column:
+            ws[us_price_column + f'{excel_index+2}'] = price_dict_us[key_list[i]][0]
+        if ca_price_column:
+            ws[ca_price_column + f'{excel_index+2}'] = price_dict_ca[key_list[i]][0]
+        if us_sale_column:
+            ws[us_sale_column + f'{excel_index+2}'] = float(price_dict_us[key_list[i]][1])
+        if ca_sale_column:
+            ws[ca_sale_column + f'{excel_index+2}'] = float(price_dict_ca[key_list[i]][1])
+        if revenue_column:
             c = CurrencyConverter()
-            usd_cad = c.convert(1, 'USD', 'CAD') 
-            usd_cad_price = (float(price_dict_us[key_list[i]][0])*1.06)*usd_cad
-            shipping = 2.5*usd_cad
+            usd_cad = c.convert(1, 'USD', 'CAD')
+            usd_cad_price = (float(price_dict_us[key_list[i]][0]) * 1.06) * usd_cad
+            shipping = 2.5 * usd_cad
             cost = usd_cad_price + shipping
-            print(usd_cad_price, shipping, cost,float(price_dict_ca[key_list[i]][2]))
-            ws[revenue_column+f'{excel_index+2}']  = ((float(price_dict_ca[key_list[i]][2])-cost)*100.0)/cost
-        # ws[f'A{i+2}'] = key_list[i]
-        # ws[f'B{i+2}'] = price_dict_us[key_list[i]][0]
-        # ws[f'C{i+2}'] = float(price_dict_us[key_list[i]][1].replace(',', '.'))
-        # ws[f'D{i+2}'] = price_dict_ca[key_list[i]][0]
-        # ws[f'E{i+2}'] = float(price_dict_ca[key_list[i]][1].replace(',', '.'))
-        # ws[f'G{i+2}'] = f"https://www.amazon.com/dp/{key_list[i]}"
-        # ws[f'H{i+2}'] = f"https://www.amazon.ca/dp/{key_list[i]}"
+            print(usd_cad_price, shipping, cost, float(price_dict_ca[key_list[i]][2]))
+            ws[revenue_column + f'{excel_index+2}'] = ((float(price_dict_ca[key_list[i]][2]) - cost) * 100.0) / cost
+
+        # Calculate the price ratio if both prices are available
         if price_dict_ca[key_list[i]] == 0 or price_dict_us[key_list[i]] == 0:
             ws[f'F{excel_index+2}'] = 0
         else:
             try:
-                ws[f'F{excel_index+2}'] = price_dict_us[key_list[i]][0]/price_dict_ca[key_list[i]][0]
+                ws[f'F{excel_index+2}'] = price_dict_us[key_list[i]][0] / price_dict_ca[key_list[i]][0]
             except:
                 ws[f'F{excel_index+2}'] = 0
 
-    wb.save(data_path)
+    # Save the updated workbook
+    wb.save(excel_path)
 
 import pandas as pd
 
